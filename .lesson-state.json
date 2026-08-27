@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 125,
-  "lessonId": "lesson-6-116-monolith-vs-microservices-11",
-  "title": "116. Monolith vs Microservices",
+  "sequence": 126,
+  "lessonId": "lesson-6-117-resilience-12",
+  "title": "117. Resilience",
   "chapter": 6,
-  "stateId": "lesson-125",
+  "stateId": "lesson-126",
   "exerciseType": "DESIGN",
   "canonicalStage": "stage-06",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
