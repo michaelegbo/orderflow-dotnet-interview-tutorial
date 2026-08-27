@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "sequence": 4,
-  "lessonId": "lesson-1-3-variables-and-data-types-4",
-  "title": "3. Variables and Data Types",
+  "sequence": 5,
+  "lessonId": "lesson-1-4-var-5",
+  "title": "4. var",
   "chapter": 1,
-  "stateId": "lesson-004",
-  "exerciseType": "BUILD",
+  "stateId": "lesson-005",
+  "exerciseType": "EXPERIMENT",
   "canonicalStage": "stage-01",
-  "productionTreeNote": "This lesson applies a permanent practice change against the canonical checkpoint."
+  "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
 }
