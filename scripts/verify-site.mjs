@@ -18,6 +18,7 @@ const lessonIds = [...html.matchAll(/<article class="lesson [^"]*" id="([^"]+)"/
 const codeLinks = [...html.matchAll(/<a class="lesson-code-link" href="([^"]+)"/g)].map(match => match[1].replaceAll('&amp;', '&'));
 const allIds = [...html.matchAll(/\sid="([^"]+)"/g)].map(match => match[1]);
 const count = pattern => [...html.matchAll(pattern)].length;
+const wordCount = value => (value ?? '').trim().split(/\s+/).filter(Boolean).length;
 const inlineScript = html.match(/<script>([\s\S]*?)<\/script>/)?.[1] ?? '';
 const htmlWithoutSnapshotData = html.replace(/<script type="application\/json" id="snapshot-store">[\s\S]*?<\/script>/, '');
 const contentCount = pattern => [...htmlWithoutSnapshotData.matchAll(pattern)].length;
@@ -37,6 +38,7 @@ assert(count(/class="nav-estimate"/g) === 8, 'Every sidebar chapter must show it
 assert(count(/class="chapter-progress-track"/g) === 8, 'Every chapter must show progress with remaining time.');
 assert(count(/class="lesson-practice/g) === lessonIds.length, 'Every lesson must have one practical exercise panel.');
 assert(count(/class="learning-lens mastery-teaching/g) === 128, 'Every concept lesson from 2–129 must have a visible mastery explanation.');
+assert(count(/class="mastery-words"/g) === 128, 'Every concept lesson must translate technical words into plain English.');
 assert(count(/class="lesson-role role-/g) === lessonIds.length - 128, 'Every non-concept lesson must identify its orientation, practice, recall, or rehearsal role.');
 assert(count(/class="practice-given"/g) === lessonIds.length, 'Every lesson must say what the learner is given.');
 assert(count(/class="practice-starter"/g) === lessonIds.length, 'Every lesson must provide starter inputs or a response frame.');
@@ -66,6 +68,10 @@ const lessonCards = [...html.matchAll(/<article class="lesson [\s\S]*?<\/article
 for (const [index, card] of lessonCards.entries()) {
   const contentIndex = card.indexOf('class="lesson-content"');
   const masteryIndex = card.indexOf('class="learning-lens mastery-teaching');
+  const simpleIndex = card.indexOf('Start here · the simple picture');
+  const wordsIndex = card.indexOf('Words in plain English');
+  const technicalIndex = card.indexOf('Now the technical version');
+  const mechanicsIndex = card.indexOf('Walk through what actually happens');
   const roleIndex = card.indexOf('class="lesson-role role-');
   const practiceIndex = card.indexOf('class="lesson-practice');
   const knowledgeIndex = card.indexOf('class="active-check"');
@@ -73,7 +79,7 @@ for (const [index, card] of lessonCards.entries()) {
   const completionIndex = card.indexOf('class="lesson-check"');
   assert(contentIndex >= 0 && practiceIndex > contentIndex && knowledgeIndex > practiceIndex && finishIndex > knowledgeIndex && completionIndex > finishIndex, `Lesson ${index + 1} does not follow teach → practise → check → finish order.`);
   if (manifest.lessons[index]?.teaching)
-    assert(masteryIndex > contentIndex && masteryIndex < practiceIndex, `Lesson ${index + 1} does not teach fully before practice.`);
+    assert(masteryIndex > contentIndex && simpleIndex > masteryIndex && wordsIndex > simpleIndex && technicalIndex > wordsIndex && mechanicsIndex > technicalIndex && practiceIndex > mechanicsIndex, `Lesson ${index + 1} does not follow simple → translated words → technical → steps → exercise order.`);
   else
     assert(roleIndex > contentIndex && roleIndex < practiceIndex, `Lesson ${index + 1} does not explain its assessment or orientation role before practice.`);
 }
@@ -88,8 +94,13 @@ for (const lesson of masteryLessons) {
   assert(!/fallback/i.test(teaching.category), `Teaching uses a generic fallback: ${lesson.id}`);
   assert(['anchor', 'supporting'].includes(teaching.tier), `Teaching tier is invalid: ${lesson.id}`);
   assert((teaching.simple ?? '').trim().length >= 35, `Simple explanation is too short: ${lesson.id}`);
+  assert(wordCount(teaching.simple) <= 30, `Simple explanation uses more than 30 words: ${lesson.id}`);
   assert((teaching.precise ?? '').trim().length >= 45, `Technical explanation is too short: ${lesson.id}`);
+  assert(Array.isArray(teaching.terms) && teaching.terms.length >= 3 && teaching.terms.length <= 4, `Plain-English word guide must contain 3–4 terms: ${lesson.id}`);
+  assert(teaching.terms.every(item => (item.term ?? '').trim().length >= 2 && (item.meaning ?? '').trim().length >= 18), `A technical word is not translated clearly: ${lesson.id}`);
+  assert(teaching.terms.every(item => wordCount(item.meaning) <= 22), `A plain-English word definition is too long: ${lesson.id}`);
   assert(Array.isArray(teaching.mechanics) && teaching.mechanics.length === 4 && teaching.mechanics.every(step => step.trim().length >= 45), `Mechanism walkthrough is incomplete: ${lesson.id}`);
+  assert(teaching.mechanics.every(step => wordCount(step) <= 30), `A mechanism step uses more than 30 words: ${lesson.id}`);
   assert((teaching.connection ?? '').trim().length >= 90, `OrderFlow connection is too short: ${lesson.id}`);
   assert((teaching.why ?? '').trim().length >= 90, `Why-it-matters explanation is too short: ${lesson.id}`);
   assert((teaching.trap ?? '').trim().length >= 45, `Common boundary is too short: ${lesson.id}`);

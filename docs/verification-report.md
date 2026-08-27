@@ -61,8 +61,12 @@ chapter-end checkpoint mappings, bottom completion controls,
 interactive knowledge checks, duplicate IDs, inline script syntax, and the
 downloadable archive. It also requires visible, pre-exercise mastery teaching
 for all 128 concept lessons and explicit orientation/practice/recall roles for
-the other 48 cards. Every mastery contract contains a simple explanation,
-technical definition, four-step mechanism, connection to the same OrderFlow
+the other 48 cards. Every mastery contract follows the enforced order
+**simple picture -> words in plain English -> technical version -> four short
+steps -> exercise**. The simple opening and each mechanism step are limited to
+30 words; all 128 lessons include a three- or four-term plain-English guide,
+and the current maximum is 26 words. Every mastery contract also contains a
+connection to the same OrderFlow
 solution, why-it-matters discussion, common boundary, interview answer frame,
 and at least 225 teaching words. Every task has an explicitly matched answer. The 68 C#
 focused answers and 142 standalone rendered teaching examples pass Roslyn

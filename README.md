@@ -20,10 +20,13 @@ checkpoints, not files the learner must open during each lesson.
 
 Teaching remains separate from practice. All 128 concept lessons from Setup
 through the algorithm patterns now show a visible mastery explanation before
-the exercise: a simple mental model, precise definition, four-step mechanism,
-OrderFlow connection, reason it matters, common boundary, and interview-ready
-answer. These explanations have an enforced minimum depth and never collapse
-behind a reveal. The other 48 orientation, combined-practice, and rapid-recall
+the exercise. Each one now starts with the everyday idea, translates three or
+four necessary technical words into plain English, and only then gives the
+formal explanation, four short mechanism steps, OrderFlow connection, reason
+it matters, common boundary, and interview-ready answer. A simple opening is
+limited to 30 words and each mechanism step to 30 words, while the technical
+depth remains available immediately below it. The other 48 orientation,
+combined-practice, and rapid-recall
 cards identify their role explicitly, so an assessment cannot masquerade as
 an unexplained lesson.
 
