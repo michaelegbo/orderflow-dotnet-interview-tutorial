@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 73,
-  "lessonId": "lesson-4-66-middleware-6",
-  "title": "66. Middleware",
+  "sequence": 74,
+  "lessonId": "lesson-4-67-controllers-7",
+  "title": "67. Controllers",
   "chapter": 4,
-  "stateId": "lesson-073",
+  "stateId": "lesson-074",
   "exerciseType": "BUILD",
   "canonicalStage": "stage-04",
   "productionTreeNote": "This lesson applies a permanent practice change against the canonical checkpoint."
