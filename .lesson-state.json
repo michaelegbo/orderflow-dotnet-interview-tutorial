@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 17,
-  "lessonId": "lesson-2-13-fields-vs-properties-2",
-  "title": "13. Fields vs Properties",
+  "sequence": 18,
+  "lessonId": "lesson-2-14-constructors-3",
+  "title": "14. Constructors",
   "chapter": 2,
-  "stateId": "lesson-017",
+  "stateId": "lesson-018",
   "exerciseType": "BUILD",
   "canonicalStage": "stage-02",
   "productionTreeNote": "This lesson applies a permanent practice change against the canonical checkpoint."
