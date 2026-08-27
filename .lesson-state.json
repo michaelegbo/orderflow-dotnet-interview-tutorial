@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 108,
-  "lessonId": "lesson-5-99-integration-tests-15",
-  "title": "99. Integration Tests",
+  "sequence": 109,
+  "lessonId": "lesson-5-100-end-to-end-tests-16",
+  "title": "100. End-to-End Tests",
   "chapter": 5,
-  "stateId": "lesson-108",
+  "stateId": "lesson-109",
   "exerciseType": "TRACE/DEBUG",
   "canonicalStage": "stage-05",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
