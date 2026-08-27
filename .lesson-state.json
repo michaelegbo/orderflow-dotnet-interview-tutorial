@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 130,
-  "lessonId": "lesson-7-part-xix-small-dsa-crash-course-1",
-  "title": "PART XIX — SMALL DSA CRASH COURSE",
+  "sequence": 131,
+  "lessonId": "lesson-7-121-big-o-2",
+  "title": "121. Big-O",
   "chapter": 7,
-  "stateId": "lesson-130",
+  "stateId": "lesson-131",
   "exerciseType": "TRACE/DEBUG",
   "canonicalStage": "stage-07",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
