@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 122,
-  "lessonId": "lesson-6-113-caching-8",
-  "title": "113. Caching",
+  "sequence": 123,
+  "lessonId": "lesson-6-114-message-queues-9",
+  "title": "114. Message Queues",
   "chapter": 6,
-  "stateId": "lesson-122",
+  "stateId": "lesson-123",
   "exerciseType": "DESIGN",
   "canonicalStage": "stage-06",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
