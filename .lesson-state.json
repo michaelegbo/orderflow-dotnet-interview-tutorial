@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "sequence": 52,
-  "lessonId": "lesson-3-47-avoid-result-wait-5",
-  "title": "47. Avoid .Result / .Wait()",
+  "sequence": 53,
+  "lessonId": "lesson-3-48-task-whenall-6",
+  "title": "48. Task.WhenAll",
   "chapter": 3,
-  "stateId": "lesson-052",
-  "exerciseType": "EXPERIMENT",
+  "stateId": "lesson-053",
+  "exerciseType": "BUILD",
   "canonicalStage": "stage-03",
-  "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
+  "productionTreeNote": "This lesson applies a permanent practice change against the canonical checkpoint."
 }
