@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 155,
-  "lessonId": "lesson-8-143-authentication-vs-authorization-16",
-  "title": "143. Authentication vs authorization?",
+  "sequence": 156,
+  "lessonId": "lesson-8-144-ienumerable-vs-iqueryable-17",
+  "title": "144. IEnumerable vs IQueryable?",
   "chapter": 8,
-  "stateId": "lesson-155",
+  "stateId": "lesson-156",
   "exerciseType": "REHEARSE",
   "canonicalStage": "stage-08",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
