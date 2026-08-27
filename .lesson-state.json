@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "sequence": 64,
-  "lessonId": "lesson-3-58-boxing-unboxing-17",
-  "title": "58. Boxing / Unboxing",
+  "sequence": 65,
+  "lessonId": "lesson-3-59-assemblies-18",
+  "title": "59. Assemblies",
   "chapter": 3,
-  "stateId": "lesson-064",
-  "exerciseType": "EXPERIMENT",
+  "stateId": "lesson-065",
+  "exerciseType": "TRACE/DEBUG",
   "canonicalStage": "stage-03",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
 }
