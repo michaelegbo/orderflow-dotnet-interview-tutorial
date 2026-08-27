@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 20,
-  "lessonId": "lesson-2-16-encapsulation-5",
-  "title": "16. Encapsulation",
+  "sequence": 21,
+  "lessonId": "lesson-2-17-access-modifiers-6",
+  "title": "17. Access Modifiers",
   "chapter": 2,
-  "stateId": "lesson-020",
+  "stateId": "lesson-021",
   "exerciseType": "BUILD",
   "canonicalStage": "stage-02",
   "productionTreeNote": "This lesson applies a permanent practice change against the canonical checkpoint."
