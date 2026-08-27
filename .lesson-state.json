@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 96,
-  "lessonId": "lesson-5-76-di-lifetimes-3",
-  "title": "76. DI Lifetimes",
+  "sequence": 97,
+  "lessonId": "lesson-5-77-inversion-of-control-4",
+  "title": "77. Inversion of Control",
   "chapter": 5,
-  "stateId": "lesson-096",
+  "stateId": "lesson-097",
   "exerciseType": "TRACE/DEBUG",
   "canonicalStage": "stage-05",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
