@@ -25,8 +25,8 @@ const inlineScript = html.match(/<script>([\s\S]*?)<\/script>/)?.[1] ?? '';
 const htmlWithoutSnapshotData = html.replace(/<script type="application\/json" id="snapshot-store">[\s\S]*?<\/script>/, '');
 const contentCount = pattern => [...htmlWithoutSnapshotData.matchAll(pattern)].length;
 const quickIds = [...quickRefresher.matchAll(/\sid="([^"]+)"/g)].map(match => match[1]);
-const quickTrackNames = ['dotnet', 'angular'];
-const quickTrackStarts = quickTrackNames.map(name => quickRefresher.indexOf(`<div class="track-panel" data-track-panel="${name}"`));
+const quickTrackNames = ['dotnet', 'angular', 'story'];
+const quickTrackStarts = quickTrackNames.map(name => quickRefresher.search(new RegExp(`<div class="track-panel"[^>]*data-track-panel="${name}"`)));
 const quickTrackEnd = quickRefresher.indexOf('<p class="footer-note">');
 assert(quickTrackStarts.every(index => index >= 0) && quickTrackEnd > quickTrackStarts.at(-1), 'The short refresher track panels are missing or out of order.');
 const quickTracks = quickTrackNames.map((name, index) => ({
@@ -34,26 +34,38 @@ const quickTracks = quickTrackNames.map((name, index) => ({
   html: quickRefresher.slice(quickTrackStarts[index], quickTrackStarts[index + 1] ?? quickTrackEnd)
 }));
 
-assert([...quickRefresher.matchAll(/role="tab" data-track="(?:dotnet|angular)"/g)].length === 2, 'The short refresher must expose one accessible toggle for each track.');
+assert([...quickRefresher.matchAll(/role="tab"[^>]+data-track="(?:dotnet|angular|story)"/g)].length === 3, 'The short refresher must expose one accessible toggle for each track.');
 for (const track of quickTracks) {
   const lessons = [...track.html.matchAll(/<article class="lesson" id="([^"]+)" data-minutes="(\d+)">/g)];
   const visibleWords = track.html
     .replace(/<[^>]+>/g, ' ')
     .replace(/&(?:gt|lt|amp|quot|#39);/g, ' ')
     .trim();
-  assert(lessons.length === 5, `Expected five sections in the ${track.name} 30-minute track; found ${lessons.length}.`);
-  assert(lessons.reduce((sum, match) => sum + Number(match[2]), 0) === 30, `The ${track.name} track timings do not total 30 minutes.`);
-  assert([...track.html.matchAll(/class="check" data-answer=/g)].length === 5, `Every ${track.name} section must have one quick check.`);
-  assert([...track.html.matchAll(/class="complete"/g)].length === 5, `Every ${track.name} section must have one completion control.`);
-  assert([...track.html.matchAll(/class="explain"/g)].length === 5, `Every ${track.name} section must have exactly one concise explanatory layer.`);
-  const maximumWords = track.name === 'dotnet' ? 2800 : 2400;
-  assert(wordCount(visibleWords) >= 1400 && wordCount(visibleWords) <= maximumWords, `The ${track.name} track has drifted outside its concise 30-minute reading range.`);
+  if (track.name === 'story') {
+    assert(lessons.length === 1, `Expected one connected interview story; found ${lessons.length}.`);
+    assert(lessons.reduce((sum, match) => sum + Number(match[2]), 0) === 8, 'The interview story must remain an eight-minute track.');
+    assert([...track.html.matchAll(/class="complete"/g)].length === 1, 'The interview story must have one completion control.');
+    assert([...track.html.matchAll(/class="explain"/g)].length === 1, 'The interview story must have one follow-up explanation.');
+    assert(wordCount(visibleWords) >= 500 && wordCount(visibleWords) <= 1100, 'The interview story has drifted outside its focused reading range.');
+  } else {
+    assert(lessons.length === 5, `Expected five sections in the ${track.name} 30-minute track; found ${lessons.length}.`);
+    assert(lessons.reduce((sum, match) => sum + Number(match[2]), 0) === 30, `The ${track.name} track timings do not total 30 minutes.`);
+    assert([...track.html.matchAll(/class="check" data-answer=/g)].length === 5, `Every ${track.name} section must have one quick check.`);
+    assert([...track.html.matchAll(/class="complete"/g)].length === 5, `Every ${track.name} section must have one completion control.`);
+    assert([...track.html.matchAll(/class="explain"/g)].length === 5, `Every ${track.name} section must have exactly one concise explanatory layer.`);
+    const maximumWords = track.name === 'dotnet' ? 4200 : 2400;
+    assert(wordCount(visibleWords) >= 1400 && wordCount(visibleWords) <= maximumWords, `The ${track.name} track has drifted outside its concise 30-minute reading range.`);
+  }
 }
 assert(new Set(quickIds).size === quickIds.length, 'The short refresher contains duplicate DOM IDs.');
 assert([...quickRefresher.matchAll(/class="api-flow"/g)].length === 1, 'The short refresher must contain one focused Web API request journey.');
 for (const requiredWebApiIdea of ['Kestrel receives it', 'Routing matches it', 'Binding reads it', 'EF Core saves it', '201 Created', 'ProblemDetails', 'WebApplicationFactory', 'CORS']) {
   assert(quickRefresher.includes(requiredWebApiIdea), `The short Web API refresher is missing: ${requiredWebApiIdea}.`);
 }
+for (const requiredCodeExample of ['app.UseRouting()', '[FromBody] CreateOrderRequest', 'query.ToQueryString()', '.FromSqlInterpolated(', 'Task.Run(', 'Parallel.ForEach(', 'BackgroundService']) {
+  assert(quickRefresher.includes(requiredCodeExample), `The short refresher is missing the code or decision example: ${requiredCodeExample}.`);
+}
+assert(quickRefresher.includes('data-track-panel="story"') && quickRefresher.includes('Say this as one connected answer'), 'The separate connected interview-story track is missing.');
 assert(!/<(?:script|link)[^>]+(?:src|href)=/i.test(quickRefresher), 'The short refresher unexpectedly depends on an external asset.');
 assert(quickRefresher.includes('width=device-width,initial-scale=1,viewport-fit=cover'), 'The short refresher is missing mobile viewport support.');
 for (const match of quickRefresher.matchAll(/<script>([\s\S]*?)<\/script>/g)) {

@@ -19,6 +19,8 @@
       --yellow: #f2c14e;
       --angular: #c2185b;
       --angular-dark: #82153d;
+      --story: #3157a3;
+      --story-dark: #203d78;
       --code: #101923;
       --code-ink: #dce9e4;
       --shadow: 0 14px 42px rgba(18, 46, 37, .08);
@@ -82,7 +84,7 @@
     .top-progress span { color: var(--muted); font-size: .65rem; }
     .track-switch {
       display: inline-grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(3, 1fr);
       gap: 3px;
       border: 1px solid var(--line);
       border-radius: 12px;
@@ -102,14 +104,29 @@
     }
     .track-switch button[aria-selected="true"] { background: var(--green); color: #fff; }
     .track-switch button[data-track="angular"][aria-selected="true"] { background: var(--angular); }
+    .track-switch button[data-track="story"][aria-selected="true"] { background: var(--story); }
     .track-panel[hidden] { display: none; }
     .track-panel[data-track-panel="angular"] {
       --green: var(--angular);
       --green-dark: var(--angular-dark);
       --soft: #fff0f5;
     }
+    .track-panel[data-track-panel="story"] {
+      --green: var(--story);
+      --green-dark: var(--story-dark);
+      --soft: #edf2ff;
+    }
+    .track-panel[data-track-panel="story"] .hero::after {
+      content: "STORY";
+      right: -22px;
+      bottom: -12px;
+      font-size: clamp(4rem, 12vw, 7rem);
+    }
     body[data-track="angular"] .progress-line {
       background: linear-gradient(90deg, var(--angular), #7b2cbf, var(--yellow));
+    }
+    body[data-track="story"] .progress-line {
+      background: linear-gradient(90deg, var(--story), #6387d7, var(--yellow));
     }
 
     main { width: min(760px, calc(100% - 32px)); margin: 0 auto; padding: 46px 0 90px; }
@@ -280,6 +297,22 @@
     }
     .api-flow b { display: block; color: var(--green-dark); font-size: .75rem; }
     .api-flow span { display: block; margin-top: 3px; color: var(--muted); font-size: .72rem; line-height: 1.4; }
+    .code-caption {
+      margin: -7px 0 17px;
+      border-left: 3px solid var(--green);
+      padding-left: 11px;
+      color: var(--muted);
+      font-size: .81rem;
+    }
+    .decision-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 9px;
+      margin: 14px 0 18px;
+    }
+    .decision-grid > div { border: 1px solid var(--line); border-radius: 11px; padding: 12px; }
+    .decision-grid b { display: block; color: var(--green-dark); font-size: .77rem; }
+    .decision-grid span { display: block; margin-top: 4px; color: var(--muted); font-size: .78rem; }
     .code {
       margin: 16px 0;
       border-radius: 13px;
@@ -412,6 +445,7 @@
       .lesson-head { padding: 21px 18px 16px; }
       .lesson-body { padding: 19px 18px 22px; }
       .compare { grid-template-columns: 1fr; }
+      .decision-grid { grid-template-columns: 1fr; }
       .api-flow { grid-template-columns: 1fr 1fr; }
       .code { margin-left: -6px; margin-right: -6px; }
       pre { padding: 14px; font-size: .74rem; }
@@ -433,17 +467,18 @@
 <body data-track="dotnet">
   <div class="progress-line" aria-hidden="true"></div>
   <header class="topbar">
-    <div class="topbar-brand"><b id="course-label">.NET · Fast Refresher</b><small>Five sections · no coding required</small></div>
+    <div class="topbar-brand"><b id="course-label">.NET · Fast Refresher</b><small id="course-meta">Five sections · code shown, typing optional</small></div>
     <div class="track-switch" role="tablist" aria-label="Choose interview refresher">
-      <button type="button" role="tab" data-track="dotnet" aria-selected="true">.NET</button>
-      <button type="button" role="tab" data-track="angular" aria-selected="false">Angular</button>
+      <button type="button" role="tab" id="tab-dotnet" aria-controls="panel-dotnet" data-track="dotnet" aria-selected="true">.NET</button>
+      <button type="button" role="tab" id="tab-angular" aria-controls="panel-angular" data-track="angular" aria-selected="false" tabindex="-1">Angular</button>
+      <button type="button" role="tab" id="tab-story" aria-controls="panel-story" data-track="story" aria-selected="false" tabindex="-1">Story</button>
     </div>
     <div class="time-left" id="time-left" aria-live="polite">30 min left</div>
     <div class="top-progress"><b id="progress-count">0 / 5</b><span>sections complete</span></div>
   </header>
 
   <main>
-    <div class="track-panel" data-track-panel="dotnet">
+    <div class="track-panel" id="panel-dotnet" role="tabpanel" aria-labelledby="tab-dotnet" data-track-panel="dotnet">
     <section class="hero">
       <p class="eyebrow">Interview essentials only · 30 minutes</p>
       <h1>C# and .NET, without the noise.</h1>
@@ -452,16 +487,16 @@
     </section>
 
     <nav class="route" aria-label="Thirty-minute route">
-      <a href="#part-1"><b>5 min</b><span>C# basics</span></a>
-      <a href="#part-2"><b>5 min</b><span>OOP + LINQ</span></a>
-      <a href="#part-3"><b>6 min</b><span>Async + tasks</span></a>
-      <a href="#part-4"><b>9 min</b><span>Web API</span></a>
-      <a href="#part-5"><b>5 min</b><span>Design + recall</span></a>
+      <a href="#part-1"><b>4 min</b><span>C# basics</span></a>
+      <a href="#part-2"><b>4 min</b><span>OOP + LINQ</span></a>
+      <a href="#part-3"><b>7 min</b><span>Async + tasks</span></a>
+      <a href="#part-4"><b>11 min</b><span>Web API</span></a>
+      <a href="#part-5"><b>4 min</b><span>Design + recall</span></a>
     </nav>
 
-    <article class="lesson" id="part-1" data-minutes="5">
+    <article class="lesson" id="part-1" data-minutes="4">
       <header class="lesson-head">
-        <div class="lesson-meta"><span class="number">1</span><span class="minutes">5 MINUTES</span></div>
+        <div class="lesson-meta"><span class="number">1</span><span class="minutes">4 MINUTES</span></div>
         <h2>C# foundations</h2>
         <p class="lesson-summary">Values, decisions, loops, and methods—the small pieces every program uses.</p>
       </header>
@@ -504,9 +539,9 @@
       <footer class="finish"><span>Remember: value → decision → repetition → method.</span><button type="button" class="complete">Mark section complete</button></footer>
     </article>
 
-    <article class="lesson" id="part-2" data-minutes="5">
+    <article class="lesson" id="part-2" data-minutes="4">
       <header class="lesson-head">
-        <div class="lesson-meta"><span class="number">2</span><span class="minutes">5 MINUTES</span></div>
+        <div class="lesson-meta"><span class="number">2</span><span class="minutes">4 MINUTES</span></div>
         <h2>Objects, interfaces, collections, and LINQ</h2>
         <p class="lesson-summary">How OrderFlow represents orders and asks useful questions about groups of them.</p>
       </header>
@@ -562,9 +597,9 @@
       <footer class="finish"><span>Remember: class = design; object = instance; interface = promise.</span><button type="button" class="complete">Mark section complete</button></footer>
     </article>
 
-    <article class="lesson" id="part-3" data-minutes="6">
+    <article class="lesson" id="part-3" data-minutes="7">
       <header class="lesson-head">
-        <div class="lesson-meta"><span class="number">3</span><span class="minutes">6 MINUTES</span></div>
+        <div class="lesson-meta"><span class="number">3</span><span class="minutes">7 MINUTES</span></div>
         <h2>Async, tasks, and multithreading</h2>
         <p class="lesson-summary">How efficient waiting differs from concurrency, parallel CPU work, and multiple threads.</p>
       </header>
@@ -600,6 +635,52 @@
         cancellationToken);
 }</code></pre>
         </div>
+        <p class="code-caption"><strong>Why:</strong> the database does the waiting. <code>await</code> frees the request thread until the database replies; wrapping this in <code>Task.Run</code> would only waste another thread-pool slot.</p>
+
+        <h3>Choose by the kind of work</h3>
+        <div class="decision-grid">
+          <div><b>One I/O operation</b><span>Use the API's natural async method: <code>await ToListAsync(token)</code>.</span></div>
+          <div><b>A few independent I/O calls</b><span>Start them, then use <code>Task.WhenAll</code> so their waiting overlaps.</span></div>
+          <div><b>One expensive CPU calculation</b><span><code>Task.Run</code> can move it to a thread-pool worker—especially useful for keeping a desktop UI responsive.</span></div>
+          <div><b>Many independent CPU items</b><span><code>Parallel.ForEach</code> partitions them across available cores. Limit parallelism and avoid shared mutable state.</span></div>
+          <div><b>Many async I/O items</b><span>Use bounded <code>Parallel.ForEachAsync</code>, or batches of tasks. Never launch an unlimited number.</span></div>
+          <div><b>Long or durable background job</b><span>Put a message on a queue and let a <code>BackgroundService</code> or separately deployed worker process it.</span></div>
+        </div>
+
+        <div class="code">
+          <div class="code-head"><span>C# · overlap independent I/O</span><button class="copy" type="button">Copy</button></div>
+          <pre><code>Task&lt;CustomerDto?&gt; customerTask =
+    customerClient.GetFromJsonAsync&lt;CustomerDto&gt;(
+        <span class="str">$"customers/{customerId}"</span>, token);
+Task&lt;StockDto?&gt; stockTask =
+    stockClient.GetFromJsonAsync&lt;StockDto&gt;(
+        <span class="str">$"stock/{productId}"</span>, token);
+
+<span class="kw">await</span> Task.WhenAll(customerTask, stockTask);
+CustomerDto? customer = <span class="kw">await</span> customerTask;
+StockDto? stock = <span class="kw">await</span> stockTask;</code></pre>
+        </div>
+        <p class="code-caption"><strong>Why:</strong> both HTTP calls begin before either is awaited. They are concurrent, but <code>Task.WhenAll</code> does not mean that two dedicated threads sit waiting.</p>
+
+        <div class="code">
+          <div class="code-head"><span>C# · one CPU-bound calculation</span><button class="copy" type="button">Copy</button></div>
+          <pre><code>RiskReport report = <span class="kw">await</span> Task.Run(
+    () =&gt; BuildRiskReport(orders, token),
+    token);</code></pre>
+        </div>
+        <p class="code-caption"><strong>Use carefully:</strong> <code>Task.Run</code> queues CPU work to the managed thread pool in the same application. It does not create a separate service, and inside ASP.NET Core it usually does not improve server throughput. Queue genuinely long work to a background worker instead.</p>
+
+        <div class="code">
+          <div class="code-head"><span>C# · parallel CPU work over many items</span><button class="copy" type="button">Copy</button></div>
+          <pre><code><span class="kw">var</span> scores = <span class="kw">new</span> ConcurrentBag&lt;RiskScore&gt;();
+
+Parallel.ForEach(orders, <span class="kw">new</span> ParallelOptions
+{
+    MaxDegreeOfParallelism = Environment.ProcessorCount,
+    CancellationToken = token
+}, order =&gt; scores.Add(CalculateRisk(order)));</code></pre>
+        </div>
+        <p class="code-caption"><strong>Use when:</strong> each iteration is expensive, CPU-bound and independent. The TPL partitions the collection across thread-pool workers. Measure first: small loops can become slower, and ordinary collections are unsafe for concurrent writes.</p>
 
         <h3>What .NET does with your code</h3>
         <p>The C# compiler changes source code into <span class="term">IL</span>, a middle form stored in an assembly. The <span class="term">CLR</span> runs the application. The <span class="term">JIT</span> turns needed IL methods into machine instructions for the current computer.</p>
@@ -615,9 +696,9 @@
       <footer class="finish"><span>Remember: async is about waiting efficiently.</span><button type="button" class="complete">Mark section complete</button></footer>
     </article>
 
-    <article class="lesson" id="part-4" data-minutes="9">
+    <article class="lesson" id="part-4" data-minutes="11">
       <header class="lesson-head">
-        <div class="lesson-meta"><span class="number">4</span><span class="minutes">9 MINUTES</span></div>
+        <div class="lesson-meta"><span class="number">4</span><span class="minutes">11 MINUTES</span></div>
         <h2>ASP.NET Core Web API, EF Core, and DI</h2>
         <p class="lesson-summary">The path from an HTTP request to a saved OrderFlow order.</p>
       </header>
@@ -638,6 +719,37 @@
         </div>
 
         <div class="code">
+          <div class="code-head"><span>Program.cs · registration and middleware pipeline</span><button class="copy" type="button">Copy</button></div>
+          <pre><code><span class="kw">var</span> builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddControllers();
+builder.Services.AddProblemDetails();
+builder.Services.AddDbContext&lt;OrderDbContext&gt;(options =&gt;
+    options.UseSqlite(builder.Configuration.GetConnectionString(<span class="str">"Orders"</span>)));
+builder.Services.AddScoped&lt;IOrderService, OrderService&gt;();
+builder.Services.AddCors(options =&gt; options.AddPolicy(<span class="str">"Angular"</span>, policy =&gt;
+    policy.WithOrigins(<span class="str">"https://app.example.com"</span>)
+          .AllowAnyHeader().AllowAnyMethod()));
+builder.Services.AddAuthentication().AddJwtBearer(options =&gt;
+{
+    options.Authority = builder.Configuration[<span class="str">"Auth:Authority"</span>];
+    options.Audience = <span class="str">"orderflow-api"</span>;
+});
+builder.Services.AddAuthorization();
+
+WebApplication app = builder.Build();
+app.UseExceptionHandler();       <span class="com">// catch later failures centrally</span>
+app.UseHttpsRedirection();
+app.UseRouting();                <span class="com">// find the matching endpoint</span>
+app.UseCors(<span class="str">"Angular"</span>);       <span class="com">// browser-origin permission</span>
+app.UseAuthentication();         <span class="com">// who is calling?</span>
+app.UseAuthorization();          <span class="com">// may they call it?</span>
+app.MapControllers();            <span class="com">// expose controller endpoints</span>
+app.Run();</code></pre>
+        </div>
+        <p class="code-caption"><strong>What this does:</strong> <code>builder.Services</code> registers objects that DI may supply later. The <code>app.Use...</code> calls form an ordered request pipeline. Each middleware may inspect the request, stop it, or call the next checkpoint; the response then travels back through them.</p>
+
+        <div class="code">
           <div class="code-head"><span>HTTP · what crosses the boundary</span><button class="copy" type="button">Copy</button></div>
           <pre><code><span class="kw">POST</span> /orders
 Authorization: Bearer &lt;token&gt;
@@ -653,16 +765,38 @@ Location: /orders/123
         <div class="explain"><b>Method + address + result = the API conversation</b><p><code>GET</code> reads, <code>POST</code> creates, <code>PUT</code> replaces, <code>PATCH</code> changes part, and <code>DELETE</code> removes. A successful read normally returns <code>200</code>; a create returns <code>201</code>; invalid input returns <code>400</code>; missing/invalid identity returns <code>401</code>; known identity without permission returns <code>403</code>; a missing order returns <code>404</code>.</p><p>A DTO is the promised message shape at this boundary. It prevents database details from leaking into the public contract.</p></div>
 
         <div class="code">
-          <div class="code-head"><span>C# · minimal endpoint shape</span><button class="copy" type="button">Copy</button></div>
-          <pre><code>app.MapPost(<span class="str">"/orders"</span>, <span class="kw">async</span> (
-    CreateOrderRequest request,
-    IOrderService service,
-    CancellationToken token) =&gt;
+          <div class="code-head"><span>OrdersController.cs · routing, binding, validation, endpoint</span><button class="copy" type="button">Copy</button></div>
+          <pre><code><span class="kw">public sealed record</span> CreateOrderRequest(
+    Guid CustomerId,
+    [property: Range(<span class="num">1</span>, <span class="num">100</span>)] <span class="kw">int</span> Quantity,
+    [property: Range(typeof(<span class="kw">decimal</span>), <span class="str">"0.01"</span>, <span class="str">"1000000"</span>)] <span class="kw">decimal</span> UnitPrice);
+
+[ApiController]
+[Route(<span class="str">"api/orders"</span>)]
+<span class="kw">public sealed class</span> OrdersController(IOrderService service)
+    : ControllerBase
 {
-    <span class="kw">var</span> order = <span class="kw">await</span> service.CreateAsync(request, token);
-    <span class="kw">return</span> Results.Created(<span class="str">$"/orders/{order.Id}"</span>, order);
-});</code></pre>
+    [HttpPost]
+    [Authorize]
+    <span class="kw">public async</span> Task&lt;ActionResult&lt;OrderResponse&gt;&gt; Create(
+        [FromBody] CreateOrderRequest request,
+        CancellationToken token)
+    {
+        OrderResponse order = <span class="kw">await</span> service.CreateAsync(request, token);
+        <span class="kw">return</span> CreatedAtAction(nameof(GetById), <span class="kw">new</span> { id = order.Id }, order);
+    }
+
+    [HttpGet(<span class="str">"{id:guid}"</span>)]
+    <span class="kw">public async</span> Task&lt;ActionResult&lt;OrderResponse&gt;&gt; GetById(
+        Guid id, CancellationToken token)
+    {
+        OrderResponse? order = <span class="kw">await</span> service.GetAsync(id, token);
+        <span class="kw">if</span> (order <span class="kw">is null</span>) <span class="kw">return</span> NotFound();
+        <span class="kw">return</span> Ok(order);
+    }
+}</code></pre>
         </div>
+        <p class="code-caption"><strong>Trace it:</strong> <code>POST /api/orders</code> matches <code>[Route]</code> + <code>[HttpPost]</code>. Model binding converts the JSON body into <code>CreateOrderRequest</code>. With <code>[ApiController]</code>, invalid annotated input produces a 400 response. DI supplies <code>IOrderService</code>; the method awaits the use case and returns 201 with the new address.</p>
 
         <div class="compare">
           <div><b>Minimal API or controller?</b><p>Both use the same ASP.NET Core pipeline. Minimal handlers are compact; controllers group actions and offer conventions and filters for larger APIs.</p></div>
@@ -677,6 +811,46 @@ Location: /orders/123
         <p>Instead of a controller building its own repository, it asks for <code>IOrderService</code>. The application setup chooses the real implementation. This makes dependencies clear and testing easier.</p>
         <p><strong>Lifetimes:</strong> <span class="term">Transient</span> creates a new instance each time; <span class="term">Scoped</span> normally creates one per web request; <span class="term">Singleton</span> shares one for the application's lifetime.</p>
         <p><strong>EF Core detail:</strong> tracking remembers loaded entities so changes can be saved. For a read-only query, <code>AsNoTracking()</code> avoids that work. <code>SaveChangesAsync()</code> sends the tracked changes to the database as one unit of work. A migration records a repeatable change to the database structure.</p>
+
+        <h3>Entity Framework Core: do I write the SQL?</h3>
+        <div class="plain"><b>Short answer</b><p>Usually, no. You write a strongly typed LINQ query or change C# entities. The database provider translates that work into parameterized SQL for SQLite, SQL Server, PostgreSQL, or another supported database.</p></div>
+
+        <div class="code">
+          <div class="code-head"><span>OrderRepository.cs · LINQ becomes SQL</span><button class="copy" type="button">Copy</button></div>
+          <pre><code>IQueryable&lt;Order&gt; query = db.Orders
+    .AsNoTracking()
+    .Where(order =&gt; order.CustomerId == customerId)
+    .OrderByDescending(order =&gt; order.CreatedAtUtc)
+    .Take(<span class="num">10</span>);
+
+<span class="kw">string</span> generatedSql = query.ToQueryString(); <span class="com">// inspect while debugging</span>
+List&lt;Order&gt; orders = <span class="kw">await</span> query.ToListAsync(token);
+
+db.Orders.Add(<span class="kw">new</span> Order(customerId, total));
+<span class="kw">await</span> db.SaveChangesAsync(token);             <span class="com">// generates INSERT</span></code></pre>
+        </div>
+        <p class="code-caption"><strong>What happens:</strong> LINQ builds a query description. It does not contact the database until a terminal operation such as <code>ToListAsync</code> runs. The provider translates the description into SQL, sends parameters separately, reads the rows, and creates objects. <code>SaveChangesAsync</code> similarly generates the required <code>INSERT</code>, <code>UPDATE</code>, or <code>DELETE</code>.</p>
+
+        <div class="code">
+          <div class="code-head"><span>SQLite · simplified generated SQL</span><button class="copy" type="button">Copy</button></div>
+          <pre><code><span class="kw">SELECT</span> "o"."Id", "o"."CustomerId", "o"."Total"
+<span class="kw">FROM</span> "Orders" <span class="kw">AS</span> "o"
+<span class="kw">WHERE</span> "o"."CustomerId" = @customerId
+<span class="kw">ORDER BY</span> "o"."CreatedAtUtc" <span class="kw">DESC</span>
+<span class="kw">LIMIT</span> @take;</code></pre>
+        </div>
+        <p class="code-caption">The exact SQL changes by provider and EF Core version. Parameters such as <code>@customerId</code> keep data separate from the SQL command, which supports plan reuse and helps prevent injection.</p>
+
+        <div class="code">
+          <div class="code-head"><span>C# · raw SQL when there is a real reason</span><button class="copy" type="button">Copy</button></div>
+          <pre><code><span class="kw">decimal</span> minimum = <span class="num">50m</span>;
+List&lt;Order&gt; orders = <span class="kw">await</span> db.Orders
+    .FromSqlInterpolated(
+        <span class="str">$"SELECT * FROM Orders WHERE Total &gt;= {minimum}"</span>)
+    .AsNoTracking()
+    .ToListAsync(token);</code></pre>
+        </div>
+        <p class="code-caption"><strong>When:</strong> use raw SQL for a query EF cannot express well, a measured performance case, or an existing database routine. The interpolated EF API turns <code>minimum</code> into a parameter. Never join untrusted text into table names, clauses, or commands.</p>
 
         <h3>How you prove and operate it</h3>
         <p><strong>Unit tests</strong> test a business rule by itself. <strong>Integration tests</strong> send a real HTTP request through a test server—often with <code>WebApplicationFactory</code>—and prove that routing, DI, serialization, security and storage work together. In production, structured logs, traces, metrics and health checks tell you what failed and where.</p>
@@ -704,14 +878,14 @@ Location: /orders/123
           <div class="options"><button class="option" data-choice="0">200 with no location</button><button class="option" data-choice="1">201 Created with /orders/123</button><button class="option" data-choice="2">204 No Content</button></div>
           <p class="feedback"><strong>201 Created.</strong> It says a new resource now exists, and the Location header tells the client where to find it.</p>
         </div>
-        <p class="source-links">Web API anchors: <a href="https://learn.microsoft.com/en-us/aspnet/core/web-api/?view=aspnetcore-10.0" target="_blank" rel="noreferrer">API fundamentals</a> · <a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/?view=aspnetcore-10.0" target="_blank" rel="noreferrer">middleware order</a> · <a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/error-handling-api?view=aspnetcore-10.0" target="_blank" rel="noreferrer">API errors</a> · <a href="https://learn.microsoft.com/en-us/aspnet/core/test/integration-tests?view=aspnetcore-10.0" target="_blank" rel="noreferrer">integration testing</a>.</p>
+        <p class="source-links">Web API anchors: <a href="https://learn.microsoft.com/en-us/aspnet/core/web-api/?view=aspnetcore-10.0" target="_blank" rel="noreferrer">API fundamentals</a> · <a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/?view=aspnetcore-10.0" target="_blank" rel="noreferrer">middleware order</a> · <a href="https://learn.microsoft.com/en-us/ef/core/querying/" target="_blank" rel="noreferrer">EF Core querying</a> · <a href="https://learn.microsoft.com/en-us/ef/core/querying/sql-queries" target="_blank" rel="noreferrer">raw SQL</a> · <a href="https://learn.microsoft.com/en-us/aspnet/core/test/integration-tests?view=aspnetcore-10.0" target="_blank" rel="noreferrer">integration testing</a>.</p>
       </div>
       <footer class="finish"><span>Remember: request → checkpoints → endpoint → use case → database → response.</span><button type="button" class="complete">Mark section complete</button></footer>
     </article>
 
-    <article class="lesson" id="part-5" data-minutes="5">
+    <article class="lesson" id="part-5" data-minutes="4">
       <header class="lesson-head">
-        <div class="lesson-meta"><span class="number">5</span><span class="minutes">5 MINUTES</span></div>
+        <div class="lesson-meta"><span class="number">5</span><span class="minutes">4 MINUTES</span></div>
         <h2>SOLID, testing, architecture, and algorithms</h2>
         <p class="lesson-summary">The final ideas that help you explain why a solution is safe and able to grow.</p>
       </header>
@@ -784,7 +958,7 @@ Location: /orders/123
     </section>
     </div>
 
-    <div class="track-panel" data-track-panel="angular" hidden>
+    <div class="track-panel" id="panel-angular" role="tabpanel" aria-labelledby="tab-angular" data-track-panel="angular" hidden>
       <section class="hero">
         <p class="eyebrow">Interview essentials only · 30 minutes</p>
         <h1>Angular, NgRx and RxJS—clearly.</h1>
@@ -1031,6 +1205,50 @@ on(OrderActions.loadSuccess, (state, { orders }) =&gt; ({
         <p class="source-links">Source anchors: <a href="https://angular.dev/guide/signals" target="_blank" rel="noreferrer">Angular signals</a> · <a href="https://angular.dev/guide/ngmodules/overview" target="_blank" rel="noreferrer">standalone guidance</a> · <a href="https://angular.dev/ecosystem/web-workers" target="_blank" rel="noreferrer">Web Workers</a> · concepts and examples adapted from the supplied Angular/NgRx/RxJS refresher PDF.</p>
       </section>
     </div>
+
+    <div class="track-panel" id="panel-story" role="tabpanel" aria-labelledby="tab-story" data-track-panel="story" hidden>
+      <section class="hero">
+        <p class="eyebrow">One interview story · 8 minutes</p>
+        <h1>A migration story you can own.</h1>
+        <p class="hero-copy">This is one connected answer—not separate facts. Read it once, then say it aloud in your own words. Keep the order of the decisions even if you shorten the sentences.</p>
+        <span class="hero-note">Context → risk → migration slice → request flow → performance → proof</span>
+      </section>
+
+      <article class="lesson" id="story-part-1" data-minutes="8">
+        <header class="lesson-head">
+          <div class="lesson-meta"><span class="number">1</span><span class="minutes">8 MINUTES</span></div>
+          <h2>Modernising a legacy IIS order system</h2>
+          <p class="lesson-summary">A safe, incremental story joining ASP.NET Core, Angular, Web API, EF Core, async work, testing and operations.</p>
+        </header>
+        <div class="lesson-body">
+          <div class="plain"><b>The situation</b><p>“The company had an important order application built on .NET Framework and hosted in IIS. The UI, business rules and database code were tightly connected, deployments were risky, and several request paths blocked threads while waiting for the database or other services.”</p></div>
+
+          <div class="story-card">
+            <b>Say this as one connected answer</b>
+            <p>“I would begin by resisting a big-bang rewrite. First I would map the existing routes, authentication, scheduled jobs, database tables, external integrations and the behaviour users rely on. I would record a baseline for response time, error rate and deployment frequency, then add characterisation and integration tests around the most valuable order journeys. That gives us a safety net and a way to prove that modernisation has not silently changed the business.”</p>
+
+            <p>“I would use an incremental strangler approach. IIS could remain the public front door at first. A new ASP.NET Core application would run with Kestrel, and IIS would forward only a chosen route—such as <code>/api/orders</code>—to it. All unmigrated routes would continue reaching the legacy application. That lets us release and roll back one business capability at a time.”</p>
+
+            <p>“For the first slice, Angular would send a typed order DTO as JSON. In ASP.NET Core, central exception handling, correlation logging, CORS, authentication and authorization would run in the middleware pipeline. Routing would match the HTTP method and URL; model binding would create the C# request object; validation would reject bad input; and a thin controller would call an injected application service. The service—not the controller—would enforce the order rules.”</p>
+
+            <p>“The service would use an EF Core <code>DbContext</code> scoped to the request. For normal work I would write LINQ and entity changes; the provider would generate parameterized SQL, and I would inspect that SQL and the query plan for important paths. I would use projections, <code>AsNoTracking</code> for read-only queries, proper indexes and pagination. Raw SQL would be reserved for a query EF cannot express well or a measured performance case.”</p>
+
+            <p>“I would keep I/O asynchronous from controller to database and pass the request's cancellation token through every layer. Independent HTTP calls could overlap with <code>Task.WhenAll</code>. I would not wrap database or HTTP I/O in <code>Task.Run</code>. If profiling found expensive CPU work, a bounded parallel loop might help independent items; long-running or durable work would be placed on a queue and processed by a background or separately deployed worker, rather than being started and forgotten inside the web request.”</p>
+
+            <p>“Before shifting traffic, I would add unit tests for business rules, integration tests for the real HTTP and database boundary, OpenAPI contract checks, structured logs, traces, metrics and health checks. We would release to a small amount of traffic, compare behaviour and performance with the baseline, and keep a rollback route. Once the new slice was stable and the old route had no callers, we could retire that legacy piece and repeat the process.”</p>
+
+            <p>“My target would initially be a well-structured modular application, not microservices by default. I would split a capability into a separate service only when independent ownership, scaling, reliability or deployment made the extra network and operational complexity worthwhile.”</p>
+
+            <div class="memory-line">Remember the spine: understand → protect → coexist → move one slice → optimise from evidence → shift traffic → retire safely.</div>
+          </div>
+
+          <div class="explain"><b>If they interrupt, return to the decision</b><p><strong>Why IIS and Kestrel?</strong> IIS can remain the reverse proxy while Kestrel runs ASP.NET Core. <strong>Why EF Core?</strong> typed LINQ, change tracking, migrations and provider-generated parameterized SQL speed ordinary data work. <strong>Why async?</strong> it prevents request threads from sitting idle during I/O. <strong>Why not microservices immediately?</strong> boundaries and operational evidence should justify the cost.</p></div>
+
+          <div class="interview"><b>Your closing sentence</b><p>“The theme is controlled change: preserve behaviour, modernise one capability end to end, measure it in production, and remove the old path only when the evidence says it is safe.”</p></div>
+        </div>
+        <footer class="finish"><span>Say the story aloud once, then mark it complete.</span><button type="button" class="complete">Mark story complete</button></footer>
+      </article>
+    </div>
     <p class="footer-note">Your progress is saved only in this browser on this device. The full tutorial remains separate.</p>
   </main>
 
@@ -1039,23 +1257,40 @@ on(OrderActions.loadSuccess, (state, { orders }) =&gt; ({
       const legacyKey = 'orderflow-30-minute-progress-v1';
       const key = 'interview-30-minute-progress-v2';
       const panels = [...document.querySelectorAll('[data-track-panel]')];
-      const labels = { dotnet: '.NET · Fast Refresher', angular: 'Angular · Fast Refresher' };
-      let state = { track: 'dotnet', done: { dotnet: [], angular: [] } };
+      const trackNames = ['dotnet', 'angular', 'story'];
+      const labels = {
+        dotnet: '.NET · Fast Refresher',
+        angular: 'Angular · Fast Refresher',
+        story: 'Interview · One Strong Story'
+      };
+      const meta = {
+        dotnet: 'Five sections · code shown, typing optional',
+        angular: 'Five sections · code shown, typing optional',
+        story: 'One connected answer · say it aloud'
+      };
+      const titles = {
+        dotnet: '30-Minute C#/.NET Interview Refresher',
+        angular: '30-Minute Angular, NgRx + RxJS Refresher',
+        story: 'Legacy .NET Modernisation Interview Story'
+      };
+      let state = { track: 'dotnet', done: { dotnet: [], angular: [], story: [] } };
 
       try {
         const legacyDone = JSON.parse(localStorage.getItem(legacyKey) || '[]');
         if (Array.isArray(legacyDone)) state.done.dotnet = legacyDone;
         const saved = JSON.parse(localStorage.getItem(key) || 'null');
         if (saved?.done) state = {
-          track: saved.track === 'angular' ? 'angular' : 'dotnet',
+          track: trackNames.includes(saved.track) ? saved.track : 'dotnet',
           done: {
             dotnet: Array.isArray(saved.done.dotnet) ? saved.done.dotnet : state.done.dotnet,
-            angular: Array.isArray(saved.done.angular) ? saved.done.angular : []
+            angular: Array.isArray(saved.done.angular) ? saved.done.angular : [],
+            story: Array.isArray(saved.done.story) ? saved.done.story : []
           }
         };
       } catch { /* Keep the safe defaults. */ }
 
       if (location.hash.startsWith('#angular-')) state.track = 'angular';
+      if (location.hash.startsWith('#story-')) state.track = 'story';
 
       const save = () => localStorage.setItem(key, JSON.stringify(state));
 
@@ -1067,15 +1302,21 @@ on(OrderActions.loadSuccess, (state, { orders }) =&gt; ({
         panels.forEach(item => { item.hidden = item !== panel; });
         document.body.dataset.track = state.track;
         document.getElementById('course-label').textContent = labels[state.track];
+        document.getElementById('course-meta').textContent = meta[state.track];
         document.querySelectorAll('.track-switch [data-track]').forEach(button => {
-          button.setAttribute('aria-selected', String(button.dataset.track === state.track));
+          const selected = button.dataset.track === state.track;
+          button.setAttribute('aria-selected', String(selected));
+          button.tabIndex = selected ? 0 : -1;
         });
 
         lessons.forEach(lesson => {
           const complete = done.includes(lesson.id);
           lesson.classList.toggle('done', complete);
           const button = lesson.querySelector('.complete');
-          button.textContent = complete ? 'Section completed ✓' : 'Mark section complete';
+          const story = state.track === 'story';
+          button.textContent = complete
+            ? `${story ? 'Story' : 'Section'} completed ✓`
+            : `Mark ${story ? 'story' : 'section'} complete`;
           button.setAttribute('aria-pressed', String(complete));
         });
         const total = lessons.reduce((sum, lesson) => sum + Number(lesson.dataset.minutes), 0);
@@ -1084,9 +1325,7 @@ on(OrderActions.loadSuccess, (state, { orders }) =&gt; ({
         document.getElementById('time-left').textContent = left ? `${left} min left` : 'Complete';
         document.getElementById('progress-count').textContent = `${done.length} / ${lessons.length}`;
         document.querySelector('.progress-line').style.width = `${done.length / lessons.length * 100}%`;
-        document.title = state.track === 'angular'
-          ? '30-Minute Angular, NgRx + RxJS Refresher'
-          : '30-Minute C#/.NET Interview Refresher';
+        document.title = titles[state.track];
       };
 
       document.addEventListener('click', event => {
@@ -1128,6 +1367,21 @@ on(OrderActions.loadSuccess, (state, { orders }) =&gt; ({
             setTimeout(() => copy.textContent = 'Copy', 1100);
           });
         }
+      });
+
+      document.querySelector('.track-switch').addEventListener('keydown', event => {
+        if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+        const current = trackNames.indexOf(state.track);
+        const next = event.key === 'Home'
+          ? 0
+          : event.key === 'End'
+            ? trackNames.length - 1
+            : (current + (event.key === 'ArrowRight' ? 1 : -1) + trackNames.length) % trackNames.length;
+        event.preventDefault();
+        state.track = trackNames[next];
+        save();
+        update();
+        document.querySelector(`.track-switch [data-track="${state.track}"]`).focus();
       });
 
       update();
