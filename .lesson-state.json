@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "sequence": 132,
-  "lessonId": "lesson-7-122-pattern-map-3",
-  "title": "122. Pattern Map",
+  "sequence": 133,
+  "lessonId": "lesson-7-123-two-sum-4",
+  "title": "123. Two Sum",
   "chapter": 7,
-  "stateId": "lesson-132",
-  "exerciseType": "TRACE/DEBUG",
+  "stateId": "lesson-133",
+  "exerciseType": "BUILD",
   "canonicalStage": "stage-07",
-  "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
+  "productionTreeNote": "This lesson applies a permanent practice change against the canonical checkpoint."
 }
