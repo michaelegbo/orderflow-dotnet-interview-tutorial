@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "sequence": 41,
-  "lessonId": "lesson-2-36-lambdas-26",
-  "title": "36. Lambdas",
+  "sequence": 42,
+  "lessonId": "lesson-2-37-linq-27",
+  "title": "37. LINQ",
   "chapter": 2,
-  "stateId": "lesson-041",
-  "exerciseType": "EXPERIMENT",
+  "stateId": "lesson-042",
+  "exerciseType": "BUILD",
   "canonicalStage": "stage-02",
-  "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
+  "productionTreeNote": "This lesson applies a permanent practice change against the canonical checkpoint."
 }
