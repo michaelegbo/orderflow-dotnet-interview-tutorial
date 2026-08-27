@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 92,
-  "lessonId": "lesson-4-87-create-iorderservice-24",
-  "title": "87. Create IOrderService",
+  "sequence": 93,
+  "lessonId": "lesson-4-88-controller-should-not-become-the-whole-application-25",
+  "title": "88. Controller Should Not Become the Whole Application",
   "chapter": 4,
-  "stateId": "lesson-092",
+  "stateId": "lesson-093",
   "exerciseType": "BUILD",
   "canonicalStage": "stage-04",
   "productionTreeNote": "This lesson applies a permanent practice change against the canonical checkpoint."
