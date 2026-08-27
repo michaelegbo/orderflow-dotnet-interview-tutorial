@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "sequence": 93,
-  "lessonId": "lesson-4-88-controller-should-not-become-the-whole-application-25",
-  "title": "88. Controller Should Not Become the Whole Application",
-  "chapter": 4,
-  "stateId": "lesson-093",
-  "exerciseType": "BUILD",
-  "canonicalStage": "stage-04",
-  "productionTreeNote": "This lesson applies a permanent practice change against the canonical checkpoint."
+  "sequence": 94,
+  "lessonId": "lesson-5-74-why-di-exists-1",
+  "title": "74. Why DI Exists",
+  "chapter": 5,
+  "stateId": "lesson-094",
+  "exerciseType": "TRACE/DEBUG",
+  "canonicalStage": "stage-05",
+  "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
 }
