@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 157,
-  "lessonId": "lesson-8-145-asnotracking-18",
-  "title": "145. AsNoTracking?",
+  "sequence": 158,
+  "lessonId": "lesson-8-146-n-1-19",
+  "title": "146. N+1?",
   "chapter": 8,
-  "stateId": "lesson-157",
+  "stateId": "lesson-158",
   "exerciseType": "REHEARSE",
   "canonicalStage": "stage-08",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
