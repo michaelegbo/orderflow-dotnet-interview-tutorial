@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 65,
-  "lessonId": "lesson-3-59-assemblies-18",
-  "title": "59. Assemblies",
+  "sequence": 66,
+  "lessonId": "lesson-3-60-csproj-19",
+  "title": "60. .csproj",
   "chapter": 3,
-  "stateId": "lesson-065",
+  "stateId": "lesson-066",
   "exerciseType": "TRACE/DEBUG",
   "canonicalStage": "stage-03",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
