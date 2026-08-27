@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 146,
-  "lessonId": "lesson-8-134-what-is-garbage-collection-7",
-  "title": "134. What is garbage collection?",
+  "sequence": 147,
+  "lessonId": "lesson-8-135-value-type-vs-reference-type-8",
+  "title": "135. Value type vs reference type?",
   "chapter": 8,
-  "stateId": "lesson-146",
+  "stateId": "lesson-147",
   "exerciseType": "REHEARSE",
   "canonicalStage": "stage-08",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
