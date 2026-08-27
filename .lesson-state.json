@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "sequence": 47,
-  "lessonId": "lesson-2-42-events-32",
-  "title": "42. Events",
-  "chapter": 2,
-  "stateId": "lesson-047",
-  "exerciseType": "EXPERIMENT",
-  "canonicalStage": "stage-02",
-  "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
+  "sequence": 48,
+  "lessonId": "lesson-3-43-why-async-exists-1",
+  "title": "43. Why Async Exists",
+  "chapter": 3,
+  "stateId": "lesson-048",
+  "exerciseType": "BUILD",
+  "canonicalStage": "stage-03",
+  "productionTreeNote": "This lesson applies a permanent practice change against the canonical checkpoint."
 }
