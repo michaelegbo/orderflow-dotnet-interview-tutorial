@@ -53,11 +53,22 @@ for (const track of quickTracks) {
     assert([...track.html.matchAll(/class="check" data-answer=/g)].length === 5, `Every ${track.name} section must have one quick check.`);
     assert([...track.html.matchAll(/class="complete"/g)].length === 5, `Every ${track.name} section must have one completion control.`);
     assert([...track.html.matchAll(/class="explain"/g)].length === 5, `Every ${track.name} section must have exactly one concise explanatory layer.`);
-    const maximumWords = track.name === 'dotnet' ? 4200 : 2400;
+    // The selectable file explorer is optional reference material, not another
+    // linear lesson. Keep a ceiling so it cannot quietly become a second book.
+    const maximumWords = track.name === 'dotnet' ? 5000 : 3200;
     assert(wordCount(visibleWords) >= 1400 && wordCount(visibleWords) <= maximumWords, `The ${track.name} track has drifted outside its concise 30-minute reading range.`);
   }
 }
 assert(new Set(quickIds).size === quickIds.length, 'The short refresher contains duplicate DOM IDs.');
+assert([...quickRefresher.matchAll(/data-code-explorer="(?:dotnet|angular)"/g)].length === 2, 'The short refresher must contain one codebase explorer for .NET and one for Angular.');
+assert([...quickRefresher.matchAll(/class="file-tab"/g)].length === 18, 'The two codebase explorers must expose exactly 18 selectable files.');
+assert([...quickRefresher.matchAll(/<article class="file-panel"[^>]+data-file-panel(?:\s|>)/g)].length === 18, 'Every selectable codebase file must have one explanation panel.');
+assert([...quickRefresher.matchAll(/class="journey-strip"/g)].length === 2, 'Both codebase explorers must show an end-to-end journey.');
+for (const requiredFilePanel of ['dotnet-file-program', 'dotnet-file-controller', 'dotnet-file-service', 'dotnet-file-repository', 'dotnet-file-db', 'angular-file-main', 'angular-file-routes', 'angular-file-component', 'angular-file-api', 'angular-file-effects', 'angular-file-state']) {
+  assert(quickRefresher.includes(`id="${requiredFilePanel}"`), `The short refresher is missing its codebase panel: ${requiredFilePanel}.`);
+  assert(quickRefresher.includes(`data-file-target="${requiredFilePanel}"`), `The short refresher is missing navigation for: ${requiredFilePanel}.`);
+}
+assert(quickRefresher.includes('const activateFile =') && quickRefresher.includes("history.replaceState(null, '', `#${target.id}`)"), 'The codebase explorer navigation or reload-safe URL state is missing.');
 assert([...quickRefresher.matchAll(/class="api-flow"/g)].length === 1, 'The short refresher must contain one focused Web API request journey.');
 for (const requiredWebApiIdea of ['Kestrel receives it', 'Routing matches it', 'Binding reads it', 'EF Core saves it', '201 Created', 'ProblemDetails', 'WebApplicationFactory', 'CORS']) {
   assert(quickRefresher.includes(requiredWebApiIdea), `The short Web API refresher is missing: ${requiredWebApiIdea}.`);

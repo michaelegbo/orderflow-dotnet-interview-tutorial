@@ -209,6 +209,90 @@
     .route b { color: var(--green); font: 800 .68rem "Cascadia Code", monospace; }
     .route span { margin-top: 3px; font-size: .68rem; line-height: 1.25; }
 
+    .codebase-tour {
+      margin: 0 0 38px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+      overflow: clip;
+    }
+    .tour-head { padding: 25px 27px 21px; border-bottom: 1px solid var(--line); }
+    .tour-kicker { margin: 0 0 6px; color: var(--green); font: 800 .67rem "Cascadia Code", monospace; letter-spacing: .1em; text-transform: uppercase; }
+    .tour-head h2 { margin: 0; font-size: clamp(1.45rem, 5vw, 2rem); letter-spacing: -.035em; line-height: 1.12; }
+    .tour-head > p:last-child { margin: 9px 0 0; max-width: 68ch; color: var(--muted); font-size: .89rem; }
+    .journey-strip {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--line);
+      background: var(--soft);
+      overflow-x: auto;
+      scrollbar-width: thin;
+    }
+    .journey-strip span {
+      flex: 0 0 auto;
+      border: 1px solid color-mix(in srgb, var(--green) 24%, var(--line));
+      border-radius: 999px;
+      background: var(--paper);
+      padding: 5px 9px;
+      color: var(--green-dark);
+      font-size: .7rem;
+      font-weight: 750;
+      white-space: nowrap;
+    }
+    .journey-strip i { flex: 0 0 auto; color: var(--green); font-style: normal; font-weight: 900; }
+    .explorer-shell { display: grid; grid-template-columns: 230px minmax(0, 1fr); min-height: 570px; }
+    .file-tree {
+      position: sticky;
+      top: 65px;
+      align-self: start;
+      max-height: calc(100vh - 82px);
+      overflow-y: auto;
+      border-right: 1px solid var(--line);
+      background: #f8fbfa;
+      padding: 16px 12px 20px;
+      scrollbar-width: thin;
+    }
+    .tree-title { margin: 0 6px 10px; color: var(--muted); font: 750 .65rem "Cascadia Code", monospace; letter-spacing: .07em; text-transform: uppercase; }
+    .tree-root { margin: 0 6px 9px; color: var(--ink); font: 800 .74rem "Cascadia Code", monospace; }
+    .tree-group { margin: 12px 6px 5px; color: var(--muted); font: 750 .62rem "Cascadia Code", monospace; letter-spacing: .06em; text-transform: uppercase; }
+    .tree-runtime { margin: 6px 8px 0 25px; color: var(--green-dark); font: 650 .64rem "Cascadia Code", monospace; }
+    .file-list { display: grid; gap: 3px; }
+    .file-tab {
+      width: 100%;
+      min-width: 0;
+      min-height: 36px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      background: transparent;
+      padding: 7px 8px;
+      color: #3e514b;
+      text-align: left;
+      cursor: pointer;
+      font: 650 .68rem "Cascadia Code", monospace;
+      overflow-wrap: anywhere;
+    }
+    .file-tab::before { content: "◇"; flex: 0 0 auto; color: var(--green); font-size: .85rem; }
+    .file-tab:hover { border-color: var(--line); background: var(--paper); }
+    .file-tab[aria-selected="true"] { border-color: color-mix(in srgb, var(--green) 35%, var(--line)); background: var(--paper); color: var(--green-dark); font-weight: 850; }
+    .file-tab[aria-selected="true"]::before { content: "◆"; }
+    .file-stage { min-width: 0; padding: 24px 26px 28px; }
+    .file-panel[hidden] { display: none; }
+    .file-path { margin: 0; color: var(--green); font: 800 .65rem "Cascadia Code", monospace; letter-spacing: .04em; overflow-wrap: anywhere; }
+    .file-panel h3 { margin: 7px 0 5px; font-size: 1.35rem; letter-spacing: -.025em; }
+    .file-intro { margin: 0 0 14px; color: var(--muted); font-size: .87rem; }
+    .file-points { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 13px 0 16px; }
+    .file-points > div { border: 1px solid var(--line); border-radius: 10px; padding: 10px; }
+    .file-points b { display: block; color: var(--green-dark); font-size: .7rem; }
+    .file-points span { display: block; margin-top: 3px; color: var(--muted); font-size: .74rem; line-height: 1.45; }
+    .file-remember { margin-top: 13px; border-left: 3px solid var(--yellow); background: #fff9e9; padding: 10px 12px; color: #6d510d; font-size: .8rem; }
+    .lesson-link { display: inline-flex; margin-top: 12px; color: var(--green-dark); font-size: .78rem; font-weight: 800; }
+
     .lesson {
       scroll-margin-top: 78px;
       margin: 0 0 22px;
@@ -440,6 +524,15 @@
       .hero::after { font-size: 9rem; bottom: -42px; }
       .route { grid-template-columns: repeat(5, minmax(66px, 1fr)); overflow-x: auto; padding-bottom: 7px; scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch; }
       .route a { scroll-snap-align: start; min-width: 70px; min-height: 58px; }
+      .codebase-tour { border-radius: 16px; }
+      .tour-head { padding: 21px 18px 17px; }
+      .explorer-shell { grid-template-columns: 1fr; min-height: 0; }
+      .file-tree { position: static; max-height: none; border-right: 0; border-bottom: 1px solid var(--line); padding: 15px 12px 17px; }
+      .file-list { grid-template-columns: 1fr 1fr; gap: 5px; }
+      .tree-group { grid-column: 1 / -1; }
+      .file-tab { min-height: 42px; background: var(--paper); border-color: var(--line); }
+      .file-stage { padding: 21px 18px 24px; scroll-margin-top: 126px; }
+      .file-points { grid-template-columns: 1fr; }
       .lesson { border-radius: 16px; }
       .lesson { scroll-margin-top: 126px; }
       .lesson-head { padding: 21px 18px 16px; }
@@ -458,6 +551,7 @@
       main { width: calc(100% - 18px); }
       .lesson-body, .lesson-head { padding-left: 15px; padding-right: 15px; }
       .api-flow { grid-template-columns: 1fr; }
+      .file-list { grid-template-columns: 1fr; }
     }
     @media (prefers-reduced-motion: reduce) {
       * { scroll-behavior: auto !important; transition: none !important; }
@@ -493,6 +587,255 @@
       <a href="#part-4"><b>11 min</b><span>Web API</span></a>
       <a href="#part-5"><b>4 min</b><span>Design + recall</span></a>
     </nav>
+
+    <section class="codebase-tour" data-code-explorer="dotnet" aria-labelledby="dotnet-tour-title">
+      <header class="tour-head">
+        <p class="tour-kicker">Start with the structure · click any file</p>
+        <h2 id="dotnet-tour-title">A small ASP.NET Core codebase</h2>
+        <p>Spend about two minutes on the path below, then click only the files that feel unclear. This is an optional map—not extra homework or a replacement for the 30-minute route.</p>
+      </header>
+      <div class="journey-strip" aria-label="Complete .NET request journey">
+        <span>Browser</span><i>→</i><span>Kestrel</span><i>→</i><span>Middleware</span><i>→</i><span>Controller</span><i>→</i><span>Service</span><i>→</i><span>Repository</span><i>→</i><span>EF Core</span><i>→</i><span>Database</span><i>→</i><span>Response</span>
+      </div>
+      <div class="explorer-shell">
+        <nav class="file-tree" role="tablist" aria-orientation="vertical" aria-label="ASP.NET Core project files">
+          <p class="tree-title">Project explorer</p>
+          <p class="tree-root">▾ OrderFlow/</p>
+          <div class="file-list">
+            <p class="tree-group">OrderFlow.Api</p>
+            <button class="file-tab" type="button" role="tab" id="tab-dotnet-file-program" aria-controls="dotnet-file-program" aria-selected="true" data-file-target="dotnet-file-program">Program.cs</button>
+            <button class="file-tab" type="button" role="tab" id="tab-dotnet-file-middleware" aria-controls="dotnet-file-middleware" aria-selected="false" tabindex="-1" data-file-target="dotnet-file-middleware">Middleware/Timing.cs</button>
+            <button class="file-tab" type="button" role="tab" id="tab-dotnet-file-controller" aria-controls="dotnet-file-controller" aria-selected="false" tabindex="-1" data-file-target="dotnet-file-controller">Controllers/OrdersController.cs</button>
+            <button class="file-tab" type="button" role="tab" id="tab-dotnet-file-contract" aria-controls="dotnet-file-contract" aria-selected="false" tabindex="-1" data-file-target="dotnet-file-contract">Contracts/CreateOrderRequest.cs</button>
+            <p class="tree-group">OrderFlow.Application</p>
+            <button class="file-tab" type="button" role="tab" id="tab-dotnet-file-service" aria-controls="dotnet-file-service" aria-selected="false" tabindex="-1" data-file-target="dotnet-file-service">Services/OrderService.cs</button>
+            <p class="tree-group">OrderFlow.Domain</p>
+            <button class="file-tab" type="button" role="tab" id="tab-dotnet-file-domain" aria-controls="dotnet-file-domain" aria-selected="false" tabindex="-1" data-file-target="dotnet-file-domain">Entities/Order.cs</button>
+            <p class="tree-group">OrderFlow.Infrastructure</p>
+            <button class="file-tab" type="button" role="tab" id="tab-dotnet-file-repository" aria-controls="dotnet-file-repository" aria-selected="false" tabindex="-1" data-file-target="dotnet-file-repository">Repositories/OrderRepository.cs</button>
+            <button class="file-tab" type="button" role="tab" id="tab-dotnet-file-db" aria-controls="dotnet-file-db" aria-selected="false" tabindex="-1" data-file-target="dotnet-file-db">Data/OrderDbContext.cs</button>
+            <p class="tree-runtime">↳ orderflow.db · stored rows</p>
+            <p class="tree-group">OrderFlow.Tests</p>
+            <button class="file-tab" type="button" role="tab" id="tab-dotnet-file-test" aria-controls="dotnet-file-test" aria-selected="false" tabindex="-1" data-file-target="dotnet-file-test">OrdersApiTests.cs</button>
+          </div>
+        </nav>
+
+        <div class="file-stage">
+          <article class="file-panel" role="tabpanel" id="dotnet-file-program" aria-labelledby="tab-dotnet-file-program" data-file-panel>
+            <p class="file-path">OrderFlow.Api/Program.cs</p>
+            <h3>The wiring room</h3>
+            <p class="file-intro">This file starts the application. It tells .NET which helpers exist and the order every web request must follow.</p>
+            <div class="file-points"><div><b>Receives</b><span>Application startup.</span></div><div><b>Connects</b><span>Controllers, services, EF Core and security.</span></div><div><b>Produces</b><span>A running web application listening through Kestrel.</span></div></div>
+            <div class="code"><div class="code-head"><span>Program.cs · the route through the app</span><button class="copy" type="button">Copy</button></div><pre><code><span class="kw">var</span> builder = WebApplication.CreateBuilder(args);
+builder.Services.AddControllers();
+builder.Services.AddProblemDetails();
+builder.Services.AddAuthentication().AddJwtBearer();
+builder.Services.AddAuthorization();
+builder.Services.AddScoped&lt;IOrderService, OrderService&gt;();
+builder.Services.AddScoped&lt;IOrderRepository, OrderRepository&gt;();
+builder.Services.AddDbContext&lt;OrderDbContext&gt;(options =&gt;
+    options.UseSqlite(builder.Configuration.GetConnectionString(<span class="str">"Orders"</span>)));
+
+WebApplication app = builder.Build();
+app.UseExceptionHandler();
+app.UseHttpsRedirection();
+app.UseMiddleware&lt;RequestTimingMiddleware&gt;();
+app.UseRouting();
+app.UseAuthentication();
+app.UseAuthorization();
+app.MapControllers();
+app.Run();</code></pre></div>
+            <p class="file-remember"><strong>Remember:</strong> registration happens before <code>Build()</code>; request handling happens after it. Kestrel is the web server underneath this application.</p>
+            <a class="lesson-link" href="#part-4">Study the full Web API pipeline ↓</a>
+          </article>
+
+          <article class="file-panel" role="tabpanel" id="dotnet-file-middleware" aria-labelledby="tab-dotnet-file-middleware" data-file-panel hidden>
+            <p class="file-path">OrderFlow.Api/Middleware/RequestTimingMiddleware.cs</p>
+            <h3>A checkpoint in the hallway</h3>
+            <p class="file-intro">Middleware handles work shared by many endpoints. It can inspect the request, stop it immediately, or call the next checkpoint.</p>
+            <div class="file-points"><div><b>Receives</b><span>The current <code>HttpContext</code>.</span></div><div><b>Calls</b><span><code>next(context)</code> to continue.</span></div><div><b>Produces</b><span>Logging around everything that follows.</span></div></div>
+            <div class="code"><div class="code-head"><span>RequestTimingMiddleware.cs</span><button class="copy" type="button">Copy</button></div><pre><code><span class="kw">public sealed class</span> RequestTimingMiddleware
+{
+    <span class="kw">private readonly</span> RequestDelegate _next;
+
+    <span class="kw">public</span> RequestTimingMiddleware(RequestDelegate next)
+        =&gt; _next = next;
+
+    <span class="kw">public async</span> Task InvokeAsync(
+        HttpContext context, ILogger&lt;RequestTimingMiddleware&gt; logger)
+    {
+        Stopwatch timer = Stopwatch.StartNew();
+        <span class="kw">await</span> _next(context); <span class="com">// continue down the pipeline</span>
+        logger.LogInformation(<span class="str">"{Path} took {Ms} ms"</span>,
+            context.Request.Path, timer.ElapsedMilliseconds);
+    }
+}</code></pre></div>
+            <p class="file-remember"><strong>Short-circuit:</strong> if middleware writes a response and does not call <code>next</code>, later middleware and the controller never run.</p>
+          </article>
+
+          <article class="file-panel" role="tabpanel" id="dotnet-file-controller" aria-labelledby="tab-dotnet-file-controller" data-file-panel hidden>
+            <p class="file-path">OrderFlow.Api/Controllers/OrdersController.cs</p>
+            <h3>The HTTP receptionist</h3>
+            <p class="file-intro">The controller understands HTTP. It receives input, calls the use case, and converts the result into an HTTP response. Keep it thin.</p>
+            <div class="file-points"><div><b>Receives</b><span><code>POST /api/orders</code> and JSON.</span></div><div><b>Calls</b><span><code>IOrderService.CreateAsync</code>.</span></div><div><b>Returns</b><span><code>201 Created</code> or a clear error.</span></div></div>
+            <div class="code"><div class="code-head"><span>OrdersController.cs</span><button class="copy" type="button">Copy</button></div><pre><code>[ApiController]
+[Route(<span class="str">"api/orders"</span>)]
+<span class="kw">public sealed class</span> OrdersController : ControllerBase
+{
+    <span class="kw">private readonly</span> IOrderService _service;
+
+    <span class="kw">public</span> OrdersController(IOrderService service)
+    {
+        _service = service; <span class="com">// supplied by dependency injection</span>
+    }
+
+    [HttpPost]
+    <span class="kw">public async</span> Task&lt;ActionResult&lt;OrderResponse&gt;&gt; Create(
+        CreateOrderRequest request, CancellationToken token)
+    {
+        OrderResponse result = <span class="kw">await</span> _service.CreateAsync(request, token);
+        <span class="kw">return</span> Created(<span class="str">$"api/orders/{result.Id}"</span>, result);
+    }
+}</code></pre></div>
+            <p class="file-remember"><strong>Remember:</strong> routing chooses this method; model binding creates <code>request</code>; DI supplies <code>service</code>.</p>
+          </article>
+
+          <article class="file-panel" role="tabpanel" id="dotnet-file-contract" aria-labelledby="tab-dotnet-file-contract" data-file-panel hidden>
+            <p class="file-path">OrderFlow.Api/Contracts/CreateOrderRequest.cs</p>
+            <h3>The labelled parcel</h3>
+            <p class="file-intro">A DTO defines the exact shape allowed across the HTTP boundary. It is not automatically the same object stored in the database.</p>
+            <div class="file-points"><div><b>Receives</b><span>JSON property values.</span></div><div><b>Protects</b><span>The public API contract.</span></div><div><b>Prevents</b><span>Database-only fields leaking outside.</span></div></div>
+            <div class="code"><div class="code-head"><span>CreateOrderRequest.cs</span><button class="copy" type="button">Copy</button></div><pre><code><span class="kw">public sealed record</span> CreateOrderRequest(
+    Guid CustomerId,
+    [property: Range(<span class="num">1</span>, <span class="num">100</span>)] <span class="kw">int</span> Quantity,
+    [property: Range(typeof(<span class="kw">decimal</span>), <span class="str">"0.01"</span>, <span class="str">"1000000"</span>)]
+    <span class="kw">decimal</span> UnitPrice);</code></pre></div>
+            <p class="file-remember"><strong>Remember:</strong> JSON → DTO is model binding. The range rules are validation. Business rules still belong deeper in the application.</p>
+          </article>
+
+          <article class="file-panel" role="tabpanel" id="dotnet-file-service" aria-labelledby="tab-dotnet-file-service" data-file-panel hidden>
+            <p class="file-path">OrderFlow.Application/Services/OrderService.cs</p>
+            <h3>The use-case manager</h3>
+            <p class="file-intro">This file coordinates the actual business action. It calculates, checks rules, creates the domain object, and asks storage to save it.</p>
+            <div class="file-points"><div><b>Receives</b><span>A valid request DTO.</span></div><div><b>Calls</b><span>The domain object and repository.</span></div><div><b>Returns</b><span>A response DTO for the controller.</span></div></div>
+            <div class="code"><div class="code-head"><span>OrderService.cs</span><button class="copy" type="button">Copy</button></div><pre><code><span class="kw">public sealed class</span> OrderService : IOrderService
+{
+    <span class="kw">private readonly</span> IOrderRepository _repository;
+
+    <span class="kw">public</span> OrderService(IOrderRepository repository)
+    {
+        _repository = repository;
+    }
+
+    <span class="kw">public async</span> Task&lt;OrderResponse&gt; CreateAsync(
+        CreateOrderRequest request, CancellationToken token)
+    {
+        <span class="kw">decimal</span> total = request.Quantity * request.UnitPrice;
+        <span class="kw">if</span> (total &gt; <span class="num">10_000m</span>)
+            <span class="kw">throw new</span> OrderLimitExceededException();
+
+        Order order = Order.Create(request.CustomerId, total);
+        <span class="kw">await</span> _repository.AddAsync(order, token);
+        <span class="kw">return new</span>(order.Id, order.Status, order.Total);
+    }
+}</code></pre></div>
+            <p class="file-remember"><strong>Remember:</strong> the service knows the steps of the use case; it does not know HTTP status codes or SQL syntax.</p>
+          </article>
+
+          <article class="file-panel" role="tabpanel" id="dotnet-file-domain" aria-labelledby="tab-dotnet-file-domain" data-file-panel hidden>
+            <p class="file-path">OrderFlow.Domain/Entities/Order.cs</p>
+            <h3>The protected business object</h3>
+            <p class="file-intro">The domain object keeps important state and rules together so outside code cannot put an order into an impossible state.</p>
+            <div class="file-points"><div><b>Contains</b><span>Order identity, total and status.</span></div><div><b>Protects</b><span>Rules such as “cancelled cannot be paid.”</span></div><div><b>Knows nothing about</b><span>Controllers, JSON or EF queries.</span></div></div>
+            <div class="code"><div class="code-head"><span>Order.cs</span><button class="copy" type="button">Copy</button></div><pre><code><span class="kw">public sealed class</span> Order
+{
+    <span class="kw">public</span> Guid Id { <span class="kw">get</span>; <span class="kw">private set</span>; } = Guid.NewGuid();
+    <span class="kw">public</span> Guid CustomerId { <span class="kw">get</span>; <span class="kw">private set</span>; }
+    <span class="kw">public decimal</span> Total { <span class="kw">get</span>; <span class="kw">private set</span>; }
+    <span class="kw">public</span> OrderStatus Status { <span class="kw">get</span>; <span class="kw">private set</span>; }
+
+    <span class="kw">public static</span> Order Create(Guid customerId, <span class="kw">decimal</span> total)
+    {
+        <span class="kw">if</span> (total &lt;= <span class="num">0m</span>) <span class="kw">throw new</span> ArgumentOutOfRangeException();
+        <span class="kw">return new</span> Order { CustomerId = customerId, Total = total };
+    }
+
+    <span class="kw">public void</span> MarkPaid()
+    {
+        <span class="kw">if</span> (Status == OrderStatus.Cancelled)
+            <span class="kw">throw new</span> InvalidOperationException();
+        Status = OrderStatus.Paid;
+    }
+}</code></pre></div>
+            <p class="file-remember"><strong>Remember:</strong> encapsulation means changing state through safe behaviour, not allowing every caller to set every property.</p>
+          </article>
+
+          <article class="file-panel" role="tabpanel" id="dotnet-file-repository" aria-labelledby="tab-dotnet-file-repository" data-file-panel hidden>
+            <p class="file-path">OrderFlow.Infrastructure/Repositories/OrderRepository.cs</p>
+            <h3>The storage doorway</h3>
+            <p class="file-intro">The repository gives the application simple storage operations. EF Core performs the real database work behind this doorway.</p>
+            <div class="file-points"><div><b>Receives</b><span>An order or query value.</span></div><div><b>Calls</b><span><code>OrderDbContext</code> and EF Core.</span></div><div><b>Returns</b><span>Domain objects, not HTTP responses.</span></div></div>
+            <div class="code"><div class="code-head"><span>OrderRepository.cs</span><button class="copy" type="button">Copy</button></div><pre><code><span class="kw">public sealed class</span> OrderRepository : IOrderRepository
+{
+    <span class="kw">private readonly</span> OrderDbContext _db;
+
+    <span class="kw">public</span> OrderRepository(OrderDbContext db) { _db = db; }
+
+    <span class="kw">public async</span> Task&lt;Order?&gt; FindAsync(Guid id, CancellationToken token)
+    {
+        <span class="kw">return await</span> _db.Orders.AsNoTracking()
+            .SingleOrDefaultAsync(order =&gt; order.Id == id, token);
+    }
+
+    <span class="kw">public async</span> Task AddAsync(Order order, CancellationToken token)
+    {
+        _db.Orders.Add(order);
+        <span class="kw">await</span> _db.SaveChangesAsync(token);
+    }
+}</code></pre></div>
+            <p class="file-remember"><strong>Remember:</strong> LINQ describes the question. The EF provider translates it into parameterized SQL when the query executes.</p>
+          </article>
+
+          <article class="file-panel" role="tabpanel" id="dotnet-file-db" aria-labelledby="tab-dotnet-file-db" data-file-panel hidden>
+            <p class="file-path">OrderFlow.Infrastructure/Data/OrderDbContext.cs</p>
+            <h3>The map between C# and the database</h3>
+            <p class="file-intro">The <code>DbContext</code> knows which entities exist, how they map to tables, and which changes must be written to the real database.</p>
+            <div class="file-points"><div><b>Maps</b><span><code>Order</code> objects to the <code>Orders</code> table.</span></div><div><b>Tracks</b><span>Added, changed and deleted entities.</span></div><div><b>Writes</b><span>Generated SQL during <code>SaveChangesAsync</code>.</span></div></div>
+            <div class="code"><div class="code-head"><span>OrderDbContext.cs</span><button class="copy" type="button">Copy</button></div><pre><code><span class="kw">public sealed class</span> OrderDbContext : DbContext
+{
+    <span class="kw">public</span> OrderDbContext(DbContextOptions&lt;OrderDbContext&gt; options)
+        : <span class="kw">base</span>(options) { }
+
+    <span class="kw">public</span> DbSet&lt;Order&gt; Orders =&gt; Set&lt;Order&gt;();
+
+    <span class="kw">protected override void</span> OnModelCreating(ModelBuilder model)
+    {
+        model.Entity&lt;Order&gt;().Property(order =&gt; order.Total)
+            .HasPrecision(<span class="num">18</span>, <span class="num">2</span>);
+    }
+}</code></pre></div>
+            <p class="file-remember"><strong>Where data finally lives:</strong> SQLite or another database file/server. EF migrations record repeatable table changes such as adding a <code>Status</code> column.</p>
+          </article>
+
+          <article class="file-panel" role="tabpanel" id="dotnet-file-test" aria-labelledby="tab-dotnet-file-test" data-file-panel hidden>
+            <p class="file-path">OrderFlow.Tests/OrdersApiTests.cs</p>
+            <h3>The complete-journey proof</h3>
+            <p class="file-intro">An integration test sends a real HTTP request through routing, DI, controller, service and storage without needing a public server.</p>
+            <div class="file-points"><div><b>Arranges</b><span>A test application and request.</span></div><div><b>Acts</b><span>Calls the API through <code>HttpClient</code>.</span></div><div><b>Asserts</b><span>The status and saved result are correct.</span></div></div>
+            <div class="code"><div class="code-head"><span>OrdersApiTests.cs</span><button class="copy" type="button">Copy</button></div><pre><code>[Fact]
+<span class="kw">public async</span> Task Create_returns_201()
+{
+    HttpClient client = factory.CreateClient();
+    HttpResponseMessage response = <span class="kw">await</span> client.PostAsJsonAsync(
+        <span class="str">"/api/orders"</span>, <span class="kw">new</span> CreateOrderRequest(customerId, <span class="num">2</span>, <span class="num">25m</span>));
+
+    Assert.Equal(HttpStatusCode.Created, response.StatusCode);
+}</code></pre></div>
+            <p class="file-remember"><strong>Remember:</strong> unit tests prove one rule; integration tests prove that the connected pieces cooperate.</p>
+          </article>
+        </div>
+      </div>
+    </section>
 
     <article class="lesson" id="part-1" data-minutes="4">
       <header class="lesson-head">
@@ -974,6 +1317,197 @@ List&lt;Order&gt; orders = <span class="kw">await</span> db.Orders
         <a href="#angular-part-5"><b>6 min</b><span>Quality + recall</span></a>
       </nav>
 
+      <section class="codebase-tour" data-code-explorer="angular" aria-labelledby="angular-tour-title">
+        <header class="tour-head">
+          <p class="tour-kicker">Start with the structure · click any file</p>
+          <h2 id="angular-tour-title">A small Angular codebase</h2>
+          <p>Spend about two minutes on the path below, then click only the files that feel unclear. This is an optional map—not extra homework or a replacement for the 30-minute route.</p>
+        </header>
+        <div class="journey-strip" aria-label="Complete Angular screen journey">
+          <span>Browser</span><i>→</i><span>Router</span><i>→</i><span>Component</span><i>→</i><span>Template</span><i>→</i><span>Action</span><i>→</i><span>Effect</span><i>→</i><span>API</span><i>→</i><span>State</span><i>→</i><span>View</span>
+        </div>
+        <div class="explorer-shell">
+          <nav class="file-tree" role="tablist" aria-orientation="vertical" aria-label="Angular project files">
+            <p class="tree-title">Project explorer</p>
+            <p class="tree-root">▾ orderflow-ui/src/</p>
+            <div class="file-list">
+              <p class="tree-group">Startup</p>
+              <button class="file-tab" type="button" role="tab" id="tab-angular-file-main" aria-controls="angular-file-main" aria-selected="true" data-file-target="angular-file-main">main.ts</button>
+              <button class="file-tab" type="button" role="tab" id="tab-angular-file-routes" aria-controls="angular-file-routes" aria-selected="false" tabindex="-1" data-file-target="angular-file-routes">app/app.routes.ts</button>
+              <p class="tree-group">Feature: orders</p>
+              <button class="file-tab" type="button" role="tab" id="tab-angular-file-component" aria-controls="angular-file-component" aria-selected="false" tabindex="-1" data-file-target="angular-file-component">features/orders/order-list.component.ts</button>
+              <button class="file-tab" type="button" role="tab" id="tab-angular-file-template" aria-controls="angular-file-template" aria-selected="false" tabindex="-1" data-file-target="angular-file-template">features/orders/order-list.component.html</button>
+              <button class="file-tab" type="button" role="tab" id="tab-angular-file-model" aria-controls="angular-file-model" aria-selected="false" tabindex="-1" data-file-target="angular-file-model">features/orders/order.model.ts</button>
+              <p class="tree-group">API and security</p>
+              <button class="file-tab" type="button" role="tab" id="tab-angular-file-api" aria-controls="angular-file-api" aria-selected="false" tabindex="-1" data-file-target="angular-file-api">data-access/order-api.service.ts</button>
+              <button class="file-tab" type="button" role="tab" id="tab-angular-file-interceptor" aria-controls="angular-file-interceptor" aria-selected="false" tabindex="-1" data-file-target="angular-file-interceptor">core/auth.interceptor.ts</button>
+              <p class="tree-group">NgRx state</p>
+              <button class="file-tab" type="button" role="tab" id="tab-angular-file-effects" aria-controls="angular-file-effects" aria-selected="false" tabindex="-1" data-file-target="angular-file-effects">state/orders.effects.ts</button>
+              <button class="file-tab" type="button" role="tab" id="tab-angular-file-state" aria-controls="angular-file-state" aria-selected="false" tabindex="-1" data-file-target="angular-file-state">state/orders.reducer.ts</button>
+            </div>
+          </nav>
+
+          <div class="file-stage">
+            <article class="file-panel" role="tabpanel" id="angular-file-main" aria-labelledby="tab-angular-file-main" data-file-panel>
+              <p class="file-path">src/main.ts</p>
+              <h3>The on switch</h3>
+              <p class="file-intro">This is where Angular starts. It creates the root component and makes shared helpers such as routing and HTTP available.</p>
+              <div class="file-points"><div><b>Receives</b><span>The browser loading the application.</span></div><div><b>Connects</b><span>The root component, router and HTTP client.</span></div><div><b>Produces</b><span>A running Angular application.</span></div></div>
+              <div class="code"><div class="code-head"><span>main.ts · start and connect</span><button class="copy" type="button">Copy</button></div><pre><code>bootstrapApplication(AppComponent, {
+  providers: [
+    provideRouter(routes),
+    provideHttpClient(withInterceptors([authInterceptor])),
+    provideStore({ orders: ordersReducer }),
+    provideEffects(OrdersEffects)
+  ]
+}).catch(console.error);</code></pre></div>
+              <p class="file-remember"><strong>Remember:</strong> this file wires the application together. It should not contain screen behaviour or business rules.</p>
+              <a class="lesson-link" href="#angular-part-1">Study Angular’s mental model ↓</a>
+            </article>
+
+            <article class="file-panel" role="tabpanel" id="angular-file-routes" aria-labelledby="tab-angular-file-routes" data-file-panel hidden>
+              <p class="file-path">src/app/app.routes.ts</p>
+              <h3>The page map</h3>
+              <p class="file-intro">The router reads the browser URL and chooses which component belongs in the page’s <code>router-outlet</code>.</p>
+              <div class="file-points"><div><b>Receives</b><span>A URL such as <code>/orders</code>.</span></div><div><b>Chooses</b><span>The matching component.</span></div><div><b>Can produce</b><span>A lazy download of that feature’s code.</span></div></div>
+              <div class="code"><div class="code-head"><span>app.routes.ts</span><button class="copy" type="button">Copy</button></div><pre><code><span class="kw">export const</span> routes: Routes = [
+  {
+    path: <span class="str">'orders'</span>,
+    loadComponent: () =&gt; import(
+      <span class="str">'./features/orders/order-list.component'</span>
+    ).then(file =&gt; file.OrderListComponent)
+  },
+  { path: <span class="str">''</span>, redirectTo: <span class="str">'orders'</span>, pathMatch: <span class="str">'full'</span> }
+];</code></pre></div>
+              <p class="file-remember"><strong>Remember:</strong> <code>loadComponent</code> waits to download this screen until its route is visited. Put more specific routes before broad or wildcard routes.</p>
+            </article>
+
+            <article class="file-panel" role="tabpanel" id="angular-file-component" aria-labelledby="tab-angular-file-component" data-file-panel hidden>
+              <p class="file-path">src/app/features/orders/order-list.component.ts</p>
+              <h3>The screen coordinator</h3>
+              <p class="file-intro">The component connects state to the template and turns a user action into an application action. It should stay focused on this screen.</p>
+              <div class="file-points"><div><b>Receives</b><span>Route activation and user events.</span></div><div><b>Calls</b><span>The NgRx store or a service.</span></div><div><b>Exposes</b><span>View data such as <code>orders$</code>.</span></div></div>
+              <div class="code"><div class="code-head"><span>order-list.component.ts</span><button class="copy" type="button">Copy</button></div><pre><code>@Component({
+  standalone: <span class="kw">true</span>,
+  templateUrl: <span class="str">'./order-list.component.html'</span>,
+  imports: [AsyncPipe, CurrencyPipe]
+})
+<span class="kw">export class</span> OrderListComponent {
+  <span class="kw">private</span> store = inject(Store);
+  orders$ = <span class="kw">this</span>.store.select(selectAllOrders);
+
+  ngOnInit() { <span class="kw">this</span>.store.dispatch(OrdersActions.load()); }
+}</code></pre></div>
+              <p class="file-remember"><strong>Remember:</strong> component = screen interaction. Do not hide reusable HTTP code or server-side business rules inside it.</p>
+            </article>
+
+            <article class="file-panel" role="tabpanel" id="angular-file-template" aria-labelledby="tab-angular-file-template" data-file-panel hidden>
+              <p class="file-path">src/app/features/orders/order-list.component.html</p>
+              <h3>What the user sees</h3>
+              <p class="file-intro">The template describes the visible page. Binding fills it with component data and sends user events back to the component.</p>
+              <div class="file-points"><div><b>Receives</b><span>Values exposed by the component.</span></div><div><b>Displays</b><span>Loading, empty, error and success states.</span></div><div><b>Sends</b><span>Clicks and input events to handlers.</span></div></div>
+              <div class="code"><div class="code-head"><span>order-list.component.html</span><button class="copy" type="button">Copy</button></div><pre><code>@if (orders$ | async; as orders) {
+  &lt;h1&gt;Orders ({{ orders.length }})&lt;/h1&gt;
+  @for (order of orders; track order.id) {
+    &lt;article&gt;{{ order.customer }} — {{ order.total | currency }}&lt;/article&gt;
+  } @empty {
+    &lt;p&gt;No orders yet.&lt;/p&gt;
+  }
+}</code></pre></div>
+              <p class="file-remember"><strong>Remember:</strong> <code>{{ }}</code> displays a value, <code>[property]</code> sends a value in, and <code>(event)</code> sends an event out.</p>
+            </article>
+
+            <article class="file-panel" role="tabpanel" id="angular-file-model" aria-labelledby="tab-angular-file-model" data-file-panel hidden>
+              <p class="file-path">src/app/features/orders/order.model.ts</p>
+              <h3>The agreed data shape</h3>
+              <p class="file-intro">A TypeScript interface tells the editor and compiler which fields the UI expects from an order.</p>
+              <div class="file-points"><div><b>Describes</b><span>The frontend’s order shape.</span></div><div><b>Helps</b><span>Catch incorrect property names during development.</span></div><div><b>Does not</b><span>Validate an untrusted server response at runtime.</span></div></div>
+              <div class="code"><div class="code-head"><span>order.model.ts</span><button class="copy" type="button">Copy</button></div><pre><code><span class="kw">export interface</span> Order {
+  id: <span class="kw">string</span>;
+  customer: <span class="kw">string</span>;
+  total: <span class="kw">number</span>;
+  status: <span class="str">'pending'</span> | <span class="str">'paid'</span> | <span class="str">'cancelled'</span>;
+}</code></pre></div>
+              <p class="file-remember"><strong>Remember:</strong> this frontend model usually matches an API response DTO—not necessarily the database entity.</p>
+            </article>
+
+            <article class="file-panel" role="tabpanel" id="angular-file-api" aria-labelledby="tab-angular-file-api" data-file-panel hidden>
+              <p class="file-path">src/app/data-access/order-api.service.ts</p>
+              <h3>The doorway to the .NET API</h3>
+              <p class="file-intro">This service keeps HTTP details out of the component. It turns an endpoint into a typed Observable that other code can reuse.</p>
+              <div class="file-points"><div><b>Receives</b><span>A request from an effect or component.</span></div><div><b>Calls</b><span><code>GET /api/orders</code> through <code>HttpClient</code>.</span></div><div><b>Returns</b><span>An <code>Observable&lt;Order[]&gt;</code>.</span></div></div>
+              <div class="code"><div class="code-head"><span>order-api.service.ts</span><button class="copy" type="button">Copy</button></div><pre><code>@Injectable({ providedIn: <span class="str">'root'</span> })
+<span class="kw">export class</span> OrderApiService {
+  <span class="kw">private</span> http = inject(HttpClient);
+
+  getAll(): Observable&lt;Order[]&gt; {
+    <span class="kw">return this</span>.http.get&lt;Order[]&gt;(<span class="str">'/api/orders'</span>);
+  }
+}</code></pre></div>
+              <p class="file-remember"><strong>Remember:</strong> <code>HttpClient</code> returns a cold Observable. The network request begins when something subscribes—an effect or the async pipe can do that.</p>
+              <a class="lesson-link" href="#angular-part-2">Study services, HTTP and routing ↓</a>
+            </article>
+
+            <article class="file-panel" role="tabpanel" id="angular-file-interceptor" aria-labelledby="tab-angular-file-interceptor" data-file-panel hidden>
+              <p class="file-path">src/app/core/auth.interceptor.ts</p>
+              <h3>A checkpoint for every HTTP call</h3>
+              <p class="file-intro">An interceptor handles repeated HTTP concerns in one place, such as attaching an access token before a request leaves the browser.</p>
+              <div class="file-points"><div><b>Receives</b><span>The outgoing request.</span></div><div><b>Can change</b><span>A cloned request, because requests are immutable.</span></div><div><b>Passes</b><span>The request to the next interceptor.</span></div></div>
+              <div class="code"><div class="code-head"><span>auth.interceptor.ts</span><button class="copy" type="button">Copy</button></div><pre><code><span class="kw">export const</span> authInterceptor: HttpInterceptorFn = (request, next) =&gt; {
+  <span class="kw">const</span> token = inject(AuthService).accessToken();
+  <span class="kw">const</span> authorized = token
+    ? request.clone({ setHeaders: { Authorization: <span class="str">`Bearer ${token}`</span> } })
+    : request;
+
+  <span class="kw">return</span> next(authorized);
+};</code></pre></div>
+              <p class="file-remember"><strong>Security boundary:</strong> this helps the client send a credential. The .NET API must still validate it and authorize every protected operation.</p>
+            </article>
+
+            <article class="file-panel" role="tabpanel" id="angular-file-effects" aria-labelledby="tab-angular-file-effects" data-file-panel hidden>
+              <p class="file-path">src/app/state/orders.effects.ts</p>
+              <h3>The outside-work coordinator</h3>
+              <p class="file-intro">An effect listens for an action, performs external work such as an API call, then reports success or failure with another action.</p>
+              <div class="file-points"><div><b>Receives</b><span><code>OrdersActions.load</code>.</span></div><div><b>Calls</b><span><code>OrderApiService.getAll()</code>.</span></div><div><b>Dispatches</b><span><code>loadSuccess</code> or <code>loadFailure</code>.</span></div></div>
+              <div class="code"><div class="code-head"><span>orders.effects.ts</span><button class="copy" type="button">Copy</button></div><pre><code>@Injectable()
+<span class="kw">export class</span> OrdersEffects {
+  <span class="kw">private</span> actions$ = inject(Actions);
+  <span class="kw">private</span> api = inject(OrderApiService);
+
+  loadOrders$ = createEffect(() =&gt; <span class="kw">this</span>.actions$.pipe(
+    ofType(OrdersActions.load),
+    switchMap(() =&gt; <span class="kw">this</span>.api.getAll().pipe(
+      map(orders =&gt; OrdersActions.loadSuccess({ orders })),
+      catchError(error =&gt; of(OrdersActions.loadFailure({ error })))
+    ))
+  ));
+}</code></pre></div>
+              <p class="file-remember"><strong>Remember:</strong> effects perform side effects. Reducers must stay pure and must never make HTTP requests.</p>
+            </article>
+
+            <article class="file-panel" role="tabpanel" id="angular-file-state" aria-labelledby="tab-angular-file-state" data-file-panel hidden>
+              <p class="file-path">src/app/state/orders.reducer.ts</p>
+              <h3>The predictable state update</h3>
+              <p class="file-intro">The reducer calculates the next shared state. A selector reads just the piece a component needs.</p>
+              <div class="file-points"><div><b>Receives</b><span>Old state plus an action.</span></div><div><b>Returns</b><span>A new immutable state object.</span></div><div><b>Selectors expose</b><span>Small, reusable views of that state.</span></div></div>
+              <div class="code"><div class="code-head"><span>orders.reducer.ts</span><button class="copy" type="button">Copy</button></div><pre><code><span class="kw">export const</span> ordersReducer = createReducer(
+  initialState,
+  on(OrdersActions.load, state =&gt; ({ ...state, loading: <span class="kw">true</span> })),
+  on(OrdersActions.loadSuccess, (state, { orders }) =&gt; ({
+    ...state, orders, loading: <span class="kw">false</span>, error: <span class="kw">null</span>
+  }))
+);
+
+<span class="kw">export const</span> selectAllOrders = createSelector(
+  selectOrdersState, state =&gt; state.orders
+);</code></pre></div>
+              <p class="file-remember"><strong>The loop:</strong> component dispatches → effect calls API → success action → reducer creates state → selector feeds component → template updates.</p>
+              <a class="lesson-link" href="#angular-part-4">Study the complete NgRx loop ↓</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
       <article class="lesson" id="angular-part-1" data-minutes="6">
         <header class="lesson-head">
           <div class="lesson-meta"><span class="number">1</span><span class="minutes">6 MINUTES</span></div>
@@ -1202,6 +1736,7 @@ on(OrderActions.loadSuccess, (state, { orders }) =&gt; ({
           <p>A typed service or effect calls the Web API; RxJS handles cancellation, errors and composition.</p>
           <p>The new state reaches the template through a signal or async pipe, and tests prove the important behaviour.</p>
         </div>
+        <p class="source-links">Additional structure anchors: <a href="https://angular.dev/guide/routing" target="_blank" rel="noreferrer">Angular routing</a> · <a href="https://angular.dev/guide/http/interceptors" target="_blank" rel="noreferrer">HTTP interceptors</a>.</p>
         <p class="source-links">Source anchors: <a href="https://angular.dev/guide/signals" target="_blank" rel="noreferrer">Angular signals</a> · <a href="https://angular.dev/guide/ngmodules/overview" target="_blank" rel="noreferrer">standalone guidance</a> · <a href="https://angular.dev/ecosystem/web-workers" target="_blank" rel="noreferrer">Web Workers</a> · concepts and examples adapted from the supplied Angular/NgRx/RxJS refresher PDF.</p>
       </section>
     </div>
@@ -1257,6 +1792,7 @@ on(OrderActions.loadSuccess, (state, { orders }) =&gt; ({
       const legacyKey = 'orderflow-30-minute-progress-v1';
       const key = 'interview-30-minute-progress-v2';
       const panels = [...document.querySelectorAll('[data-track-panel]')];
+      const explorers = [...document.querySelectorAll('[data-code-explorer]')];
       const trackNames = ['dotnet', 'angular', 'story'];
       const labels = {
         dotnet: '.NET · Fast Refresher',
@@ -1293,6 +1829,25 @@ on(OrderActions.loadSuccess, (state, { orders }) =&gt; ({
       if (location.hash.startsWith('#story-')) state.track = 'story';
 
       const save = () => localStorage.setItem(key, JSON.stringify(state));
+
+      const activateFile = (explorer, panelId, options = {}) => {
+        const buttons = [...explorer.querySelectorAll('[data-file-target]')];
+        const filePanels = [...explorer.querySelectorAll('[data-file-panel]')];
+        const target = filePanels.find(panel => panel.id === panelId) || filePanels[0];
+        if (!target) return;
+
+        buttons.forEach(button => {
+          const selected = button.dataset.fileTarget === target.id;
+          button.setAttribute('aria-selected', String(selected));
+          button.tabIndex = selected ? 0 : -1;
+        });
+        filePanels.forEach(panel => { panel.hidden = panel !== target; });
+
+        if (options.writeHash) history.replaceState(null, '', `#${target.id}`);
+        if (options.scroll && matchMedia('(max-width: 600px)').matches) {
+          explorer.querySelector('.file-stage').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      };
 
       const update = () => {
         const panel = panels.find(item => item.dataset.trackPanel === state.track);
@@ -1335,6 +1890,16 @@ on(OrderActions.loadSuccess, (state, { orders }) =&gt; ({
           save();
           update();
           document.querySelector(`[data-track-panel="${state.track}"] .hero`).scrollIntoView({ behavior: 'smooth', block: 'start' });
+          return;
+        }
+
+        const fileTab = event.target.closest('[data-file-target]');
+        if (fileTab) {
+          activateFile(
+            fileTab.closest('[data-code-explorer]'),
+            fileTab.dataset.fileTarget,
+            { writeHash: true, scroll: true }
+          );
           return;
         }
 
@@ -1384,7 +1949,37 @@ on(OrderActions.loadSuccess, (state, { orders }) =&gt; ({
         document.querySelector(`.track-switch [data-track="${state.track}"]`).focus();
       });
 
+      document.querySelectorAll('.file-tree').forEach(tree => {
+        tree.addEventListener('keydown', event => {
+          if (!['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+          const buttons = [...tree.querySelectorAll('[data-file-target]')];
+          const currentButton = event.target.closest('[data-file-target]');
+          if (!currentButton) return;
+          const current = buttons.indexOf(currentButton);
+          const next = event.key === 'Home'
+            ? 0
+            : event.key === 'End'
+              ? buttons.length - 1
+              : (current + (['ArrowDown', 'ArrowRight'].includes(event.key) ? 1 : -1) + buttons.length) % buttons.length;
+          event.preventDefault();
+          const nextButton = buttons[next];
+          activateFile(
+            nextButton.closest('[data-code-explorer]'),
+            nextButton.dataset.fileTarget,
+            { writeHash: true }
+          );
+          nextButton.focus();
+        });
+      });
+
       update();
+      explorers.forEach(explorer => {
+        const hashTarget = location.hash.slice(1);
+        const ownsHash = [...explorer.querySelectorAll('[data-file-panel]')]
+          .some(panel => panel.id === hashTarget);
+        const first = explorer.querySelector('[data-file-panel]');
+        activateFile(explorer, ownsHash ? hashTarget : first?.id);
+      });
     })();
   </script>
 </body>
