@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 6,
-  "lessonId": "lesson-1-5-strings-and-string-interpolation-6",
-  "title": "5. Strings and String Interpolation",
+  "sequence": 7,
+  "lessonId": "lesson-1-exercise-1-your-first-order-7",
+  "title": "Exercise 1 — Your First Order",
   "chapter": 1,
-  "stateId": "lesson-006",
+  "stateId": "lesson-007",
   "exerciseType": "BUILD",
   "canonicalStage": "stage-01",
   "productionTreeNote": "This lesson applies a permanent practice change against the canonical checkpoint."
