@@ -74,6 +74,12 @@ for (const requiredFilePanel of ['dotnet-file-program', 'dotnet-file-controller'
 }
 assert(quickRefresher.includes('const activateFile =') && quickRefresher.includes("history.replaceState(null, '', `#${target.id}`)"), 'The codebase explorer navigation or reload-safe URL state is missing.');
 assert([...quickRefresher.matchAll(/class="api-flow"/g)].length === 1, 'The short refresher must contain one focused Web API request journey.');
+assert([...quickRefresher.matchAll(/class="api-open-file"/g)].length === 10, 'The Web API journey must connect every request step to its codebase file.');
+assert([...quickRefresher.matchAll(/class="file-back"/g)].length === 2, 'Both codebase maps must link back into the connected lesson flow.');
+for (const connectedFile of ['angular-file-api', 'dotnet-file-program', 'dotnet-file-middleware', 'dotnet-file-controller', 'dotnet-file-contract', 'dotnet-file-service', 'dotnet-file-domain', 'dotnet-file-repository', 'dotnet-file-db', 'dotnet-file-test']) {
+  assert(quickRefresher.includes(`data-open-file="${connectedFile}"`), `The Web API journey is not connected to: ${connectedFile}.`);
+}
+assert(quickRefresher.includes("event.target.closest('[data-open-file]')"), 'The connected Web API file controls are not interactive.');
 for (const requiredWebApiIdea of ['Kestrel receives it', 'Routing matches it', 'Binding reads it', 'EF Core saves it', '201 Created', 'ProblemDetails', 'WebApplicationFactory', 'CORS']) {
   assert(quickRefresher.includes(requiredWebApiIdea), `The short Web API refresher is missing: ${requiredWebApiIdea}.`);
 }

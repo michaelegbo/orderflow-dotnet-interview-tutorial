@@ -301,6 +301,7 @@
     .file-tab[aria-selected="true"] { border-color: color-mix(in srgb, var(--green) 35%, var(--line)); background: var(--paper); color: var(--green-dark); font-weight: 850; }
     .file-tab[aria-selected="true"]::before { content: "◆"; }
     .file-stage { min-width: 0; padding: 24px 26px 28px; }
+    .file-back { display: inline-flex; margin: 0 0 14px; color: var(--green-dark); font-size: .74rem; font-weight: 850; }
     .file-panel[hidden] { display: none; }
     .file-path { margin: 0; color: var(--green); font: 800 .65rem "Cascadia Code", monospace; letter-spacing: .04em; overflow-wrap: anywhere; }
     .file-panel h3 { margin: 7px 0 5px; font-size: 1.35rem; letter-spacing: -.025em; }
@@ -372,7 +373,7 @@
     .compare p { margin: 4px 0 0; color: var(--muted); font-size: .79rem; }
     .api-flow {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 8px;
       margin: 14px 0 18px;
       counter-reset: api-step;
@@ -400,6 +401,18 @@
     }
     .api-flow b { display: block; color: var(--green-dark); font-size: .75rem; }
     .api-flow span { display: block; margin-top: 3px; color: var(--muted); font-size: .72rem; line-height: 1.4; }
+    .api-file-actions { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 9px; }
+    .api-open-file {
+      border: 1px solid color-mix(in srgb, var(--green) 32%, var(--line));
+      border-radius: 7px;
+      background: var(--paper);
+      padding: 6px 7px;
+      color: var(--green-dark);
+      cursor: pointer;
+      font: 800 .61rem "Cascadia Code", monospace;
+      text-align: left;
+    }
+    .api-open-file:hover { border-color: var(--green); background: var(--soft); }
     .code-caption {
       margin: -7px 0 17px;
       border-left: 3px solid var(--green);
@@ -644,6 +657,7 @@
         </nav>
 
         <div class="file-stage">
+          <a class="file-back" href="#part-4">← Return to the connected Web API request journey</a>
           <article class="file-panel" role="tabpanel" id="dotnet-file-program" aria-labelledby="tab-dotnet-file-program" data-file-panel>
             <p class="file-path">OrderFlow.Api/Program.cs</p>
             <h3>The wiring room</h3>
@@ -1073,15 +1087,17 @@ Parallel.ForEach(orders, <span class="kw">new</span> ParallelOptions
 
         <h3>Picture one complete request</h3>
         <p>A user presses <strong>Place order</strong>. Angular sends <code>POST /orders</code> with JSON. Follow that single request:</p>
+        <div class="plain"><b>The directory and this lesson are now connected</b><p>Use the blue file buttons as you follow the request. Each button opens the real place in the codebase map, with that file’s job, code, inputs and output. Use “Return to the connected Web API request journey” to come back here.</p></div>
         <div class="api-flow" aria-label="Web API request journey">
-          <div><b>Kestrel receives it</b><span>IIS may sit in front, but Kestrel runs the ASP.NET Core app.</span></div>
-          <div><b>Middleware checks it</b><span>Shared checkpoints handle errors, logs, CORS, identity and permission.</span></div>
-          <div><b>Routing matches it</b><span><code>POST</code> + <code>/orders</code> selects the create-order endpoint.</span></div>
-          <div><b>Binding reads it</b><span>JSON becomes a C# request DTO; validation rejects a bad shape.</span></div>
-          <div><b>Endpoint receives it</b><span>A minimal handler or controller translates HTTP into a use-case call.</span></div>
-          <div><b>Service decides</b><span>Business rules calculate the total and decide whether the order is valid.</span></div>
-          <div><b>EF Core saves it</b><span>The repository uses a scoped <code>DbContext</code>; EF Core produces SQL.</span></div>
-          <div><b>Response returns</b><span><code>201 Created</code> carries the result and the new order's address.</span></div>
+          <div><b>Angular sends it</b><span><code>OrderApiService</code> sends typed JSON to <code>POST /api/orders</code>.</span><p class="api-file-actions"><button class="api-open-file" type="button" data-open-file="angular-file-api">Open Angular API service →</button></p></div>
+          <div><b>Kestrel receives it</b><span>IIS may sit in front, but Kestrel runs the ASP.NET Core app configured in <code>Program.cs</code>.</span><p class="api-file-actions"><button class="api-open-file" type="button" data-open-file="dotnet-file-program">Open Program.cs →</button></p></div>
+          <div><b>Middleware checks it</b><span>Shared checkpoints handle errors, logs, CORS, identity and permission.</span><p class="api-file-actions"><button class="api-open-file" type="button" data-open-file="dotnet-file-middleware">Open middleware →</button></p></div>
+          <div><b>Routing matches it</b><span><code>POST</code> + <code>/api/orders</code> selects the create-order controller action.</span><p class="api-file-actions"><button class="api-open-file" type="button" data-open-file="dotnet-file-controller">Open controller →</button></p></div>
+          <div><b>Binding reads it</b><span>JSON becomes a C# request DTO; validation rejects a bad shape.</span><p class="api-file-actions"><button class="api-open-file" type="button" data-open-file="dotnet-file-contract">Open request DTO →</button></p></div>
+          <div><b>Service decides</b><span>Business rules calculate the total and decide whether the order is valid.</span><p class="api-file-actions"><button class="api-open-file" type="button" data-open-file="dotnet-file-service">Open service →</button><button class="api-open-file" type="button" data-open-file="dotnet-file-domain">Open Order →</button></p></div>
+          <div><b>Repository asks for storage</b><span>The application uses a storage doorway instead of knowing EF Core details.</span><p class="api-file-actions"><button class="api-open-file" type="button" data-open-file="dotnet-file-repository">Open repository →</button></p></div>
+          <div><b>EF Core saves it</b><span>A scoped <code>DbContext</code> maps the order and generates SQL for SQLite.</span><p class="api-file-actions"><button class="api-open-file" type="button" data-open-file="dotnet-file-db">Open DbContext →</button></p></div>
+          <div><b>Response and test</b><span><code>201 Created</code> returns through middleware; an integration test proves the connected journey.</span><p class="api-file-actions"><button class="api-open-file" type="button" data-open-file="dotnet-file-test">Open API test →</button></p></div>
         </div>
 
         <div class="code">
@@ -1373,6 +1389,7 @@ List&lt;Order&gt; orders = <span class="kw">await</span> db.Orders
           </nav>
 
           <div class="file-stage">
+            <a class="file-back" href="#part-4" data-switch-track="dotnet">← See how this Angular call enters the .NET Web API</a>
             <article class="file-panel" role="tabpanel" id="angular-file-main" aria-labelledby="tab-angular-file-main" data-file-panel>
               <p class="file-path">src/main.ts</p>
               <h3>The on switch</h3>
@@ -1916,6 +1933,32 @@ on(OrderActions.loadSuccess, (state, { orders }) =&gt; ({
           save();
           update();
           document.querySelector(`[data-track-panel="${state.track}"] .hero`).scrollIntoView({ behavior: 'smooth', block: 'start' });
+          return;
+        }
+
+        const switchTrackLink = event.target.closest('[data-switch-track]');
+        if (switchTrackLink) {
+          event.preventDefault();
+          state.track = switchTrackLink.dataset.switchTrack;
+          save();
+          update();
+          const destination = document.querySelector(switchTrackLink.getAttribute('href'));
+          history.replaceState(null, '', switchTrackLink.getAttribute('href'));
+          destination?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          return;
+        }
+
+        const apiFile = event.target.closest('[data-open-file]');
+        if (apiFile) {
+          const explorer = explorers.find(item =>
+            [...item.querySelectorAll('[data-file-panel]')].some(panel => panel.id === apiFile.dataset.openFile)
+          );
+          if (!explorer) return;
+          state.track = explorer.dataset.codeExplorer;
+          save();
+          update();
+          activateFile(explorer, apiFile.dataset.openFile, { writeHash: true });
+          explorer.scrollIntoView({ behavior: 'smooth', block: 'start' });
           return;
         }
 
