@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 150,
-  "lessonId": "lesson-8-138-why-di-11",
-  "title": "138. Why DI?",
+  "sequence": 151,
+  "lessonId": "lesson-8-139-di-lifetimes-12",
+  "title": "139. DI lifetimes?",
   "chapter": 8,
-  "stateId": "lesson-150",
+  "stateId": "lesson-151",
   "exerciseType": "REHEARSE",
   "canonicalStage": "stage-08",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
