@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 144,
-  "lessonId": "lesson-8-132-what-is-il-5",
-  "title": "132. What is IL?",
+  "sequence": 145,
+  "lessonId": "lesson-8-133-what-is-jit-6",
+  "title": "133. What is JIT?",
   "chapter": 8,
-  "stateId": "lesson-144",
+  "stateId": "lesson-145",
   "exerciseType": "REHEARSE",
   "canonicalStage": "stage-08",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
