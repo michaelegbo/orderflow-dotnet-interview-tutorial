@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "sequence": 114,
-  "lessonId": "lesson-5-105-slow-endpoint-interview-answer-21",
-  "title": "105. Slow Endpoint Interview Answer",
-  "chapter": 5,
-  "stateId": "lesson-114",
-  "exerciseType": "TRACE/DEBUG",
-  "canonicalStage": "stage-05",
+  "sequence": 115,
+  "lessonId": "lesson-6-106-start-simple-1",
+  "title": "106. Start Simple",
+  "chapter": 6,
+  "stateId": "lesson-115",
+  "exerciseType": "DESIGN",
+  "canonicalStage": "stage-06",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
 }
