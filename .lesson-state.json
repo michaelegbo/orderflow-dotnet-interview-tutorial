@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 98,
-  "lessonId": "lesson-5-89-s-single-responsibility-principle-5",
-  "title": "89. S — Single Responsibility Principle",
+  "sequence": 99,
+  "lessonId": "lesson-5-90-o-open-closed-6",
+  "title": "90. O — Open/Closed",
   "chapter": 5,
-  "stateId": "lesson-098",
+  "stateId": "lesson-099",
   "exerciseType": "DESIGN",
   "canonicalStage": "stage-05",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
