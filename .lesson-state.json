@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 110,
-  "lessonId": "lesson-5-101-load-tests-17",
-  "title": "101. Load Tests",
+  "sequence": 111,
+  "lessonId": "lesson-5-102-difference-18",
+  "title": "102. Difference",
   "chapter": 5,
-  "stateId": "lesson-110",
+  "stateId": "lesson-111",
   "exerciseType": "TRACE/DEBUG",
   "canonicalStage": "stage-05",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
