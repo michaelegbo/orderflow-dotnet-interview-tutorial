@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 12,
-  "lessonId": "lesson-1-10-loops-12",
-  "title": "10. Loops",
+  "sequence": 13,
+  "lessonId": "lesson-1-exercise-2-filtering-orders-13",
+  "title": "Exercise 2 — Filtering Orders",
   "chapter": 1,
-  "stateId": "lesson-012",
+  "stateId": "lesson-013",
   "exerciseType": "BUILD",
   "canonicalStage": "stage-01",
   "productionTreeNote": "This lesson applies a permanent practice change against the canonical checkpoint."
