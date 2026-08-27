@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 83,
-  "lessonId": "lesson-4-78-what-ef-core-is-15",
-  "title": "78. What EF Core Is",
+  "sequence": 84,
+  "lessonId": "lesson-4-79-dbcontext-16",
+  "title": "79. DbContext",
   "chapter": 4,
-  "stateId": "lesson-083",
+  "stateId": "lesson-084",
   "exerciseType": "TRACE/DEBUG",
   "canonicalStage": "stage-04",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
