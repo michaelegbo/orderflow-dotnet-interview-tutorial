@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 59,
-  "lessonId": "lesson-3-53-il-12",
-  "title": "53. IL",
+  "sequence": 60,
+  "lessonId": "lesson-3-54-jit-13",
+  "title": "54. JIT",
   "chapter": 3,
-  "stateId": "lesson-059",
+  "stateId": "lesson-060",
   "exerciseType": "TRACE/DEBUG",
   "canonicalStage": "stage-03",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
