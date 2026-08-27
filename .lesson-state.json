@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "sequence": 5,
-  "lessonId": "lesson-1-4-var-5",
-  "title": "4. var",
+  "sequence": 6,
+  "lessonId": "lesson-1-5-strings-and-string-interpolation-6",
+  "title": "5. Strings and String Interpolation",
   "chapter": 1,
-  "stateId": "lesson-005",
-  "exerciseType": "EXPERIMENT",
+  "stateId": "lesson-006",
+  "exerciseType": "BUILD",
   "canonicalStage": "stage-01",
-  "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
+  "productionTreeNote": "This lesson applies a permanent practice change against the canonical checkpoint."
 }
