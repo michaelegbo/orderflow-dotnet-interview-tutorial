@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "sequence": 71,
-  "lessonId": "lesson-4-64-program-cs-4",
-  "title": "64. Program.cs",
+  "sequence": 72,
+  "lessonId": "lesson-4-65-kestrel-5",
+  "title": "65. Kestrel",
   "chapter": 4,
-  "stateId": "lesson-071",
-  "exerciseType": "BUILD",
+  "stateId": "lesson-072",
+  "exerciseType": "TRACE/DEBUG",
   "canonicalStage": "stage-04",
-  "productionTreeNote": "This lesson applies a permanent practice change against the canonical checkpoint."
+  "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
 }
