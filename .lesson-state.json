@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 134,
-  "lessonId": "lesson-7-124-contains-duplicate-5",
-  "title": "124. Contains Duplicate",
+  "sequence": 135,
+  "lessonId": "lesson-7-125-palindrome-two-pointers-6",
+  "title": "125. Palindrome — Two Pointers",
   "chapter": 7,
-  "stateId": "lesson-134",
+  "stateId": "lesson-135",
   "exerciseType": "BUILD",
   "canonicalStage": "stage-07",
   "productionTreeNote": "This lesson applies a permanent practice change against the canonical checkpoint."
