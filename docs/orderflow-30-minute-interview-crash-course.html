@@ -850,6 +850,8 @@
             <div><b>exhaustMap</b><p>Ignores new triggers while one is active. Useful for preventing repeated submit/login clicks.</p></div>
           </div>
 
+          <div class="explain"><b>Who owns the subscription?</b><p>Prefer the async pipe when the template only needs to display an Observable. It owns the subscription and cleans it up with the view. If code must subscribe manually, tie its lifetime to the component—for example with <code>takeUntilDestroyed</code>—so a destroyed screen does not keep reacting or leaking memory.</p></div>
+
           <div class="code">
             <div class="code-head"><span>TypeScript · search as a stream</span><button class="copy" type="button">Copy</button></div>
             <pre><code>results$ = <span class="kw">this</span>.search.valueChanges.pipe(
@@ -939,6 +941,8 @@ on(OrderActions.loadSuccess, (state, { orders }) =&gt; ({
             <div><b>Component test</b><p>Proves bindings, interaction, validation and rendered output.</p></div>
             <div><b>E2E test</b><p>Proves a small number of complete user journeys through the real app.</p></div>
           </div>
+
+          <div class="explain"><b>Signals and Observables are partners</b><p>A signal is often the simplest shape for current UI state. An Observable is often the better shape for events and asynchronous work over time. You can bridge between them when necessary; choose the model that makes ownership and updates easiest to understand.</p></div>
 
           <div class="interview"><b>Say this</b><p>“I begin with clear component boundaries, typed services and observable or signal state. I add NgRx when shared-state complexity requires a traceable event loop, then protect critical behaviour with focused tests and measure performance before tuning it.”</p></div>
 
