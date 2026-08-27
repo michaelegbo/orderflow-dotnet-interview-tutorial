@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 46,
-  "lessonId": "lesson-2-41-delegates-31",
-  "title": "41. Delegates",
+  "sequence": 47,
+  "lessonId": "lesson-2-42-events-32",
+  "title": "42. Events",
   "chapter": 2,
-  "stateId": "lesson-046",
+  "stateId": "lesson-047",
   "exerciseType": "EXPERIMENT",
   "canonicalStage": "stage-02",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
