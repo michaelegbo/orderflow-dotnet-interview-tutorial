@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 40,
-  "lessonId": "lesson-2-35-using-and-idisposable-25",
-  "title": "35. using and IDisposable",
+  "sequence": 41,
+  "lessonId": "lesson-2-36-lambdas-26",
+  "title": "36. Lambdas",
   "chapter": 2,
-  "stateId": "lesson-040",
+  "stateId": "lesson-041",
   "exerciseType": "EXPERIMENT",
   "canonicalStage": "stage-02",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
