@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "sequence": 138,
-  "lessonId": "lesson-7-128-sliding-window-9",
-  "title": "128. Sliding Window",
+  "sequence": 139,
+  "lessonId": "lesson-7-129-coding-interview-script-10",
+  "title": "129. Coding Interview Script",
   "chapter": 7,
-  "stateId": "lesson-138",
-  "exerciseType": "BUILD",
+  "stateId": "lesson-139",
+  "exerciseType": "TRACE/DEBUG",
   "canonicalStage": "stage-07",
-  "productionTreeNote": "This lesson applies a permanent practice change against the canonical checkpoint."
+  "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
 }
