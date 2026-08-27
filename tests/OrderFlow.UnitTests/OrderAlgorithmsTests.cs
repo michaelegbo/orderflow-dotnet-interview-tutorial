@@ -21,4 +21,53 @@ public sealed class OrderAlgorithmsTests
     {
         Assert.Equal(expected, OrderAlgorithms.BinarySearch([10, 20, 30, 40, 50], target));
     }
+
+    [Fact]
+    public void Duplicate_detection_handles_empty_unique_and_repeated_numbers()
+    {
+        Assert.False(OrderAlgorithms.ContainsDuplicateOrderNumber([]));
+        Assert.False(OrderAlgorithms.ContainsDuplicateOrderNumber([101, 102, 103]));
+        Assert.True(OrderAlgorithms.ContainsDuplicateOrderNumber([101, 102, 101]));
+    }
+
+    [Fact]
+    public void Duplicate_detection_rejects_a_null_sequence()
+    {
+        Assert.Throws<ArgumentNullException>(() => OrderAlgorithms.ContainsDuplicateOrderNumber(null!));
+    }
+
+    [Theory]
+    [InlineData("OF-11-FO", true)]
+    [InlineData("Never odd or even", true)]
+    [InlineData("OF-1234", false)]
+    public void Palindrome_check_normalises_case_and_punctuation(string value, bool expected)
+    {
+        Assert.Equal(expected, OrderAlgorithms.IsPalindromeOrderReference(value));
+    }
+
+    [Theory]
+    [InlineData("({[]})", true)]
+    [InlineData("([)]", false)]
+    [InlineData("(()", false)]
+    [InlineData("order-{reference}", true)]
+    public void Grouping_validation_detects_wrong_order_and_unfinished_pairs(string value, bool expected)
+    {
+        Assert.Equal(expected, OrderAlgorithms.HasBalancedGrouping(value));
+    }
+
+    [Fact]
+    public void Sliding_window_returns_the_largest_consecutive_total()
+    {
+        Assert.Equal(16m, OrderAlgorithms.HighestWindowTotal([4m, 8m, 2m, 10m, 6m], 2));
+        Assert.Equal(30m, OrderAlgorithms.HighestWindowTotal([4m, 8m, 2m, 10m, 6m], 5));
+    }
+
+    [Theory]
+    [InlineData(0)]
+    [InlineData(4)]
+    public void Sliding_window_rejects_an_invalid_window_size(int windowSize)
+    {
+        Assert.Throws<ArgumentOutOfRangeException>(() =>
+            OrderAlgorithms.HighestWindowTotal([1m, 2m, 3m], windowSize));
+    }
 }
