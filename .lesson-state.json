@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "sequence": 21,
-  "lessonId": "lesson-2-17-access-modifiers-6",
-  "title": "17. Access Modifiers",
+  "sequence": 22,
+  "lessonId": "lesson-2-18-static-7",
+  "title": "18. static",
   "chapter": 2,
-  "stateId": "lesson-021",
-  "exerciseType": "BUILD",
+  "stateId": "lesson-022",
+  "exerciseType": "EXPERIMENT",
   "canonicalStage": "stage-02",
-  "productionTreeNote": "This lesson applies a permanent practice change against the canonical checkpoint."
+  "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
 }
