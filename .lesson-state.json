@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "sequence": 139,
-  "lessonId": "lesson-7-129-coding-interview-script-10",
-  "title": "129. Coding Interview Script",
-  "chapter": 7,
-  "stateId": "lesson-139",
+  "sequence": 140,
+  "lessonId": "lesson-8-part-xx-final-end-to-end-project-check-1",
+  "title": "PART XX — FINAL END-TO-END PROJECT CHECK",
+  "chapter": 8,
+  "stateId": "lesson-140",
   "exerciseType": "TRACE/DEBUG",
-  "canonicalStage": "stage-07",
+  "canonicalStage": "stage-08",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
 }

@@ -1,0 +1,2 @@
+# Prevent the downloadable archive from recursively containing itself.
+docs/orderflow-verified.zip export-ignore
