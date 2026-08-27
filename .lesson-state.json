@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 66,
-  "lessonId": "lesson-3-60-csproj-19",
-  "title": "60. .csproj",
+  "sequence": 67,
+  "lessonId": "lesson-3-61-nuget-20",
+  "title": "61. NuGet",
   "chapter": 3,
-  "stateId": "lesson-066",
+  "stateId": "lesson-067",
   "exerciseType": "TRACE/DEBUG",
   "canonicalStage": "stage-03",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
