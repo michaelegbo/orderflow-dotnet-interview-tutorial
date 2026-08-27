@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 143,
-  "lessonId": "lesson-8-131-what-is-clr-4",
-  "title": "131. What is CLR?",
+  "sequence": 144,
+  "lessonId": "lesson-8-132-what-is-il-5",
+  "title": "132. What is IL?",
   "chapter": 8,
-  "stateId": "lesson-143",
+  "stateId": "lesson-144",
   "exerciseType": "REHEARSE",
   "canonicalStage": "stage-08",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
