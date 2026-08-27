@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 103,
-  "lessonId": "lesson-5-94-the-core-idea-10",
-  "title": "94. The Core Idea",
+  "sequence": 104,
+  "lessonId": "lesson-5-95-example-project-layout-11",
+  "title": "95. Example Project Layout",
   "chapter": 5,
-  "stateId": "lesson-103",
+  "stateId": "lesson-104",
   "exerciseType": "DESIGN",
   "canonicalStage": "stage-05",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
