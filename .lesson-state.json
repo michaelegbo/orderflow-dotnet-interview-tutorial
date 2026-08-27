@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 37,
-  "lessonId": "lesson-2-32-null-conditional-22",
-  "title": "32. Null Conditional",
+  "sequence": 38,
+  "lessonId": "lesson-2-33-null-coalescing-23",
+  "title": "33. Null Coalescing",
   "chapter": 2,
-  "stateId": "lesson-037",
+  "stateId": "lesson-038",
   "exerciseType": "EXPERIMENT",
   "canonicalStage": "stage-02",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
