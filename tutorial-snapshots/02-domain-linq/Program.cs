@@ -4,13 +4,15 @@ using OrderFlow.Stage02.Infrastructure;
 
 IOrderRepository repository = new InMemoryOrderRepository();
 
-var ada = NewOrder("Ada", "Keyboard", 2, 40m, paid: true);
-var grace = NewOrder("Grace", "Monitor", 1, 125m, paid: true);
-var linus = NewOrder("Linus", "Cable", 2, 15m, paid: false);
+var first = NewOrder("Ada", "Keyboard", 2, 40m, paid: true);
+var second = NewOrder("Grace", "Monitor", 1, 125m, paid: true);
+var third = NewOrder("Linus", "Cable", 2, 15m, paid: false);
 
-repository.Add(ada);
-repository.Add(grace);
-repository.Add(linus);
+first.AddLine("Mouse", 1, 10m);
+
+repository.Add(first);
+repository.Add(second);
+repository.Add(third);
 
 var highValuePaidOrders = repository.List()
     .Where(order => order.IsPaid && order.Total >= 75m)
