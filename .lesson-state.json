@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 120,
-  "lessonId": "lesson-6-111-health-checks-6",
-  "title": "111. Health Checks",
+  "sequence": 121,
+  "lessonId": "lesson-6-112-database-bottleneck-7",
+  "title": "112. Database Bottleneck",
   "chapter": 6,
-  "stateId": "lesson-120",
+  "stateId": "lesson-121",
   "exerciseType": "DESIGN",
   "canonicalStage": "stage-06",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
