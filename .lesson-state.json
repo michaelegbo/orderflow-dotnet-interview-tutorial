@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 142,
-  "lessonId": "lesson-8-130-what-is-c-vs-net-3",
-  "title": "130. What is C# vs .NET?",
+  "sequence": 143,
+  "lessonId": "lesson-8-131-what-is-clr-4",
+  "title": "131. What is CLR?",
   "chapter": 8,
-  "stateId": "lesson-142",
+  "stateId": "lesson-143",
   "exerciseType": "REHEARSE",
   "canonicalStage": "stage-08",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
