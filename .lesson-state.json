@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 156,
-  "lessonId": "lesson-8-144-ienumerable-vs-iqueryable-17",
-  "title": "144. IEnumerable vs IQueryable?",
+  "sequence": 157,
+  "lessonId": "lesson-8-145-asnotracking-18",
+  "title": "145. AsNoTracking?",
   "chapter": 8,
-  "stateId": "lesson-156",
+  "stateId": "lesson-157",
   "exerciseType": "REHEARSE",
   "canonicalStage": "stage-08",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
