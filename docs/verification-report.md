@@ -59,10 +59,15 @@ covering all 176 lesson cards, practical exercise panels, hint and answer
 controls, supplied-input or response-frame panels, ordered task steps, eight
 chapter-end checkpoint mappings, bottom completion controls,
 interactive knowledge checks, duplicate IDs, inline script syntax, and the
-downloadable archive. Every task has an explicitly matched answer. The 68 C#
+downloadable archive. It also requires visible, pre-exercise mastery teaching
+for all 128 concept lessons and explicit orientation/practice/recall roles for
+the other 48 cards. Every mastery contract contains a simple explanation,
+technical definition, four-step mechanism, connection to the same OrderFlow
+solution, why-it-matters discussion, common boundary, interview answer frame,
+and at least 225 teaching words. Every task has an explicitly matched answer. The 68 C#
 focused answers and 142 standalone rendered teaching examples pass Roslyn
 syntax parsing; deliberately incomplete signatures are labelled as fragments.
-The sequencing audit scans every displayed C# example and focused answer
+The sequencing audit scans every displayed C# example, supplied C# starter, and focused answer
 against 45 concept-introduction boundaries and reports **0 premature-syntax
 findings**. One additional focused answer is a valid .NET CLI command rather
 than C#.
@@ -73,7 +78,9 @@ break the work into at least three small ordered steps. All 69 code-oriented
 lessons retain their exact answer contract behind the reveal. The Operators
 acceptance check specifically proves that quantity, unit price and paid state
 are supplied, that the ordered steps do not disclose the implementation, and
-that the expected console result is concrete.
+that the expected console result is concrete. All 69 code-oriented lessons now
+have a task-specific starter and observable expected result; the site verifier
+rejects generic “it compiles” proofs and generic blank-file instructions.
 
 The attached source Markdown remains unmodified. The generator applies narrow,
 manifest-hashed rendering corrections where the source previously introduced

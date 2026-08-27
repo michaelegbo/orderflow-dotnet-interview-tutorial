@@ -18,6 +18,15 @@ hint, focused answer, and the state from which the next lesson continues. Chapte
 1–3 grow `OrderFlow.Learning`; the finished repository projects are comparison
 checkpoints, not files the learner must open during each lesson.
 
+Teaching remains separate from practice. All 128 concept lessons from Setup
+through the algorithm patterns now show a visible mastery explanation before
+the exercise: a simple mental model, precise definition, four-step mechanism,
+OrderFlow connection, reason it matters, common boundary, and interview-ready
+answer. These explanations have an enforced minimum depth and never collapse
+behind a reveal. The other 48 orientation, combined-practice, and rapid-recall
+cards identify their role explicitly, so an assessment cannot masquerade as
+an unexplained lesson.
+
 The standalone tutorial embeds a deduplicated full-file browser, so learners
 can inspect the verified cumulative checkpoint for each chapter without opening GitHub. GitHub remains
 an independent reference: the `lesson-history` branch contains 176 ordered
@@ -84,7 +93,10 @@ the eight-tag matrix on every push and pull request. The Stage 08 pass also
 runs `scripts/verify-site.mjs`, which verifies that all lesson cards contain
 their practical flow, chapter-end snapshot controls, valid history references,
 stage links, downloadable solution, and a zero-finding pedagogical dependency
-audit across 45 concept-introduction boundaries. See the latest checked-in
+audit across 45 concept-introduction boundaries. That dependency audit covers
+lesson examples, supplied exercise starters, and focused answers. CI also
+rejects generic code-exercise starters, generic completion proofs, thin
+teaching, and any lesson that places practice before teaching. See the latest checked-in
 [verification report](docs/verification-report.md).
 
 ## Run the API manually

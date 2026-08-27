@@ -36,6 +36,8 @@ assert(count(/class="lesson-estimate"/g) === lessonIds.length, 'Every lesson mus
 assert(count(/class="nav-estimate"/g) === 8, 'Every sidebar chapter must show its remaining-time marker.');
 assert(count(/class="chapter-progress-track"/g) === 8, 'Every chapter must show progress with remaining time.');
 assert(count(/class="lesson-practice/g) === lessonIds.length, 'Every lesson must have one practical exercise panel.');
+assert(count(/class="learning-lens mastery-teaching/g) === 128, 'Every concept lesson from 2–129 must have a visible mastery explanation.');
+assert(count(/class="lesson-role role-/g) === lessonIds.length - 128, 'Every non-concept lesson must identify its orientation, practice, recall, or rehearsal role.');
 assert(count(/class="practice-given"/g) === lessonIds.length, 'Every lesson must say what the learner is given.');
 assert(count(/class="practice-starter"/g) === lessonIds.length, 'Every lesson must provide starter inputs or a response frame.');
 assert(count(/class="practice-do"/g) === lessonIds.length, 'Every lesson must break the task into ordered steps.');
@@ -60,11 +62,36 @@ assert(
 const lessonCards = [...html.matchAll(/<article class="lesson [\s\S]*?<\/article>/g)].map(match => match[0]);
 for (const [index, card] of lessonCards.entries()) {
   const contentIndex = card.indexOf('class="lesson-content"');
+  const masteryIndex = card.indexOf('class="learning-lens mastery-teaching');
+  const roleIndex = card.indexOf('class="lesson-role role-');
   const practiceIndex = card.indexOf('class="lesson-practice');
   const knowledgeIndex = card.indexOf('class="active-check"');
   const finishIndex = card.indexOf('class="lesson-finish"');
   const completionIndex = card.indexOf('class="lesson-check"');
   assert(contentIndex >= 0 && practiceIndex > contentIndex && knowledgeIndex > practiceIndex && finishIndex > knowledgeIndex && completionIndex > finishIndex, `Lesson ${index + 1} does not follow teach → practise → check → finish order.`);
+  if (manifest.lessons[index]?.teaching)
+    assert(masteryIndex > contentIndex && masteryIndex < practiceIndex, `Lesson ${index + 1} does not teach fully before practice.`);
+  else
+    assert(roleIndex > contentIndex && roleIndex < practiceIndex, `Lesson ${index + 1} does not explain its assessment or orientation role before practice.`);
+}
+
+const masteryLessons = manifest.lessons.filter(lesson => lesson.teaching);
+assert(masteryLessons.length === 128, `Expected 128 teaching contracts; found ${masteryLessons.length}.`);
+assert(masteryLessons.every(lesson => lesson.sourceNumber >= 2 && lesson.sourceNumber <= 129), 'A teaching contract is attached outside concept lessons 2–129.');
+assert(manifest.lessons.filter(lesson => lesson.sourceNumber >= 2 && lesson.sourceNumber <= 129).every(lesson => lesson.teaching), 'A concept lesson from 2–129 is missing teaching metadata.');
+for (const lesson of masteryLessons) {
+  const teaching = lesson.teaching;
+  assert(teaching.wordCount >= 225, `Teaching explanation is too thin (${teaching.wordCount} words): ${lesson.id}`);
+  assert(!/fallback/i.test(teaching.category), `Teaching uses a generic fallback: ${lesson.id}`);
+  assert(['anchor', 'supporting'].includes(teaching.tier), `Teaching tier is invalid: ${lesson.id}`);
+  assert((teaching.simple ?? '').trim().length >= 35, `Simple explanation is too short: ${lesson.id}`);
+  assert((teaching.precise ?? '').trim().length >= 45, `Technical explanation is too short: ${lesson.id}`);
+  assert(Array.isArray(teaching.mechanics) && teaching.mechanics.length === 4 && teaching.mechanics.every(step => step.trim().length >= 45), `Mechanism walkthrough is incomplete: ${lesson.id}`);
+  assert((teaching.connection ?? '').trim().length >= 90, `OrderFlow connection is too short: ${lesson.id}`);
+  assert((teaching.why ?? '').trim().length >= 90, `Why-it-matters explanation is too short: ${lesson.id}`);
+  assert((teaching.trap ?? '').trim().length >= 45, `Common boundary is too short: ${lesson.id}`);
+  assert((teaching.interview ?? '').trim().length >= 90, `Interview-ready explanation is too short: ${lesson.id}`);
+  assert(/^[a-f0-9]{64}$/.test(teaching.contentHash ?? ''), `Teaching content hash is missing: ${lesson.id}`);
 }
 
 for (const lesson of manifest.lessons) {
@@ -93,6 +120,10 @@ for (const lesson of manifest.lessons) {
   assert(Array.isArray(lesson.exercise?.buildingBlocks), `Hidden guidance contract is missing: ${lesson.id}`);
   if (shouldHaveCode)
     assert(JSON.stringify(lesson.exercise.buildingBlocks) === JSON.stringify(lesson.exercise.answerContract), `Hidden guidance contract drifted from the answer contract: ${lesson.id}`);
+  if (shouldHaveCode) {
+    assert(!/Your learning project compiles|same learning project compiles|focused asynchronous flow|learner API builds|focused algorithm tests/.test(lesson.exercise.expected), `Practical exercise still uses a generic proof: ${lesson.id}`);
+    assert(lesson.exercise.starter.label !== 'Keep your previous working code; add only this lesson', `Practical exercise still uses a generic starter: ${lesson.id}`);
+  }
 }
 
 const interpolation = manifest.lessons.find(lesson => /Strings and String Interpolation/i.test(lesson.title));
@@ -154,6 +185,8 @@ console.log(JSON.stringify({
   codeLinks: codeLinks.length,
   knowledgeChecks: count(/class="active-check"/g),
   practicalExercises: count(/class="lesson-practice/g),
+  masteryExplanations: count(/class="learning-lens mastery-teaching/g),
+  explicitPracticeAndRecallRoles: count(/class="lesson-role role-/g),
   projectSnapshots: count(/class="exercise-snapshot chapter-snapshot"/g),
   bottomCompletionControls: count(/class="lesson-finish"/g),
   stages: new Set(manifest.lessons.map(lesson => lesson.codeStage)).size,

@@ -89,9 +89,16 @@ function inspect(lesson, surface, code, surroundingText = '') {
 
 for (const [index, lesson] of manifest.lessons.entries()) {
   const card = cards[index];
-  const lessonContent = card.match(/<div class="lesson-content">([\s\S]*?)<\/div>\s*(?:<section class="learning-lens"|<section class="lesson-practice)/)?.[1] || '';
+  const contentStart = card.indexOf('<div class="lesson-content">');
+  const practiceStart = card.indexOf('<section class="lesson-practice');
+  const lessonContent = contentStart >= 0 && practiceStart > contentStart
+    ? card.slice(contentStart, practiceStart)
+    : '';
   const lessonCodes = [...lessonContent.matchAll(/<pre><code class="language-(?:csharp|cs)">([\s\S]*?)<\/code><\/pre>/g)].map(match => decode(match[1]));
   for (const [blockIndex, code] of lessonCodes.entries()) inspect(lesson, `lesson example ${blockIndex + 1}`, code, decode(lessonContent));
+
+  if (lesson.exercise?.starter?.kind === 'csharp')
+    inspect(lesson, 'supplied exercise starter', lesson.exercise.starter.content, card);
 
   const answerSection = card.match(/<div class="exercise-answer-code">([\s\S]*?)<\/div><\/div>/)?.[1] || '';
   const focusedCode = answerSection.match(/<pre><code[^>]*>([\s\S]*?)<\/code><\/pre>/)?.[1];
