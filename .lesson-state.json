@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "sequence": 105,
-  "lessonId": "lesson-5-96-why-do-this-12",
-  "title": "96. Why Do This?",
+  "sequence": 106,
+  "lessonId": "lesson-5-97-unit-tests-13",
+  "title": "97. Unit Tests",
   "chapter": 5,
-  "stateId": "lesson-105",
-  "exerciseType": "DESIGN",
+  "stateId": "lesson-106",
+  "exerciseType": "TRACE/DEBUG",
   "canonicalStage": "stage-05",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
 }
