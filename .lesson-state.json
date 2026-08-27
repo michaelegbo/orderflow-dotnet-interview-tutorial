@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 104,
-  "lessonId": "lesson-5-95-example-project-layout-11",
-  "title": "95. Example Project Layout",
+  "sequence": 105,
+  "lessonId": "lesson-5-96-why-do-this-12",
+  "title": "96. Why Do This?",
   "chapter": 5,
-  "stateId": "lesson-104",
+  "stateId": "lesson-105",
   "exerciseType": "DESIGN",
   "canonicalStage": "stage-05",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
