@@ -676,7 +676,7 @@ Location: /orders/123
         <h3>Dependency injection</h3>
         <p>Instead of a controller building its own repository, it asks for <code>IOrderService</code>. The application setup chooses the real implementation. This makes dependencies clear and testing easier.</p>
         <p><strong>Lifetimes:</strong> <span class="term">Transient</span> creates a new instance each time; <span class="term">Scoped</span> normally creates one per web request; <span class="term">Singleton</span> shares one for the application's lifetime.</p>
-        <p><strong>EF Core detail:</strong> tracking remembers loaded entities so changes can be saved. For a read-only query, <code>AsNoTracking()</code> avoids that work. <code>SaveChangesAsync()</code> sends the tracked changes to the database as one unit of work.</p>
+        <p><strong>EF Core detail:</strong> tracking remembers loaded entities so changes can be saved. For a read-only query, <code>AsNoTracking()</code> avoids that work. <code>SaveChangesAsync()</code> sends the tracked changes to the database as one unit of work. A migration records a repeatable change to the database structure.</p>
 
         <h3>How you prove and operate it</h3>
         <p><strong>Unit tests</strong> test a business rule by itself. <strong>Integration tests</strong> send a real HTTP request through a test server—often with <code>WebApplicationFactory</code>—and prove that routing, DI, serialization, security and storage work together. In production, structured logs, traces, metrics and health checks tell you what failed and where.</p>
