@@ -17,9 +17,8 @@ else
     Console.WriteLine("Small order");
 }
 
-int[] quantities = [quantity, 2, 1];
 int totalQuantity = 0;
-foreach (int itemQuantity in quantities)
+for (int itemQuantity = 1; itemQuantity <= 3; itemQuantity++)
 {
     totalQuantity += itemQuantity;
 }
@@ -37,16 +36,17 @@ Console.WriteLine($"Valid quantity: {hasValidQuantity}; can fulfil: {canFulfil}"
 Console.WriteLine($"Batch quantity: {totalQuantity}");
 Console.WriteLine("STAGE 01 PASS — syntax, control flow and methods");
 
-static decimal CalculateTotal(int quantity, decimal unitPrice)
+decimal CalculateTotal(int quantity, decimal unitPrice)
 {
-    if (quantity <= 0) throw new ArgumentOutOfRangeException(nameof(quantity));
-    if (unitPrice < 0) throw new ArgumentOutOfRangeException(nameof(unitPrice));
     return quantity * unitPrice;
 }
 
-static string ClassifyOrder(decimal total) => total switch
+string ClassifyOrder(decimal total)
 {
-    >= 500m => "VIP",
-    >= 100m => "Standard large",
-    _ => "Small"
-};
+    return total switch
+    {
+        >= 500m => "VIP",
+        >= 100m => "Standard large",
+        _ => "Small"
+    };
+}
