@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 86,
-  "lessonId": "lesson-4-81-linq-with-ef-18",
-  "title": "81. LINQ with EF",
+  "sequence": 87,
+  "lessonId": "lesson-4-82-ienumerable-t-vs-iqueryable-t-19",
+  "title": "82. IEnumerable<T> vs IQueryable<T>",
   "chapter": 4,
-  "stateId": "lesson-086",
+  "stateId": "lesson-087",
   "exerciseType": "TRACE/DEBUG",
   "canonicalStage": "stage-04",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
