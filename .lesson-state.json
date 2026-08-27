@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 45,
-  "lessonId": "lesson-2-40-ienumerable-t-30",
-  "title": "40. IEnumerable<T>",
+  "sequence": 46,
+  "lessonId": "lesson-2-41-delegates-31",
+  "title": "41. Delegates",
   "chapter": 2,
-  "stateId": "lesson-045",
+  "stateId": "lesson-046",
   "exerciseType": "EXPERIMENT",
   "canonicalStage": "stage-02",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
