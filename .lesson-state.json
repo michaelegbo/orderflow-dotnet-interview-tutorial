@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 109,
-  "lessonId": "lesson-5-100-end-to-end-tests-16",
-  "title": "100. End-to-End Tests",
+  "sequence": 110,
+  "lessonId": "lesson-5-101-load-tests-17",
+  "title": "101. Load Tests",
   "chapter": 5,
-  "stateId": "lesson-109",
+  "stateId": "lesson-110",
   "exerciseType": "TRACE/DEBUG",
   "canonicalStage": "stage-05",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
