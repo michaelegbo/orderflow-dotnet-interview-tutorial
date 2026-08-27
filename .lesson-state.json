@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "sequence": 2,
-  "lessonId": "lesson-1-1-the-project-we-will-build-2",
-  "title": "1. The Project We Will Build",
+  "sequence": 3,
+  "lessonId": "lesson-1-2-setup-vs-code-net-cli-3",
+  "title": "2. Setup: VS Code + .NET CLI",
   "chapter": 1,
-  "stateId": "lesson-002",
-  "exerciseType": "DESIGN",
+  "stateId": "lesson-003",
+  "exerciseType": "TRACE/DEBUG",
   "canonicalStage": "stage-01",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
 }
