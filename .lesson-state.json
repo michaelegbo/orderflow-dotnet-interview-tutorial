@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "sequence": 10,
-  "lessonId": "lesson-1-8-ternary-operator-10",
-  "title": "8. Ternary Operator",
+  "sequence": 11,
+  "lessonId": "lesson-1-9-switch-11",
+  "title": "9. switch",
   "chapter": 1,
-  "stateId": "lesson-010",
-  "exerciseType": "EXPERIMENT",
+  "stateId": "lesson-011",
+  "exerciseType": "BUILD",
   "canonicalStage": "stage-01",
-  "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
+  "productionTreeNote": "This lesson applies a permanent practice change against the canonical checkpoint."
 }
