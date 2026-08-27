@@ -8,7 +8,7 @@ with EF Core, SQLite, JWT authorization, clean boundaries, and algorithms.
 [michaelegbo.github.io/orderflow-dotnet-interview-tutorial](https://michaelegbo.github.io/orderflow-dotnet-interview-tutorial/)
 
 **Need only the interview essentials?**
-[Open the separate 30-minute refresher](https://michaelegbo.github.io/orderflow-dotnet-interview-tutorial/orderflow-30-minute-interview-crash-course.html)
+[Open the separate 30-minute .NET + Angular refresher](https://michaelegbo.github.io/orderflow-dotnet-interview-tutorial/orderflow-30-minute-interview-crash-course.html). Use the sticky toggle to switch tracks; each track saves its progress separately.
 
 ## What is actually executable?
 

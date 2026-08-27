@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="description" content="A simple 30-minute C# and .NET interview refresher built around OrderFlow.">
-  <title>OrderFlow — 30-Minute C#/.NET Refresher</title>
+  <meta name="description" content="A simple 30-minute C#/.NET or Angular interview refresher with saved progress.">
+  <title>30-Minute .NET + Angular Interview Refresher</title>
   <style>
     :root {
       --bg: #f4f7f6;
@@ -17,6 +17,8 @@
       --green-dark: #075c4b;
       --coral: #ed6a5a;
       --yellow: #f2c14e;
+      --angular: #c2185b;
+      --angular-dark: #82153d;
       --code: #101923;
       --code-ink: #dce9e4;
       --shadow: 0 14px 42px rgba(18, 46, 37, .08);
@@ -78,6 +80,37 @@
     .top-progress { min-width: 92px; text-align: right; }
     .top-progress b { display: block; font-size: .75rem; }
     .top-progress span { color: var(--muted); font-size: .65rem; }
+    .track-switch {
+      display: inline-grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--paper);
+      padding: 3px;
+    }
+    .track-switch button {
+      min-height: 34px;
+      border: 0;
+      border-radius: 8px;
+      background: transparent;
+      padding: 6px 12px;
+      color: var(--muted);
+      font-size: .72rem;
+      font-weight: 850;
+      cursor: pointer;
+    }
+    .track-switch button[aria-selected="true"] { background: var(--green); color: #fff; }
+    .track-switch button[data-track="angular"][aria-selected="true"] { background: var(--angular); }
+    .track-panel[hidden] { display: none; }
+    .track-panel[data-track-panel="angular"] {
+      --green: var(--angular);
+      --green-dark: var(--angular-dark);
+      --soft: #fff0f5;
+    }
+    body[data-track="angular"] .progress-line {
+      background: linear-gradient(90deg, var(--angular), #7b2cbf, var(--yellow));
+    }
 
     main { width: min(760px, calc(100% - 32px)); margin: 0 auto; padding: 46px 0 90px; }
     .hero {
@@ -300,6 +333,22 @@
     }
     .lesson.done .finish button { background: var(--green); color: #fff; }
 
+    .story-card {
+      margin: 20px 0;
+      border: 1px solid color-mix(in srgb, var(--green) 36%, var(--line));
+      border-radius: 14px;
+      background: color-mix(in srgb, var(--green) 6%, var(--paper));
+      padding: 17px;
+    }
+    .story-card > b { display: block; color: var(--green-dark); font-size: .78rem; letter-spacing: .04em; text-transform: uppercase; }
+    .story-card > p { margin: 8px 0 0; font-size: .88rem; }
+    .story-steps { margin: 12px 0 0; padding-left: 20px; font-size: .82rem; color: var(--muted); }
+    .memory-line { margin-top: 12px; border-top: 1px solid var(--line); padding-top: 11px; color: var(--green-dark); font-weight: 800; font-size: .8rem; }
+    .source-links { margin-top: 18px; color: #9fb0aa; font-size: .72rem; }
+    .source-links a { color: #8de0c5; }
+    .story-card .source-links { color: var(--muted); }
+    .story-card .source-links a { color: var(--green-dark); }
+
     .final-card {
       margin-top: 32px;
       border-radius: 20px;
@@ -315,16 +364,19 @@
     .footer-note { margin: 28px 0 0; color: var(--muted); text-align: center; font-size: .76rem; }
 
     @media (max-width: 600px) {
-      .topbar { gap: 8px; }
+      .topbar { gap: 8px; flex-wrap: wrap; padding-top: 7px; padding-bottom: 7px; }
       .topbar-brand small { display: none; }
       .top-progress { min-width: 62px; }
       .top-progress span { display: none; }
+      .track-switch { order: 4; width: 100%; }
+      .track-switch button { min-height: 38px; }
       main { width: min(100% - 24px, 760px); padding-top: 24px; padding-bottom: max(72px, env(safe-area-inset-bottom)); }
       .hero { border-radius: 18px; padding: 28px 22px; }
       .hero::after { font-size: 9rem; bottom: -42px; }
       .route { grid-template-columns: repeat(5, minmax(66px, 1fr)); overflow-x: auto; padding-bottom: 7px; scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch; }
       .route a { scroll-snap-align: start; min-width: 70px; min-height: 58px; }
       .lesson { border-radius: 16px; }
+      .lesson { scroll-margin-top: 126px; }
       .lesson-head { padding: 21px 18px 16px; }
       .lesson-body { padding: 19px 18px 22px; }
       .compare { grid-template-columns: 1fr; }
@@ -334,7 +386,7 @@
       .finish button { width: 100%; }
     }
     @media (max-width: 340px) {
-      .topbar-brand b { max-width: 92px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .topbar-brand b { max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
       .time-left { padding: 7px 8px; }
       main { width: calc(100% - 18px); }
       .lesson-body, .lesson-head { padding-left: 15px; padding-right: 15px; }
@@ -344,15 +396,20 @@
     }
   </style>
 </head>
-<body>
+<body data-track="dotnet">
   <div class="progress-line" aria-hidden="true"></div>
   <header class="topbar">
-    <div class="topbar-brand"><b>OrderFlow · Fast Refresher</b><small>Five sections · no coding required</small></div>
+    <div class="topbar-brand"><b id="course-label">.NET · Fast Refresher</b><small>Five sections · no coding required</small></div>
+    <div class="track-switch" role="tablist" aria-label="Choose interview refresher">
+      <button type="button" role="tab" data-track="dotnet" aria-selected="true">.NET</button>
+      <button type="button" role="tab" data-track="angular" aria-selected="false">Angular</button>
+    </div>
     <div class="time-left" id="time-left" aria-live="polite">30 min left</div>
     <div class="top-progress"><b id="progress-count">0 / 5</b><span>sections complete</span></div>
   </header>
 
   <main>
+    <div class="track-panel" data-track-panel="dotnet">
     <section class="hero">
       <p class="eyebrow">Interview essentials only · 30 minutes</p>
       <h1>C# and .NET, without the noise.</h1>
@@ -564,6 +621,21 @@
         <p><strong>Lifetimes:</strong> <span class="term">Transient</span> creates a new instance each time; <span class="term">Scoped</span> normally creates one per web request; <span class="term">Singleton</span> shares one for the application's lifetime.</p>
         <p><strong>EF Core detail:</strong> tracking remembers loaded entities so changes can be saved. For a read-only query, <code>AsNoTracking()</code> avoids that work. <code>SaveChangesAsync()</code> sends the tracked changes to the database as one unit of work.</p>
 
+        <div class="story-card">
+          <b>Strong interview story · modernising a legacy .NET system</b>
+          <p>“I would not rewrite a working IIS application all at once. First I would map its routes, authentication, database dependencies, integrations, and current behaviour. I would protect that behaviour with tests, then place a modern ASP.NET Core Web API beside it.”</p>
+          <p>“IIS could remain at the front while we migrate one business capability at a time. For example, I would move Orders into a thin API endpoint, an application service containing the use case, and an EF Core data-access layer. Migrated routes would go to the new application; everything else would still go to the legacy application.”</p>
+          <p>“For every slice, I would test behaviour, security and performance, shift traffic gradually, monitor errors and latency, and keep a rollback path. Once no traffic depended on the old route, we could retire it safely.”</p>
+          <ol class="story-steps">
+            <li><strong>Target:</strong> supported LTS .NET + ASP.NET Core Web API, not another version of .NET Framework.</li>
+            <li><strong>Hosting:</strong> Kestrel is the ASP.NET Core web server; IIS may remain in front or host the app in-process.</li>
+            <li><strong>Modern pieces:</strong> middleware, DI, async I/O, DTOs, validation, EF Core, modern authentication, tests and observability.</li>
+            <li><strong>Judgement:</strong> start as a modular application; create microservices only when independent scaling or deployment justifies them.</li>
+          </ol>
+          <div class="memory-line">Remember: discover → protect → coexist → move one capability → route → observe → retire.</div>
+          <p class="source-links">Technical anchors: <a href="https://learn.microsoft.com/en-us/aspnet/core/migration/fx-to-core/start?view=aspnetcore-10.0" target="_blank" rel="noreferrer">incremental ASP.NET migration</a> · <a href="https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/iis/out-of-process-hosting?view=aspnetcore-10.0" target="_blank" rel="noreferrer">IIS and Kestrel hosting</a>.</p>
+        </div>
+
         <div class="interview"><b>Say this</b><p>“I keep controllers thin: receive HTTP input, call the use case, and translate the result into an HTTP response. Business rules stay in the domain/application layer, and EF Core stays behind an interface.”</p></div>
 
         <div class="check" data-answer="1">
@@ -647,17 +719,291 @@
         <p><strong>Show judgement:</strong> “I would measure or test…”</p>
       </div>
     </section>
+    </div>
+
+    <div class="track-panel" data-track-panel="angular" hidden>
+      <section class="hero">
+        <p class="eyebrow">Interview essentials only · 30 minutes</p>
+        <h1>Angular, NgRx and RxJS—clearly.</h1>
+        <p class="hero-copy">A five-part refresher for explaining how an Angular screen renders, gets data, manages state, and stays fast. Read for the mental model; the code is evidence, not homework.</p>
+        <span class="hero-note">You do not need to type code for this version.</span>
+      </section>
+
+      <nav class="route" aria-label="Thirty-minute Angular route">
+        <a href="#angular-part-1"><b>6 min</b><span>Angular core</span></a>
+        <a href="#angular-part-2"><b>6 min</b><span>Data + routes</span></a>
+        <a href="#angular-part-3"><b>6 min</b><span>RxJS</span></a>
+        <a href="#angular-part-4"><b>6 min</b><span>NgRx</span></a>
+        <a href="#angular-part-5"><b>6 min</b><span>Quality + recall</span></a>
+      </nav>
+
+      <article class="lesson" id="angular-part-1" data-minutes="6">
+        <header class="lesson-head">
+          <div class="lesson-meta"><span class="number">1</span><span class="minutes">6 MINUTES</span></div>
+          <h2>Angular’s mental model</h2>
+          <p class="lesson-summary">Components describe the screen; Angular keeps the template in step with state.</p>
+        </header>
+        <div class="lesson-body">
+          <div class="plain"><b>Simple picture</b><p>A component is a small screen controller. Its TypeScript class holds state and behaviour; its HTML template describes what the user sees.</p></div>
+
+          <h3>The pieces to remember</h3>
+          <ul>
+            <li>A <span class="term">component</span> combines a class, template and styles.</li>
+            <li><span class="term">Interpolation</span> displays a value: <code>{{ customerName }}</code>.</li>
+            <li><span class="term">Property binding</span> sends data into an element: <code>[disabled]="saving"</code>.</li>
+            <li><span class="term">Event binding</span> reacts to the user: <code>(click)="save()"</code>.</li>
+            <li>An input sends data parent → child; an output sends an event child → parent.</li>
+            <li>A directive changes behaviour or structure; a pipe changes a displayed value.</li>
+          </ul>
+
+          <div class="explain"><b>Standalone and dependency injection</b><p>Modern Angular uses standalone components for new code, so a component imports the directives, pipes and components its template needs. A service holds reusable work such as API access. Angular’s injector creates that service and gives it to the component, which keeps construction and testing under control.</p><p>A <span class="term">signal</span> is a value Angular can track. Read it by calling it, update it with <code>set</code> or <code>update</code>, and use <code>computed</code> for a value derived from other signals.</p></div>
+
+          <div class="code">
+            <div class="code-head"><span>TypeScript · a small standalone component</span><button class="copy" type="button">Copy</button></div>
+            <pre><code>@Component({
+  selector: <span class="str">'app-order-count'</span>,
+  standalone: <span class="kw">true</span>,
+  template: <span class="str">`&lt;button (click)="add()"&gt;
+    Orders: {{ count() }}
+  &lt;/button&gt;`</span>
+})
+<span class="kw">export class</span> OrderCountComponent {
+  count = signal(<span class="num">0</span>);
+  add() { <span class="kw">this</span>.count.update(value =&gt; value + <span class="num">1</span>); }
+}</code></pre>
+          </div>
+
+          <div class="interview"><b>Say this</b><p>“Angular builds the UI from a tree of components. Data flows into a component, user events flow out, services provide shared behaviour through DI, and signals or observable streams notify the view when state changes.”</p></div>
+
+          <div class="check" data-answer="1">
+            <b>Quick check: Which syntax handles a button click?</b>
+            <div class="options"><button class="option" data-choice="0">[click]</button><button class="option" data-choice="1">(click)</button><button class="option" data-choice="2">{{ click }}</button></div>
+            <p class="feedback"><strong>(click)</strong> is event binding. Square brackets bind a property.</p>
+          </div>
+        </div>
+        <footer class="finish"><span>Remember: class = state; template = view; binding connects them.</span><button type="button" class="complete">Mark section complete</button></footer>
+      </article>
+
+      <article class="lesson" id="angular-part-2" data-minutes="6">
+        <header class="lesson-head">
+          <div class="lesson-meta"><span class="number">2</span><span class="minutes">6 MINUTES</span></div>
+          <h2>Services, HTTP, forms, and routing</h2>
+          <p class="lesson-summary">How a screen receives an address, validates input, and talks to a Web API.</p>
+        </header>
+        <div class="lesson-body">
+          <div class="plain"><b>Simple picture</b><p>The router chooses the screen. The component manages the interaction. A service talks to the API. A form protects the shape of user input.</p></div>
+
+          <ul>
+            <li><span class="term">Router</span>: maps a URL to a component; guards decide whether navigation is allowed.</li>
+            <li><span class="term">Lazy loading</span>: downloads feature code only when that route is needed.</li>
+            <li><span class="term">Reactive forms</span>: define controls and validation in TypeScript, which suits larger testable forms.</li>
+            <li><span class="term">HttpClient</span>: returns cold Observables; the request starts when something subscribes.</li>
+            <li><span class="term">Interceptor</span>: handles cross-cutting HTTP work such as an auth header or consistent error handling.</li>
+          </ul>
+
+          <div class="code">
+            <div class="code-head"><span>TypeScript · API service</span><button class="copy" type="button">Copy</button></div>
+            <pre><code>@Injectable({ providedIn: <span class="str">'root'</span> })
+<span class="kw">export class</span> OrderService {
+  <span class="kw">private</span> http = inject(HttpClient);
+
+  loadOrders() {
+    <span class="kw">return this</span>.http.get&lt;Order[]&gt;(<span class="str">'/api/orders'</span>);
+  }
+}</code></pre>
+          </div>
+
+          <div class="explain"><b>Where should logic live?</b><p>Keep view-only interaction in the component, reusable API work in a service, validation in the form and business truth on the server. A route guard improves navigation, but it is not security—the API must still authorize every protected request.</p></div>
+
+          <div class="interview"><b>Say this</b><p>“I keep components focused on presentation and interaction, move API work into typed services, use reactive forms for predictable validation, and lazy-load route-level features to reduce the initial bundle.”</p></div>
+
+          <div class="check" data-answer="2">
+            <b>Quick check: Is a route guard enough to secure an API?</b>
+            <div class="options"><button class="option" data-choice="0">Always</button><button class="option" data-choice="1">Only on mobile</button><button class="option" data-choice="2">No</button></div>
+            <p class="feedback"><strong>No.</strong> Browser code can be bypassed. The backend must authenticate and authorize the request.</p>
+          </div>
+        </div>
+        <footer class="finish"><span>Remember: route → component → service → API.</span><button type="button" class="complete">Mark section complete</button></footer>
+      </article>
+
+      <article class="lesson" id="angular-part-3" data-minutes="6">
+        <header class="lesson-head">
+          <div class="lesson-meta"><span class="number">3</span><span class="minutes">6 MINUTES</span></div>
+          <h2>RxJS without the confusion</h2>
+          <p class="lesson-summary">An Observable represents values arriving over time; operators describe what to do with them.</p>
+        </header>
+        <div class="lesson-body">
+          <div class="plain"><b>Simple picture</b><p>A Promise gives one future result. An Observable can give zero, one, or many values and can be cancelled by unsubscribing.</p></div>
+
+          <ul>
+            <li><code>map</code> changes each emitted value; <code>filter</code> keeps matching values.</li>
+            <li><code>tap</code> performs a side effect such as logging without changing the value.</li>
+            <li><code>catchError</code> replaces or rethrows a failed stream.</li>
+            <li><code>debounceTime</code> waits for a quiet period; <code>distinctUntilChanged</code> ignores repeated values.</li>
+            <li>The <code>async</code> pipe subscribes for the template and cleans up when the view is destroyed.</li>
+          </ul>
+
+          <div class="compare">
+            <div><b>switchMap</b><p>Cancels the previous inner subscription. Best for search or reads where only the newest result matters.</p></div>
+            <div><b>mergeMap</b><p>Runs inner work concurrently. Useful when every independent operation must run.</p></div>
+            <div><b>concatMap</b><p>Queues inner work in order. Useful when writes must happen sequentially.</p></div>
+            <div><b>exhaustMap</b><p>Ignores new triggers while one is active. Useful for preventing repeated submit/login clicks.</p></div>
+          </div>
+
+          <div class="code">
+            <div class="code-head"><span>TypeScript · search as a stream</span><button class="copy" type="button">Copy</button></div>
+            <pre><code>results$ = <span class="kw">this</span>.search.valueChanges.pipe(
+  debounceTime(<span class="num">300</span>),
+  distinctUntilChanged(),
+  switchMap(term =&gt; <span class="kw">this</span>.api.search(term)),
+  catchError(() =&gt; of([]))
+);</code></pre>
+          </div>
+
+          <div class="interview"><b>Say this</b><p>“I choose the flattening operator from the concurrency rule: cancel stale reads with switchMap, run independent work with mergeMap, preserve order with concatMap, or ignore repeat triggers with exhaustMap.”</p></div>
+
+          <div class="check" data-answer="0">
+            <b>Quick check: Which operator suits type-ahead search?</b>
+            <div class="options"><button class="option" data-choice="0">switchMap</button><button class="option" data-choice="1">mergeMap</button><button class="option" data-choice="2">concatMap</button></div>
+            <p class="feedback"><strong>switchMap</strong> discards the old search when the user types a newer one.</p>
+          </div>
+        </div>
+        <footer class="finish"><span>Remember: choose an operator by cancellation, concurrency, or order.</span><button type="button" class="complete">Mark section complete</button></footer>
+      </article>
+
+      <article class="lesson" id="angular-part-4" data-minutes="6">
+        <header class="lesson-head">
+          <div class="lesson-meta"><span class="number">4</span><span class="minutes">6 MINUTES</span></div>
+          <h2>NgRx: predictable shared state</h2>
+          <p class="lesson-summary">A controlled loop for important state shared by several parts of the application.</p>
+        </header>
+        <div class="lesson-body">
+          <div class="plain"><b>Simple picture</b><p>The component announces what happened. NgRx calculates the next state. The component observes the result. Side effects handle work outside the store.</p></div>
+
+          <ol>
+            <li>The component <span class="term">dispatches an action</span>: an event such as “Load Orders”.</li>
+            <li>An <span class="term">effect</span> hears actions that need API or other external work.</li>
+            <li>The effect dispatches success or failure.</li>
+            <li>A pure <span class="term">reducer</span> receives the old state and action, then returns a new state.</li>
+            <li>A memoized <span class="term">selector</span> reads or derives exactly what the component needs.</li>
+          </ol>
+
+          <div class="code">
+            <div class="code-head"><span>TypeScript · focused NgRx flow</span><button class="copy" type="button">Copy</button></div>
+            <pre><code><span class="com">// Component</span>
+store.dispatch(OrderActions.load());
+orders$ = store.select(selectAllOrders);
+
+<span class="com">// Reducer: never mutate the old state</span>
+on(OrderActions.loadSuccess, (state, { orders }) =&gt; ({
+  ...state,
+  orders,
+  loading: <span class="kw">false</span>
+}));</code></pre>
+          </div>
+
+          <div class="explain"><b>When should you use NgRx?</b><p>Use it when state is shared widely, changes through many events, needs traceability, or benefits from effects and selectors. Do not add it automatically to a small local form. Local component state or a focused signal-based service may be simpler.</p><p>Reducers must stay pure: no HTTP call, random value, mutation, or hidden side effect. Effects perform external work; selectors provide reusable reads.</p></div>
+
+          <div class="interview"><b>Say this</b><p>“NgRx gives us unidirectional state changes: actions describe events, reducers calculate immutable state, selectors expose read models, and effects isolate API calls. I use it only when the application’s shared-state complexity justifies it.”</p></div>
+
+          <div class="check" data-answer="1">
+            <b>Quick check: Where should the API call happen?</b>
+            <div class="options"><button class="option" data-choice="0">Reducer</button><button class="option" data-choice="1">Effect</button><button class="option" data-choice="2">Selector</button></div>
+            <p class="feedback"><strong>Effect.</strong> Reducers calculate state; selectors read it.</p>
+          </div>
+        </div>
+        <footer class="finish"><span>Remember: action → reducer/effect → result action → selector → view.</span><button type="button" class="complete">Mark section complete</button></footer>
+      </article>
+
+      <article class="lesson" id="angular-part-5" data-minutes="6">
+        <header class="lesson-head">
+          <div class="lesson-meta"><span class="number">5</span><span class="minutes">6 MINUTES</span></div>
+          <h2>Performance, testing, and rapid recall</h2>
+          <p class="lesson-summary">How to show that you can build Angular features that remain understandable and reliable.</p>
+        </header>
+        <div class="lesson-body">
+          <div class="plain"><b>Simple picture</b><p>Optimise the work Angular repeats, split code the user does not need yet, and test behaviour at the smallest useful level.</p></div>
+
+          <h3>Performance and reliability</h3>
+          <ul>
+            <li><span class="term">OnPush</span> makes update triggers more explicit; signals and the async pipe notify Angular when their values change.</li>
+            <li>Use a stable tracking key in repeated lists so Angular reuses the correct DOM nodes.</li>
+            <li>Lazy-load large routes, avoid heavy functions in templates, and measure bundle and runtime performance before optimising.</li>
+            <li>Use <code>takeUntilDestroyed</code> or the async pipe when manual subscriptions are needed.</li>
+            <li>Test pure services and reducers directly; test components for rendered behaviour; keep a few E2E tests for critical journeys.</li>
+          </ul>
+
+          <div class="compare">
+            <div><b>Signal</b><p>Excellent for synchronous local state and derived UI values. Angular tracks reads precisely.</p></div>
+            <div><b>Observable</b><p>Excellent for asynchronous streams, cancellation, events, HTTP composition, and RxJS operators.</p></div>
+            <div><b>Component test</b><p>Proves bindings, interaction, validation and rendered output.</p></div>
+            <div><b>E2E test</b><p>Proves a small number of complete user journeys through the real app.</p></div>
+          </div>
+
+          <div class="interview"><b>Say this</b><p>“I begin with clear component boundaries, typed services and observable or signal state. I add NgRx when shared-state complexity requires a traceable event loop, then protect critical behaviour with focused tests and measure performance before tuning it.”</p></div>
+
+          <div class="check" data-answer="2">
+            <b>Quick check: What helps Angular reuse rows in a changing list?</b>
+            <div class="options"><button class="option" data-choice="0">A larger service</button><button class="option" data-choice="1">More subscriptions</button><button class="option" data-choice="2">A stable tracking key</button></div>
+            <p class="feedback">A <strong>stable tracking key</strong>, normally the item ID, tells Angular which item is which.</p>
+          </div>
+        </div>
+        <footer class="finish"><span>Remember: clear boundaries, explicit state, measured optimisation.</span><button type="button" class="complete">Mark section complete</button></footer>
+      </article>
+
+      <section class="final-card">
+        <h2>Your 60-second Angular answer</h2>
+        <p>Use this when they ask you to describe an Angular feature from end to end:</p>
+        <div class="script">
+          <p>The router loads a standalone feature and its smart component.</p>
+          <p>The component gets state from signals or selectors and sends simple inputs to presentational children.</p>
+          <p>User events trigger a component method or dispatch an NgRx action.</p>
+          <p>A typed service or effect calls the Web API; RxJS handles cancellation, errors and composition.</p>
+          <p>The new state reaches the template through a signal or async pipe, and tests prove the important behaviour.</p>
+        </div>
+        <p class="source-links">Source anchors: <a href="https://angular.dev/guide/signals" target="_blank" rel="noreferrer">Angular signals</a> · <a href="https://angular.dev/guide/ngmodules/overview" target="_blank" rel="noreferrer">standalone guidance</a> · concepts and examples adapted from the supplied Angular/NgRx/RxJS refresher PDF.</p>
+      </section>
+    </div>
     <p class="footer-note">Your progress is saved only in this browser on this device. The full tutorial remains separate.</p>
   </main>
 
   <script>
     (() => {
-      const key = 'orderflow-30-minute-progress-v1';
-      const lessons = [...document.querySelectorAll('.lesson')];
-      let done = [];
-      try { done = JSON.parse(localStorage.getItem(key) || '[]'); } catch { done = []; }
+      const legacyKey = 'orderflow-30-minute-progress-v1';
+      const key = 'interview-30-minute-progress-v2';
+      const panels = [...document.querySelectorAll('[data-track-panel]')];
+      const labels = { dotnet: '.NET · Fast Refresher', angular: 'Angular · Fast Refresher' };
+      let state = { track: 'dotnet', done: { dotnet: [], angular: [] } };
+
+      try {
+        const legacyDone = JSON.parse(localStorage.getItem(legacyKey) || '[]');
+        if (Array.isArray(legacyDone)) state.done.dotnet = legacyDone;
+        const saved = JSON.parse(localStorage.getItem(key) || 'null');
+        if (saved?.done) state = {
+          track: saved.track === 'angular' ? 'angular' : 'dotnet',
+          done: {
+            dotnet: Array.isArray(saved.done.dotnet) ? saved.done.dotnet : state.done.dotnet,
+            angular: Array.isArray(saved.done.angular) ? saved.done.angular : []
+          }
+        };
+      } catch { /* Keep the safe defaults. */ }
+
+      if (location.hash.startsWith('#angular-')) state.track = 'angular';
+
+      const save = () => localStorage.setItem(key, JSON.stringify(state));
 
       const update = () => {
+        const panel = panels.find(item => item.dataset.trackPanel === state.track);
+        const lessons = [...panel.querySelectorAll('.lesson')];
+        const done = state.done[state.track];
+
+        panels.forEach(item => { item.hidden = item !== panel; });
+        document.body.dataset.track = state.track;
+        document.getElementById('course-label').textContent = labels[state.track];
+        document.querySelectorAll('.track-switch [data-track]').forEach(button => {
+          button.setAttribute('aria-selected', String(button.dataset.track === state.track));
+        });
+
         lessons.forEach(lesson => {
           const complete = done.includes(lesson.id);
           lesson.classList.toggle('done', complete);
@@ -665,19 +1011,36 @@
           button.textContent = complete ? 'Section completed ✓' : 'Mark section complete';
           button.setAttribute('aria-pressed', String(complete));
         });
+        const total = lessons.reduce((sum, lesson) => sum + Number(lesson.dataset.minutes), 0);
         const used = lessons.filter(lesson => done.includes(lesson.id)).reduce((sum, lesson) => sum + Number(lesson.dataset.minutes), 0);
-        const left = Math.max(0, 30 - used);
+        const left = Math.max(0, total - used);
         document.getElementById('time-left').textContent = left ? `${left} min left` : 'Complete';
-        document.getElementById('progress-count').textContent = `${done.length} / 5`;
-        document.querySelector('.progress-line').style.width = `${done.length / 5 * 100}%`;
+        document.getElementById('progress-count').textContent = `${done.length} / ${lessons.length}`;
+        document.querySelector('.progress-line').style.width = `${done.length / lessons.length * 100}%`;
+        document.title = state.track === 'angular'
+          ? '30-Minute Angular, NgRx + RxJS Refresher'
+          : '30-Minute C#/.NET Interview Refresher';
       };
 
       document.addEventListener('click', event => {
+        const track = event.target.closest('.track-switch [data-track]');
+        if (track) {
+          state.track = track.dataset.track;
+          save();
+          update();
+          document.querySelector(`[data-track-panel="${state.track}"] .hero`).scrollIntoView({ behavior: 'smooth', block: 'start' });
+          return;
+        }
+
         const complete = event.target.closest('.complete');
         if (complete) {
-          const id = complete.closest('.lesson').id;
-          done = done.includes(id) ? done.filter(value => value !== id) : [...done, id];
-          localStorage.setItem(key, JSON.stringify(done));
+          const lesson = complete.closest('.lesson');
+          const trackName = complete.closest('[data-track-panel]').dataset.trackPanel;
+          const done = state.done[trackName];
+          state.done[trackName] = done.includes(lesson.id)
+            ? done.filter(value => value !== lesson.id)
+            : [...done, lesson.id];
+          save();
           update();
         }
 
