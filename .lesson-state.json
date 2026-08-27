@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 131,
-  "lessonId": "lesson-7-121-big-o-2",
-  "title": "121. Big-O",
+  "sequence": 132,
+  "lessonId": "lesson-7-122-pattern-map-3",
+  "title": "122. Pattern Map",
   "chapter": 7,
-  "stateId": "lesson-131",
+  "stateId": "lesson-132",
   "exerciseType": "TRACE/DEBUG",
   "canonicalStage": "stage-07",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
