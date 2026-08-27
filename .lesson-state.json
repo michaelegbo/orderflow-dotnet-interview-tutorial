@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "sequence": 75,
-  "lessonId": "lesson-4-68-routing-8",
-  "title": "68. Routing",
+  "sequence": 76,
+  "lessonId": "lesson-4-69-http-methods-9",
+  "title": "69. HTTP Methods",
   "chapter": 4,
-  "stateId": "lesson-075",
-  "exerciseType": "BUILD",
+  "stateId": "lesson-076",
+  "exerciseType": "TRACE/DEBUG",
   "canonicalStage": "stage-04",
-  "productionTreeNote": "This lesson applies a permanent practice change against the canonical checkpoint."
+  "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
 }
