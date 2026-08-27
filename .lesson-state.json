@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 162,
-  "lessonId": "lesson-8-150-clean-architecture-23",
-  "title": "150. Clean Architecture?",
+  "sequence": 163,
+  "lessonId": "lesson-8-151-monolith-vs-microservices-24",
+  "title": "151. Monolith vs microservices?",
   "chapter": 8,
-  "stateId": "lesson-162",
+  "stateId": "lesson-163",
   "exerciseType": "REHEARSE",
   "canonicalStage": "stage-08",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
