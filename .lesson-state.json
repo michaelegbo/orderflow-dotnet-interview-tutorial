@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 62,
-  "lessonId": "lesson-3-56-garbage-collection-15",
-  "title": "56. Garbage Collection",
+  "sequence": 63,
+  "lessonId": "lesson-3-57-value-types-vs-reference-types-16",
+  "title": "57. Value Types vs Reference Types",
   "chapter": 3,
-  "stateId": "lesson-062",
+  "stateId": "lesson-063",
   "exerciseType": "TRACE/DEBUG",
   "canonicalStage": "stage-03",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
