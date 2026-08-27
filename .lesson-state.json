@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 56,
-  "lessonId": "lesson-3-50-c-vs-net-9",
-  "title": "50. C# vs .NET",
+  "sequence": 57,
+  "lessonId": "lesson-3-51-sdk-vs-runtime-10",
+  "title": "51. SDK vs Runtime",
   "chapter": 3,
-  "stateId": "lesson-056",
+  "stateId": "lesson-057",
   "exerciseType": "TRACE/DEBUG",
   "canonicalStage": "stage-03",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
