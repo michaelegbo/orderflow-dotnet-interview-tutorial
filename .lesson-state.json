@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 164,
-  "lessonId": "lesson-8-152-vertical-vs-horizontal-scaling-25",
-  "title": "152. Vertical vs horizontal scaling?",
+  "sequence": 165,
+  "lessonId": "lesson-8-153-why-stateless-apis-26",
+  "title": "153. Why stateless APIs?",
   "chapter": 8,
-  "stateId": "lesson-164",
+  "stateId": "lesson-165",
   "exerciseType": "REHEARSE",
   "canonicalStage": "stage-08",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
