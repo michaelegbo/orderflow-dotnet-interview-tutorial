@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 161,
-  "lessonId": "lesson-8-149-what-is-solid-22",
-  "title": "149. What is SOLID?",
+  "sequence": 162,
+  "lessonId": "lesson-8-150-clean-architecture-23",
+  "title": "150. Clean Architecture?",
   "chapter": 8,
-  "stateId": "lesson-161",
+  "stateId": "lesson-162",
   "exerciseType": "REHEARSE",
   "canonicalStage": "stage-08",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
