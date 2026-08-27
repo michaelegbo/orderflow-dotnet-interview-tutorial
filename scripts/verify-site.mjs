@@ -26,11 +26,19 @@ const htmlWithoutSnapshotData = html.replace(/<script type="application\/json" i
 const contentCount = pattern => [...htmlWithoutSnapshotData.matchAll(pattern)].length;
 const quickLessons = [...quickRefresher.matchAll(/<article class="lesson" id="([^"]+)" data-minutes="(\d+)">/g)];
 const quickIds = [...quickRefresher.matchAll(/\sid="([^"]+)"/g)].map(match => match[1]);
+const quickVisibleWords = quickRefresher
+  .replace(/<style>[\s\S]*?<\/style>/g, ' ')
+  .replace(/<script>[\s\S]*?<\/script>/g, ' ')
+  .replace(/<[^>]+>/g, ' ')
+  .replace(/&(?:gt|lt|amp|quot|#39);/g, ' ')
+  .trim();
 
 assert(quickLessons.length === 5, `Expected five sections in the 30-minute refresher; found ${quickLessons.length}.`);
 assert(quickLessons.reduce((sum, match) => sum + Number(match[2]), 0) === 30, 'The short refresher timings do not total 30 minutes.');
 assert([...quickRefresher.matchAll(/class="check" data-answer=/g)].length === 5, 'Each short-refresher section must have one quick check.');
 assert([...quickRefresher.matchAll(/class="complete"/g)].length === 5, 'Each short-refresher section must have one completion control.');
+assert([...quickRefresher.matchAll(/class="explain"/g)].length === 5, 'Each short-refresher section must have exactly one concise explanatory layer.');
+assert(wordCount(quickVisibleWords) >= 1900 && wordCount(quickVisibleWords) <= 2300, 'The short refresher has drifted outside its concise 30-minute reading range.');
 assert(new Set(quickIds).size === quickIds.length, 'The short refresher contains duplicate DOM IDs.');
 assert(!/<(?:script|link)[^>]+(?:src|href)=/i.test(quickRefresher), 'The short refresher unexpectedly depends on an external asset.');
 assert(quickRefresher.includes('width=device-width,initial-scale=1,viewport-fit=cover'), 'The short refresher is missing mobile viewport support.');

@@ -194,6 +194,15 @@
     }
     .plain b { display: block; color: #845b00; font-size: .73rem; text-transform: uppercase; letter-spacing: .06em; }
     .plain p { margin: 5px 0 0; }
+    .explain {
+      margin: 16px 0;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fbfdfc;
+      padding: 14px 15px;
+    }
+    .explain b { display: block; color: var(--green-dark); font-size: .77rem; }
+    .explain p { margin: 5px 0 0; color: var(--muted); font-size: .84rem; }
     h3 { margin: 24px 0 8px; font-size: 1rem; }
     p { margin: 8px 0; }
     ul { margin: 9px 0; padding-left: 22px; }
@@ -376,6 +385,8 @@
           <li>A <span class="term">method</span> gives a name to a job and can return a result.</li>
         </ul>
 
+        <div class="explain"><b>What is really happening?</b><p>C# checks types when the program is built. Even <code>var total = 75m;</code> has a real type—C# works out that it is <code>decimal</code>. The program then runs statements in order. When it calls a method, that method receives its inputs, performs its job, returns a value if needed, and the caller continues.</p><p>Conditions often combine questions: <code>&amp;&amp;</code> means both must be true, <code>||</code> means either may be true, and <code>!</code> reverses true and false.</p></div>
+
         <div class="code">
           <div class="code-head"><span>C# · one small order</span><button class="copy" type="button">Copy</button></div>
           <pre><code><span class="kw">string</span> customer = <span class="str">"Sarah"</span>;
@@ -419,6 +430,8 @@
           <li><span class="term">Polymorphism</span> means different objects can fulfil the same promise in their own way.</li>
         </ul>
 
+        <div class="explain"><b>Why does this matter in OrderFlow?</b><p>An <code>Order</code> should protect rules such as “a cancelled order cannot be paid.” Code outside the object asks it to perform a valid action instead of changing <code>Status</code> freely. Meanwhile, <code>IOrderRepository</code> lets the service ask for storage without caring whether the implementation uses EF Core, memory, or something else.</p><p>Prefer composition when possible: an order <em>uses</em> services rather than inheriting a large collection of behaviour it may not need.</p></div>
+
         <div class="code">
           <div class="code-head"><span>C# · domain and query</span><button class="copy" type="button">Copy</button></div>
           <pre><code><span class="kw">public interface</span> IOrderRepository
@@ -444,6 +457,8 @@
           <div><b>Where</b><p>Keeps only items that match a condition.</p></div>
           <div><b>Select</b><p>Changes each item into a new shape.</p></div>
         </div>
+
+        <p><strong>LINQ detail:</strong> many LINQ calls build a query plan. Work may not happen until you enumerate it with <code>foreach</code> or materialise it with <code>ToList()</code>. This is called <span class="term">deferred execution</span>.</p>
 
         <div class="interview"><b>Say this</b><p>“I keep business rules inside domain objects, depend on small interfaces at boundaries, and use LINQ for readable filtering, projection, ordering, and grouping.”</p></div>
 
@@ -473,6 +488,8 @@
           <li>A <code>CancellationToken</code> carries a polite stop request through the call chain.</li>
           <li>Use <code>Task.WhenAll</code> when independent async operations can run together.</li>
         </ul>
+
+        <div class="explain"><b>What happens at <code>await</code>?</b><p>The operation returns a <code>Task</code>, which represents work that may finish later. If it is incomplete, C# remembers where the method paused and returns control to the caller. The waiting thread is free for another request. When the task completes, the method continues from the saved point.</p><p>Exceptions are carried by the task and are thrown when it is awaited. Avoid <code>async void</code> except for event handlers because callers cannot await it or reliably observe its failure.</p></div>
 
         <div class="code">
           <div class="code-head"><span>C# · async service</span><button class="copy" type="button">Copy</button></div>
@@ -519,6 +536,8 @@
           <li>EF Core reads or writes SQLite, and the API sends an HTTP response.</li>
         </ol>
 
+        <div class="explain"><b>How do you choose the response?</b><p>Use the HTTP result that describes what happened: <code>200 OK</code> for a successful read, <code>201 Created</code> after creating an order, <code>400 Bad Request</code> for invalid input, <code>401 Unauthorized</code> when identity is missing or invalid, <code>403 Forbidden</code> when the known caller lacks permission, and <code>404 Not Found</code> when the order does not exist.</p><p>Do not expose the EF entity automatically. A DTO lets the API return only the fields its contract promises, even if the database model later changes.</p></div>
+
         <div class="code">
           <div class="code-head"><span>C# · minimal endpoint shape</span><button class="copy" type="button">Copy</button></div>
           <pre><code>app.MapPost(<span class="str">"/orders"</span>, <span class="kw">async</span> (
@@ -543,6 +562,7 @@
         <h3>Dependency injection</h3>
         <p>Instead of a controller building its own repository, it asks for <code>IOrderService</code>. The application setup chooses the real implementation. This makes dependencies clear and testing easier.</p>
         <p><strong>Lifetimes:</strong> <span class="term">Transient</span> creates a new instance each time; <span class="term">Scoped</span> normally creates one per web request; <span class="term">Singleton</span> shares one for the application's lifetime.</p>
+        <p><strong>EF Core detail:</strong> tracking remembers loaded entities so changes can be saved. For a read-only query, <code>AsNoTracking()</code> avoids that work. <code>SaveChangesAsync()</code> sends the tracked changes to the database as one unit of work.</p>
 
         <div class="interview"><b>Say this</b><p>“I keep controllers thin: receive HTTP input, call the use case, and translate the result into an HTTP response. Business rules stay in the domain/application layer, and EF Core stays behind an interface.”</p></div>
 
@@ -573,6 +593,8 @@
           <li><strong>D — Dependency Inversion:</strong> important business code depends on promises, not database or web details.</li>
         </ul>
 
+        <div class="explain"><b>Clean Architecture in one picture</b><p>The domain contains business rules. The application layer coordinates use cases such as “create an order.” Infrastructure implements outside details such as EF Core. The API translates HTTP requests and responses. Dependencies point inward, so database and web changes do not rewrite the core business rules.</p><p>This is a direction rule, not a demand for dozens of projects. Keep the structure only as complicated as the application needs.</p></div>
+
         <h3>Testing levels</h3>
         <div class="compare">
           <div><b>Unit test</b><p>Checks one small rule quickly, with outside dependencies replaced.</p></div>
@@ -601,6 +623,7 @@
 <span class="com">// 6. Explain time and space cost.</span></code></pre>
         </div>
         <p>Common tools: dictionary for fast lookup, stack for matching brackets, queue for first-in-first-out work, two pointers for ordered data, and a sliding window for neighbouring items.</p>
+        <p><strong>Complexity:</strong> <code>O(1)</code> means the work stays roughly constant; <code>O(n)</code> grows with the number of items; <code>O(n²)</code> often means a loop inside another loop. State both time cost and extra memory cost, then explain the trade-off in plain language.</p>
 
         <div class="interview"><b>Say this</b><p>“I begin with the business requirement, keep domain rules independent, choose the simplest architecture that meets current scale, add observability, and evolve only when measurements show a real bottleneck.”</p></div>
 
