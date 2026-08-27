@@ -26,7 +26,7 @@ the tutorial links, not merely the current working tree.
 - Stage 02 restored and executed with its expected pass marker.
 - Stage 03 restored and executed with its expected pass marker.
 - All nine projects restored and built with **0 warnings and 0 errors**.
-- Unit tests: **10 passed, 0 failed**.
+- Unit tests: **22 passed, 0 failed**.
 - API integration tests: **3 passed, 0 failed**.
 - EF Core reported no pending model changes.
 - The single clean migration applied to a brand-new SQLite database.
@@ -50,11 +50,18 @@ request. The lesson-history verifier additionally checks that all 176 ordered
 lesson commits are reachable, match the manifest, contain the expected
 metadata, and restore to one of the eight verified production source trees.
 
-The published site has a separate structural audit covering all 176 lesson
-cards, practical exercise panels, hint and answer controls, complete-state
-snapshot mappings, bottom completion controls, interactive knowledge checks,
+The published site has a separate structural and semantic audit covering all
+176 lesson cards, practical exercise panels, hint and answer controls, cumulative
+chapter-checkpoint mappings, bottom completion controls, interactive knowledge checks,
 their eight code checkpoints, duplicate IDs, inline script syntax, and the
-downloadable archive. Browser acceptance also covered attempt/hint/answer and
+downloadable archive. Every one of the 176 tasks has an explicitly matched
+answer; all 69 focused coding answers pass their required-concept contracts,
+all 38 permanent BUILD answers occur in their final cumulative files, and all
+69 C# answer snippets pass Roslyn syntax parsing. The 157 original C# teaching
+blocks were also parsed; 13 intentional syntax fragments are explicitly labelled
+as non-standalone. Original lesson-content hashes remain unchanged.
+
+Browser acceptance also covered attempt/hint/answer and
 snapshot interactions, saved state after reload, core/full route switching,
 lesson completion, and responsive layouts at 1280 px, 768 px, 390 px, and
 320 px. No horizontal overflow or browser-console errors were observed.
