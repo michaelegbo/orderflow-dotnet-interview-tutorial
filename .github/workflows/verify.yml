@@ -27,6 +27,10 @@ jobs:
         with:
           node-version: 22
 
+      - name: Verify all 176 ordered lesson states
+        shell: pwsh
+        run: ./scripts/verify-lesson-history.ps1
+
       - name: Restore and verify every exact lesson checkpoint
         shell: pwsh
         run: ./scripts/verify-checkpoints.ps1

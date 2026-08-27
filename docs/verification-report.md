@@ -6,12 +6,16 @@ Commands:
 
 - `pwsh ./scripts/verify-checkpoints.ps1`
 - `pwsh ./scripts/verify-all.ps1`
+- `pwsh ./scripts/verify-lesson-history.ps1`
+- `node ./scripts/verify-site.mjs`
 
 ## Result
 
 `ORDERFLOW END-TO-END PASS — 19 checks completed`
 
 `ALL 8 GIT CHECKPOINTS PASS`
+
+`176 LESSON-HISTORY COMMITS PASS`
 
 Each annotated `stage-01` through `stage-08` tag was exported into a clean
 temporary directory before its dependencies were restored and its
@@ -42,7 +46,15 @@ only from the authoring directory. Short-lived development JWTs and the
 temporary SQLite database were removed at the end of the run.
 
 The repository workflow repeats this verification on every push and pull
-request. The published site also has a separate structural audit covering all
-176 lesson cards, bottom completion controls, interactive knowledge checks,
+request. The lesson-history verifier additionally checks that all 176 ordered
+lesson commits are reachable, match the manifest, contain the expected
+metadata, and restore to one of the eight verified production source trees.
+
+The published site has a separate structural audit covering all 176 lesson
+cards, practical exercise panels, hint and answer controls, complete-state
+snapshot mappings, bottom completion controls, interactive knowledge checks,
 their eight code checkpoints, duplicate IDs, inline script syntax, and the
-downloadable archive.
+downloadable archive. Browser acceptance also covered attempt/hint/answer and
+snapshot interactions, saved state after reload, core/full route switching,
+lesson completion, and responsive layouts at 1280 px, 768 px, 390 px, and
+320 px. No horizontal overflow or browser-console errors were observed.

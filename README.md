@@ -9,15 +9,22 @@ with EF Core, SQLite, JWT authorization, clean boundaries, and algorithms.
 
 ## What is actually executable?
 
-Every one of the 176 lesson cards links to the cumulative code checkpoint for
-that part of the course. Lessons that explain concepts without changing code
-share the current tested checkpoint instead of duplicating a source tree that
-could drift.
+Every one of the 176 lesson cards now contains a focused practical exercise:
+build, experiment, trace/debug, design, or rehearse. Each exercise names the
+starting state, exact file, action, command, expected proof, hint, focused
+answer, and the state from which the next lesson continues.
 
-Every lesson now ends with the same learning loop: answer a scenario question
-or recall prompt, receive feedback or reveal a model answer, rate confidence,
-and mark completion directly at the bottom of the lesson. Progress remains
-saved in the browser between study sessions.
+The standalone tutorial embeds a deduplicated full-file browser, so learners
+can inspect the complete project state without opening GitHub. GitHub remains
+an independent reference: the `lesson-history` branch contains 176 ordered
+commits, one per lesson. Conceptual lessons deliberately keep the production
+tree unchanged; every production tree maps exactly to one of the eight tested
+stage tags.
+
+Every lesson now follows the same learning loop: learn, attempt the practical
+task, use a hint if blocked, reveal the focused answer, inspect the full state,
+answer the knowledge check, rate confidence, and mark completion at the bottom.
+Exercise and course progress remain saved in the browser between study sessions.
 
 | Stage | Learning checkpoint | Direct command |
 |---|---|---|
@@ -39,6 +46,13 @@ tags:
 pwsh ./scripts/verify-checkpoints.ps1
 ```
 
+Verify the 176 lesson commits, their metadata, ordering, tree hashes, and exact
+mapping to the eight compiled/tested checkpoints:
+
+```powershell
+pwsh ./scripts/verify-lesson-history.ps1
+```
+
 For the faster current-HEAD check, run `pwsh ./scripts/verify-all.ps1`.
 
 The checkpoint verifier exports every `stage-01` through `stage-08` tag into a
@@ -57,10 +71,11 @@ appropriate to that stage. The final-stage verifier does more than compile. It:
 8. Removes its temporary database, processes, and short-lived development
    tokens when it finishes.
 
-The GitHub Actions workflow runs the eight-tag matrix on every push and pull
-request. The Stage 08 pass also runs `scripts/verify-site.mjs`, which verifies
-that all 176 lesson cards have valid stage links and that the downloadable
-solution is present. See the latest checked-in
+The GitHub Actions workflow validates the 176-commit lesson history and runs
+the eight-tag matrix on every push and pull request. The Stage 08 pass also
+runs `scripts/verify-site.mjs`, which verifies that all lesson cards contain
+their practical flow, snapshot controls, valid history references, stage links,
+and downloadable solution. See the latest checked-in
 [verification report](docs/verification-report.md).
 
 ## Run the API manually
