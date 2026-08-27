@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "sequence": 25,
-  "lessonId": "lesson-2-21-overloading-vs-overriding-10",
-  "title": "21. Overloading vs Overriding",
+  "sequence": 26,
+  "lessonId": "lesson-2-22-interfaces-11",
+  "title": "22. Interfaces",
   "chapter": 2,
-  "stateId": "lesson-025",
-  "exerciseType": "EXPERIMENT",
+  "stateId": "lesson-026",
+  "exerciseType": "BUILD",
   "canonicalStage": "stage-02",
-  "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
+  "productionTreeNote": "This lesson applies a permanent practice change against the canonical checkpoint."
 }
