@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 165,
-  "lessonId": "lesson-8-153-why-stateless-apis-26",
-  "title": "153. Why stateless APIs?",
+  "sequence": 166,
+  "lessonId": "lesson-8-154-what-is-load-balancing-27",
+  "title": "154. What is load balancing?",
   "chapter": 8,
-  "stateId": "lesson-165",
+  "stateId": "lesson-166",
   "exerciseType": "REHEARSE",
   "canonicalStage": "stage-08",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
