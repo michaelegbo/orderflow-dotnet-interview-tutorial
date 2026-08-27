@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "sequence": 54,
-  "lessonId": "lesson-3-49-cancellationtoken-7",
-  "title": "49. CancellationToken",
+  "sequence": 55,
+  "lessonId": "lesson-3-exercise-5-async-order-lookup-8",
+  "title": "Exercise 5 — Async Order Lookup",
   "chapter": 3,
-  "stateId": "lesson-054",
-  "exerciseType": "BUILD",
+  "stateId": "lesson-055",
+  "exerciseType": "EXPERIMENT",
   "canonicalStage": "stage-03",
-  "productionTreeNote": "This lesson applies a permanent practice change against the canonical checkpoint."
+  "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
 }
