@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 147,
-  "lessonId": "lesson-8-135-value-type-vs-reference-type-8",
-  "title": "135. Value type vs reference type?",
+  "sequence": 148,
+  "lessonId": "lesson-8-136-interface-vs-abstract-class-9",
+  "title": "136. Interface vs abstract class?",
   "chapter": 8,
-  "stateId": "lesson-147",
+  "stateId": "lesson-148",
   "exerciseType": "REHEARSE",
   "canonicalStage": "stage-08",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
