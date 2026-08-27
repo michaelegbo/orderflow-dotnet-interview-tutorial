@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 61,
-  "lessonId": "lesson-3-55-managed-code-14",
-  "title": "55. Managed Code",
+  "sequence": 62,
+  "lessonId": "lesson-3-56-garbage-collection-15",
+  "title": "56. Garbage Collection",
   "chapter": 3,
-  "stateId": "lesson-061",
+  "stateId": "lesson-062",
   "exerciseType": "TRACE/DEBUG",
   "canonicalStage": "stage-03",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
