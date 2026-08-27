@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 31,
-  "lessonId": "lesson-2-27-hashset-t-16",
-  "title": "27. HashSet<T>",
+  "sequence": 32,
+  "lessonId": "lesson-2-28-stack-t-17",
+  "title": "28. Stack<T>",
   "chapter": 2,
-  "stateId": "lesson-031",
+  "stateId": "lesson-032",
   "exerciseType": "EXPERIMENT",
   "canonicalStage": "stage-02",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
