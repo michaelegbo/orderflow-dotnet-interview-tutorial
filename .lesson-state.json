@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 141,
-  "lessonId": "lesson-8-part-xxi-interview-rapid-fire-questions-2",
-  "title": "PART XXI — INTERVIEW RAPID-FIRE QUESTIONS",
+  "sequence": 142,
+  "lessonId": "lesson-8-130-what-is-c-vs-net-3",
+  "title": "130. What is C# vs .NET?",
   "chapter": 8,
-  "stateId": "lesson-141",
+  "stateId": "lesson-142",
   "exerciseType": "REHEARSE",
   "canonicalStage": "stage-08",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
