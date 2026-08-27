@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 94,
-  "lessonId": "lesson-5-74-why-di-exists-1",
-  "title": "74. Why DI Exists",
+  "sequence": 95,
+  "lessonId": "lesson-5-75-registering-services-2",
+  "title": "75. Registering Services",
   "chapter": 5,
-  "stateId": "lesson-094",
+  "stateId": "lesson-095",
   "exerciseType": "TRACE/DEBUG",
   "canonicalStage": "stage-05",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
