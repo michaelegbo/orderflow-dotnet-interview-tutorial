@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 133,
-  "lessonId": "lesson-7-123-two-sum-4",
-  "title": "123. Two Sum",
+  "sequence": 134,
+  "lessonId": "lesson-7-124-contains-duplicate-5",
+  "title": "124. Contains Duplicate",
   "chapter": 7,
-  "stateId": "lesson-133",
+  "stateId": "lesson-134",
   "exerciseType": "BUILD",
   "canonicalStage": "stage-07",
   "productionTreeNote": "This lesson applies a permanent practice change against the canonical checkpoint."
