@@ -15,14 +15,14 @@ starting state, exact file, action, command, expected proof, hint, focused
 answer, and the state from which the next lesson continues.
 
 The standalone tutorial embeds a deduplicated full-file browser, so learners
-can inspect the complete project state without opening GitHub. GitHub remains
+can inspect the verified cumulative checkpoint for each chapter without opening GitHub. GitHub remains
 an independent reference: the `lesson-history` branch contains 176 ordered
 commits, one per lesson. Conceptual lessons deliberately keep the production
 tree unchanged; every production tree maps exactly to one of the eight tested
 stage tags.
 
 Every lesson now follows the same learning loop: learn, attempt the practical
-task, use a hint if blocked, reveal the focused answer, inspect the full state,
+task, use a hint if blocked, reveal the focused answer, inspect the cumulative checkpoint,
 answer the knowledge check, rate confidence, and mark completion at the bottom.
 Exercise and course progress remain saved in the browser between study sessions.
 
@@ -34,7 +34,7 @@ Exercise and course progress remain saved in the browser between study sessions.
 | `stage-04` | ASP.NET Core, EF Core, SQLite, JWT | `dotnet run --project src/OrderFlow.Api` |
 | `stage-05` | SOLID, DI, clean boundaries, tests | `dotnet test OrderFlow.sln` |
 | `stage-06` | Measured production evolution | Read [`docs/architecture.md`](docs/architecture.md) and run the API |
-| `stage-07` | Two Sum and binary search | `dotnet test --filter OrderAlgorithmsTests` |
+| `stage-07` | Six OrderFlow algorithm patterns | `dotnet test --filter OrderAlgorithmsTests` |
 | `stage-08` | Complete release candidate | `pwsh ./scripts/verify-all.ps1` |
 
 ## One-command checkpoint proof

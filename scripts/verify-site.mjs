@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
+import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 
 const scriptsDirectory = path.dirname(fileURLToPath(import.meta.url));
@@ -17,6 +18,8 @@ const codeLinks = [...html.matchAll(/<a class="lesson-code-link" href="([^"]+)"/
 const allIds = [...html.matchAll(/\sid="([^"]+)"/g)].map(match => match[1]);
 const count = pattern => [...html.matchAll(pattern)].length;
 const inlineScript = html.match(/<script>([\s\S]*?)<\/script>/)?.[1] ?? '';
+const htmlWithoutSnapshotData = html.replace(/<script type="application\/json" id="snapshot-store">[\s\S]*?<\/script>/, '');
+const contentCount = pattern => [...htmlWithoutSnapshotData.matchAll(pattern)].length;
 
 assert(lessonIds.length === 176, `Expected 176 lesson cards; found ${lessonIds.length}.`);
 assert(manifest.schemaVersion === 2, `Expected lesson manifest schema 2; found ${manifest.schemaVersion}.`);
@@ -36,6 +39,10 @@ assert(count(/class="exercise-attempt"/g) === lessonIds.length, 'Every lesson mu
 assert(count(/class="exercise-hint"/g) === lessonIds.length, 'Every lesson must include a progressive hint.');
 assert(count(/class="reveal-exercise-answer"/g) === lessonIds.length, 'Every lesson must include a focused answer.');
 assert(count(/class="exercise-snapshot"/g) === lessonIds.length, 'Every lesson must expose a full project snapshot.');
+const practicalLessonCount = manifest.lessons.filter(lesson => ['BUILD', 'EXPERIMENT'].includes(lesson.exercise?.type)).length;
+assert(contentCount(/Focused answer for this exact task/g) === practicalLessonCount, 'Every BUILD/EXPERIMENT lesson must use an explicit prompt-aligned answer.');
+assert(!htmlWithoutSnapshotData.includes('Potential code answer'), 'Unsafe first-code-block answer selection remains in the tutorial.');
+assert(!/@@[A-Z]+\d*@@/.test(htmlWithoutSnapshotData), 'An internal rendering placeholder leaked into the tutorial.');
 assert(inlineScript.includes("const perLessonMinutes = list.length ? plannedMinutes / list.length : 0"), 'Per-lesson estimated time calculation is missing.');
 assert(inlineScript.includes("timeLeft += chapterTimeLeft"), 'Chapter estimates are not included in total time left.');
 assert(inlineScript.includes("document.getElementById('time-left').textContent = formatMinutes(timeLeft)"), 'Estimated time-left UI is not updated with progress.');
@@ -62,7 +69,22 @@ for (const lesson of manifest.lessons) {
   assert(/^[a-f0-9]{40}$/.test(lesson.exercise?.gitRef ?? ''), `Invalid lesson-history ref for ${lesson.id}`);
   assert(/^[a-f0-9]{40}$/.test(lesson.exercise?.treeHash ?? ''), `Invalid lesson-history tree for ${lesson.id}`);
   assert(/^[a-f0-9]{64}$/.test(lesson.sourceContentHash ?? ''), `Invalid source-content hash for ${lesson.id}`);
+  assert((lesson.exercise?.task ?? '').trim().length >= 30, `Exercise task is missing or vague: ${lesson.id}`);
+  assert((lesson.exercise?.hint ?? '').trim().length >= 25, `Exercise hint is missing or vague: ${lesson.id}`);
+  assert((lesson.exercise?.answer ?? '').trim().length >= 20, `Exercise answer is missing or vague: ${lesson.id}`);
+  assert(/^[a-f0-9]{64}$/.test(lesson.exercise?.answerTextHash ?? ''), `Exercise answer text hash is missing: ${lesson.id}`);
+  assert(lesson.exercise.answerTextHash === crypto.createHash('sha256').update(lesson.exercise.answer).digest('hex'), `Exercise answer text hash drifted: ${lesson.id}`);
+  assert((lesson.exercise?.expected ?? '').trim().length >= 25, `Exercise proof is missing or vague: ${lesson.id}`);
+  const shouldHaveCode = ['BUILD', 'EXPERIMENT'].includes(lesson.exercise?.type);
+  assert(lesson.exercise?.answerSource === (shouldHaveCode ? 'explicit-code-contract' : 'explicit-concept-contract'), `Exercise answer is not explicitly authored for its task: ${lesson.id}`);
+  assert(shouldHaveCode ? /^[a-f0-9]{64}$/.test(lesson.exercise?.answerCodeHash ?? '') : lesson.exercise?.answerCodeHash === null, `Focused-answer hash does not match exercise type: ${lesson.id}`);
+  assert(Array.isArray(lesson.exercise?.answerContract), `Focused-answer contract is missing: ${lesson.id}`);
 }
+
+const interpolation = manifest.lessons.find(lesson => /Strings and String Interpolation/i.test(lesson.title));
+assert(Boolean(interpolation), 'String interpolation lesson is missing.');
+assert(interpolation?.exercise?.answerContract?.includes('$"'), 'String interpolation answer does not require an interpolated string.');
+assert(interpolation?.exercise?.answerContract?.includes('{unitPrice:C}') && interpolation?.exercise?.answerContract?.includes('{total:C}'), 'String interpolation answer does not require the requested currency formatting.');
 
 for (const [chapter, stage] of Object.entries(manifest.stages)) {
   const target = stage.path ? path.join(root, stage.path) : root;
@@ -72,7 +94,6 @@ for (const [chapter, stage] of Object.entries(manifest.stages)) {
 if (!packageMode)
   assert(fs.existsSync(path.join(docs, 'orderflow-verified.zip')), 'The downloadable verified solution is missing.');
 assert(html.includes('orderflow-verified.zip'), 'The HTML does not link to the downloadable solution.');
-const htmlWithoutSnapshotData = html.replace(/<script type="application\/json" id="snapshot-store">[\s\S]*?<\/script>/, '');
 assert(!htmlWithoutSnapshotData.includes('${'), 'Unresolved template interpolation found.');
 assert(!htmlWithoutSnapshotData.includes('OWNER/REPO'), 'Unresolved repository placeholder found.');
 
