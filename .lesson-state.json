@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 113,
-  "lessonId": "lesson-5-104-metrics-vs-logs-vs-traces-20",
-  "title": "104. Metrics vs Logs vs Traces",
+  "sequence": 114,
+  "lessonId": "lesson-5-105-slow-endpoint-interview-answer-21",
+  "title": "105. Slow Endpoint Interview Answer",
   "chapter": 5,
-  "stateId": "lesson-113",
+  "stateId": "lesson-114",
   "exerciseType": "TRACE/DEBUG",
   "canonicalStage": "stage-05",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
