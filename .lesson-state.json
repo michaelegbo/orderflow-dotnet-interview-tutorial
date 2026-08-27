@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 117,
-  "lessonId": "lesson-6-108-horizontal-scaling-3",
-  "title": "108. Horizontal Scaling",
+  "sequence": 118,
+  "lessonId": "lesson-6-109-stateless-services-4",
+  "title": "109. Stateless Services",
   "chapter": 6,
-  "stateId": "lesson-117",
+  "stateId": "lesson-118",
   "exerciseType": "DESIGN",
   "canonicalStage": "stage-06",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
