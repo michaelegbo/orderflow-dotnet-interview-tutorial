@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 123,
-  "lessonId": "lesson-6-114-message-queues-9",
-  "title": "114. Message Queues",
+  "sequence": 124,
+  "lessonId": "lesson-6-115-idempotency-10",
+  "title": "115. Idempotency",
   "chapter": 6,
-  "stateId": "lesson-123",
+  "stateId": "lesson-124",
   "exerciseType": "DESIGN",
   "canonicalStage": "stage-06",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
