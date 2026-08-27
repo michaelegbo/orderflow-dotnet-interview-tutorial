@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 101,
-  "lessonId": "lesson-5-92-i-interface-segregation-8",
-  "title": "92. I — Interface Segregation",
+  "sequence": 102,
+  "lessonId": "lesson-5-93-d-dependency-inversion-9",
+  "title": "93. D — Dependency Inversion",
   "chapter": 5,
-  "stateId": "lesson-101",
+  "stateId": "lesson-102",
   "exerciseType": "DESIGN",
   "canonicalStage": "stage-05",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
