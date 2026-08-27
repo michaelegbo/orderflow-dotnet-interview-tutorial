@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "sequence": 140,
-  "lessonId": "lesson-8-part-xx-final-end-to-end-project-check-1",
-  "title": "PART XX — FINAL END-TO-END PROJECT CHECK",
+  "sequence": 141,
+  "lessonId": "lesson-8-part-xxi-interview-rapid-fire-questions-2",
+  "title": "PART XXI — INTERVIEW RAPID-FIRE QUESTIONS",
   "chapter": 8,
-  "stateId": "lesson-140",
-  "exerciseType": "TRACE/DEBUG",
+  "stateId": "lesson-141",
+  "exerciseType": "REHEARSE",
   "canonicalStage": "stage-08",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
 }
