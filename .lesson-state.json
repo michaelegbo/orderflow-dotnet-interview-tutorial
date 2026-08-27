@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 90,
-  "lessonId": "lesson-4-85-migrations-22",
-  "title": "85. Migrations",
+  "sequence": 91,
+  "lessonId": "lesson-4-86-n-1-problem-23",
+  "title": "86. N+1 Problem",
   "chapter": 4,
-  "stateId": "lesson-090",
+  "stateId": "lesson-091",
   "exerciseType": "TRACE/DEBUG",
   "canonicalStage": "stage-04",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
