@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 88,
-  "lessonId": "lesson-4-83-tracking-and-asnotracking-20",
-  "title": "83. Tracking and AsNoTracking",
+  "sequence": 89,
+  "lessonId": "lesson-4-84-savechangesasync-21",
+  "title": "84. SaveChangesAsync",
   "chapter": 4,
-  "stateId": "lesson-088",
+  "stateId": "lesson-089",
   "exerciseType": "TRACE/DEBUG",
   "canonicalStage": "stage-04",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
