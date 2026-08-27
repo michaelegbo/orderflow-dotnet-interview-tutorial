@@ -37,6 +37,13 @@ commits, one per lesson. Conceptual lessons deliberately keep the production
 tree unchanged; every production tree maps exactly to one of the eight tested
 stage tags.
 
+The same standalone page is designed for phone study. At 600 px and below it
+uses a four-part header (chapters, current chapter, search, study tools), a
+scroll-safe chapter drawer, labelled tool panel, single-column teaching and
+exercise sections, swipeable code and tables, safe-area padding, and 44–48 px
+primary touch targets. A separate 360 px rule keeps the course usable on 320 px
+screens without removing lesson content.
+
 Every lesson follows the same learning loop: learn, review the supplied inputs,
 follow the small steps using only the current concept in the learner copy,
 predict the result, use a hint if blocked, reveal the focused answer,

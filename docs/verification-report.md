@@ -86,6 +86,14 @@ that the expected console result is concrete. All 69 code-oriented lessons now
 have a task-specific starter and observable expected result; the site verifier
 rejects generic “it compiles” proofs and generic blank-file instructions.
 
+The responsive contract is also enforced in the published artifact: the
+mobile-safe viewport, 600 px and 360 px breakpoints, dynamic-height chapter
+drawer, background scroll locking, four-control phone header, labelled study
+tools panel, safe-area padding, 44 px toolbar targets, and accessible expanded
+states must all remain present. Rendered acceptance is performed at both
+390 x 844 and 320 x 700, including drawer/tools interactions and page-width
+overflow checks.
+
 The attached source Markdown remains unmodified. The generator applies narrow,
 manifest-hashed rendering corrections where the source previously introduced
 arithmetic, branching, arrays, async, routing, or other syntax before its

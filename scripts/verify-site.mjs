@@ -36,6 +36,15 @@ assert(count(/id="time-left"/g) === 1, 'Estimated time-left indicator is missing
 assert(count(/class="lesson-estimate"/g) === lessonIds.length, 'Every lesson must show an estimated duration.');
 assert(count(/class="nav-estimate"/g) === 8, 'Every sidebar chapter must show its remaining-time marker.');
 assert(count(/class="chapter-progress-track"/g) === 8, 'Every chapter must show progress with remaining time.');
+assert(html.includes('width=device-width,initial-scale=1,viewport-fit=cover'), 'Mobile viewport and safe-area support are missing.');
+assert(count(/class="tool-btn mobile-tools-btn"/g) === 1, 'Mobile study-tools control is missing or duplicated.');
+assert(count(/class="toolbar-tools"/g) === 1, 'Responsive study-tools panel is missing or duplicated.');
+assert(html.includes('@media(max-width:360px)'), 'Narrow 320–360 px layout rules are missing.');
+assert(html.includes('height:100dvh'), 'Mobile navigation does not use the dynamic viewport height.');
+assert(html.includes('body.nav-open,body.tools-open{overflow:hidden}'), 'Mobile overlays do not lock background scrolling.');
+assert(html.includes('width:44px;min-width:44px;height:44px'), 'Primary phone toolbar controls are smaller than the touch target contract.');
+assert(inlineScript.includes("mobileToolsButton.setAttribute('aria-expanded'"), 'Mobile tools expanded state is not exposed to assistive technology.');
+assert(inlineScript.includes("menuButton.setAttribute('aria-expanded'"), 'Mobile chapter navigation expanded state is not exposed to assistive technology.');
 assert(count(/class="lesson-practice/g) === lessonIds.length, 'Every lesson must have one practical exercise panel.');
 assert(count(/class="learning-lens mastery-teaching/g) === 128, 'Every concept lesson from 2–129 must have a visible mastery explanation.');
 assert(count(/class="mastery-words"/g) === 128, 'Every concept lesson must translate technical words into plain English.');
