@@ -420,9 +420,9 @@
     <nav class="route" aria-label="Thirty-minute route">
       <a href="#part-1"><b>5 min</b><span>C# basics</span></a>
       <a href="#part-2"><b>6 min</b><span>OOP + LINQ</span></a>
-      <a href="#part-3"><b>5 min</b><span>Async</span></a>
+      <a href="#part-3"><b>6 min</b><span>Async + tasks</span></a>
       <a href="#part-4"><b>7 min</b><span>Web API</span></a>
-      <a href="#part-5"><b>7 min</b><span>Design + recall</span></a>
+      <a href="#part-5"><b>6 min</b><span>Design + recall</span></a>
     </nav>
 
     <article class="lesson" id="part-1" data-minutes="5">
@@ -528,11 +528,11 @@
       <footer class="finish"><span>Remember: class = design; object = instance; interface = promise.</span><button type="button" class="complete">Mark section complete</button></footer>
     </article>
 
-    <article class="lesson" id="part-3" data-minutes="5">
+    <article class="lesson" id="part-3" data-minutes="6">
       <header class="lesson-head">
-        <div class="lesson-meta"><span class="number">3</span><span class="minutes">5 MINUTES</span></div>
-        <h2>Async and core .NET</h2>
-        <p class="lesson-summary">How a web server waits for databases and networks without wasting a worker.</p>
+        <div class="lesson-meta"><span class="number">3</span><span class="minutes">6 MINUTES</span></div>
+        <h2>Async, tasks, and multithreading</h2>
+        <p class="lesson-summary">How efficient waiting differs from concurrency, parallel CPU work, and multiple threads.</p>
       </header>
       <div class="lesson-body">
         <div class="plain"><b>Simple picture</b><p><code>await</code> means: “Pause this job here, let the worker do something else, and continue when the result arrives.”</p></div>
@@ -546,7 +546,14 @@
           <li>Use <code>Task.WhenAll</code> when independent async operations can run together.</li>
         </ul>
 
-        <div class="explain"><b>What happens at <code>await</code>?</b><p>The operation returns a <code>Task</code>, which represents work that may finish later. If it is incomplete, C# remembers where the method paused and returns control to the caller. The waiting thread is free for another request. When the task completes, the method continues from the saved point.</p><p>Exceptions are carried by the task and are thrown when it is awaited. Avoid <code>async void</code> except for event handlers because callers cannot await it or reliably observe its failure.</p></div>
+        <div class="compare">
+          <div><b>Asynchronous</b><p>Do not block while waiting. An I/O operation can be in progress without owning a thread.</p></div>
+          <div><b>Concurrent</b><p>Several jobs make progress during the same period, even if they do not execute at the exact same instant.</p></div>
+          <div><b>Parallel</b><p>CPU work executes at the same instant, usually across multiple cores.</p></div>
+          <div><b>Multithreaded</b><p>More than one thread is involved. Shared mutable data can create races and may need synchronization.</p></div>
+        </div>
+
+        <div class="explain"><b>Task does not mean thread</b><p>A <code>Task</code> represents work and its eventual result. During true asynchronous database or network I/O, no thread needs to sit and wait. When the task completes, the method continues from its saved point. <code>Task.WhenAll</code> overlaps independent operations but does not itself create threads.</p><p>The <span class="term">Task Parallel Library</span> provides APIs for scheduling, cancellation and parallel work. For expensive CPU calculations, <code>Task.Run</code> can queue work to the managed thread pool; APIs such as <code>Parallel.ForEach</code> can divide suitable CPU work across cores. Do not wrap asynchronous I/O in <code>Task.Run</code>; scheduling and synchronization also have costs.</p><p>Exceptions are carried by tasks and rethrown when awaited. Avoid <code>async void</code> except for event handlers, and avoid <code>.Result</code> or <code>.Wait()</code> because they block a thread.</p></div>
 
         <div class="code">
           <div class="code-head"><span>C# · async service</span><button class="copy" type="button">Copy</button></div>
@@ -563,7 +570,7 @@
         <h3>What .NET does with your code</h3>
         <p>The C# compiler changes source code into <span class="term">IL</span>, a middle form stored in an assembly. The <span class="term">CLR</span> runs the application. The <span class="term">JIT</span> turns needed IL methods into machine instructions for the current computer.</p>
 
-        <div class="interview"><b>Say this</b><p>“Async improves scalability for I/O-bound work because a thread does not need to sit idle while waiting. I pass cancellation tokens and avoid blocking with <code>.Result</code> or <code>.Wait()</code>.”</p></div>
+        <div class="interview"><b>Say this</b><p>“For I/O-bound work I use async/await so threads are not blocked. I use <code>Task.WhenAll</code> for independent concurrent operations. For CPU-bound work I consider <code>Task.Run</code> or TPL parallel APIs, but only after measuring, limiting concurrency, and protecting shared state.”</p></div>
 
         <div class="check" data-answer="0">
           <b>Quick check: Does <code>await</code> always create a new thread?</b>
@@ -647,9 +654,9 @@
       <footer class="finish"><span>Remember: middleware → endpoint → service → database → response.</span><button type="button" class="complete">Mark section complete</button></footer>
     </article>
 
-    <article class="lesson" id="part-5" data-minutes="7">
+    <article class="lesson" id="part-5" data-minutes="6">
       <header class="lesson-head">
-        <div class="lesson-meta"><span class="number">5</span><span class="minutes">7 MINUTES</span></div>
+        <div class="lesson-meta"><span class="number">5</span><span class="minutes">6 MINUTES</span></div>
         <h2>SOLID, testing, architecture, and algorithms</h2>
         <p class="lesson-summary">The final ideas that help you explain why a solution is safe and able to grow.</p>
       </header>
@@ -718,6 +725,7 @@
         <p><strong>Name the trade-off:</strong> “The cost or risk is…”</p>
         <p><strong>Show judgement:</strong> “I would measure or test…”</p>
       </div>
+      <p class="source-links">Technical anchors: <a href="https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/async-scenarios" target="_blank" rel="noreferrer">C# async scenarios</a> · <a href="https://learn.microsoft.com/en-us/dotnet/standard/parallel-programming/task-parallel-library-tpl" target="_blank" rel="noreferrer">Task Parallel Library</a>.</p>
     </section>
     </div>
 
@@ -829,8 +837,8 @@
       <article class="lesson" id="angular-part-3" data-minutes="6">
         <header class="lesson-head">
           <div class="lesson-meta"><span class="number">3</span><span class="minutes">6 MINUTES</span></div>
-          <h2>RxJS without the confusion</h2>
-          <p class="lesson-summary">An Observable represents values arriving over time; operators describe what to do with them.</p>
+          <h2>RxJS and browser asynchrony</h2>
+          <p class="lesson-summary">How Angular handles work that finishes later—and when a real background thread is needed.</p>
         </header>
         <div class="lesson-body">
           <div class="plain"><b>Simple picture</b><p>A Promise gives one future result. An Observable can give zero, one, or many values and can be cancelled by unsubscribing.</p></div>
@@ -850,7 +858,7 @@
             <div><b>exhaustMap</b><p>Ignores new triggers while one is active. Useful for preventing repeated submit/login clicks.</p></div>
           </div>
 
-          <div class="explain"><b>Who owns the subscription?</b><p>Prefer the async pipe when the template only needs to display an Observable. It owns the subscription and cleans it up with the view. If code must subscribe manually, tie its lifetime to the component—for example with <code>takeUntilDestroyed</code>—so a destroyed screen does not keep reacting or leaking memory.</p></div>
+          <div class="explain"><b>Asynchronous does not automatically mean multithreaded</b><p>Angular normally runs application and rendering code on the browser’s main JavaScript thread. Network I/O completes through browser APIs and the event loop schedules the continuation; the thread does not sit blocked while the server responds. Promises and Observables organise results that arrive later, while RxJS operators control cancellation, ordering and concurrency. RxJS does not automatically move the work to another CPU thread.</p><p>Use the async pipe when the template only needs to display an Observable. It owns the subscription and cleans it up with the view. If code subscribes manually, tie its lifetime to the component with a tool such as <code>takeUntilDestroyed</code>. For genuinely CPU-heavy calculations that would freeze the interface, a <span class="term">Web Worker</span> runs code on a background thread and communicates by passing messages.</p></div>
 
           <div class="code">
             <div class="code-head"><span>TypeScript · search as a stream</span><button class="copy" type="button">Copy</button></div>
@@ -862,7 +870,7 @@
 );</code></pre>
           </div>
 
-          <div class="interview"><b>Say this</b><p>“I choose the flattening operator from the concurrency rule: cancel stale reads with switchMap, run independent work with mergeMap, preserve order with concatMap, or ignore repeat triggers with exhaustMap.”</p></div>
+          <div class="interview"><b>Say this</b><p>“Angular’s network work is asynchronous, but the application normally renders on one main thread. RxJS coordinates streams; it does not automatically create threads. I choose flattening operators from the cancellation and ordering rule, and reserve Web Workers for measured CPU-heavy work.”</p></div>
 
           <div class="check" data-answer="0">
             <b>Quick check: Which operator suits type-ahead search?</b>
@@ -965,7 +973,7 @@ on(OrderActions.loadSuccess, (state, { orders }) =&gt; ({
           <p>A typed service or effect calls the Web API; RxJS handles cancellation, errors and composition.</p>
           <p>The new state reaches the template through a signal or async pipe, and tests prove the important behaviour.</p>
         </div>
-        <p class="source-links">Source anchors: <a href="https://angular.dev/guide/signals" target="_blank" rel="noreferrer">Angular signals</a> · <a href="https://angular.dev/guide/ngmodules/overview" target="_blank" rel="noreferrer">standalone guidance</a> · concepts and examples adapted from the supplied Angular/NgRx/RxJS refresher PDF.</p>
+        <p class="source-links">Source anchors: <a href="https://angular.dev/guide/signals" target="_blank" rel="noreferrer">Angular signals</a> · <a href="https://angular.dev/guide/ngmodules/overview" target="_blank" rel="noreferrer">standalone guidance</a> · <a href="https://angular.dev/ecosystem/web-workers" target="_blank" rel="noreferrer">Web Workers</a> · concepts and examples adapted from the supplied Angular/NgRx/RxJS refresher PDF.</p>
       </section>
     </div>
     <p class="footer-note">Your progress is saved only in this browser on this device. The full tutorial remains separate.</p>
