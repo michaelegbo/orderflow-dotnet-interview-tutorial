@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "sequence": 48,
-  "lessonId": "lesson-3-43-why-async-exists-1",
-  "title": "43. Why Async Exists",
+  "sequence": 49,
+  "lessonId": "lesson-3-44-task-2",
+  "title": "44. Task",
   "chapter": 3,
-  "stateId": "lesson-048",
-  "exerciseType": "BUILD",
+  "stateId": "lesson-049",
+  "exerciseType": "EXPERIMENT",
   "canonicalStage": "stage-03",
-  "productionTreeNote": "This lesson applies a permanent practice change against the canonical checkpoint."
+  "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
 }
