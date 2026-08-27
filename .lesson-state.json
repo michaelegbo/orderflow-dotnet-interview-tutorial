@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "sequence": 72,
-  "lessonId": "lesson-4-65-kestrel-5",
-  "title": "65. Kestrel",
+  "sequence": 73,
+  "lessonId": "lesson-4-66-middleware-6",
+  "title": "66. Middleware",
   "chapter": 4,
-  "stateId": "lesson-072",
-  "exerciseType": "TRACE/DEBUG",
+  "stateId": "lesson-073",
+  "exerciseType": "BUILD",
   "canonicalStage": "stage-04",
-  "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
+  "productionTreeNote": "This lesson applies a permanent practice change against the canonical checkpoint."
 }
