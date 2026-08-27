@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 32,
-  "lessonId": "lesson-2-28-stack-t-17",
-  "title": "28. Stack<T>",
+  "sequence": 33,
+  "lessonId": "lesson-2-29-queue-t-18",
+  "title": "29. Queue<T>",
   "chapter": 2,
-  "stateId": "lesson-032",
+  "stateId": "lesson-033",
   "exerciseType": "EXPERIMENT",
   "canonicalStage": "stage-02",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
