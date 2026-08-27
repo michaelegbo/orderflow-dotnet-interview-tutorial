@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 135,
-  "lessonId": "lesson-7-125-palindrome-two-pointers-6",
-  "title": "125. Palindrome — Two Pointers",
+  "sequence": 136,
+  "lessonId": "lesson-7-126-valid-parentheses-stack-7",
+  "title": "126. Valid Parentheses — Stack",
   "chapter": 7,
-  "stateId": "lesson-135",
+  "stateId": "lesson-136",
   "exerciseType": "BUILD",
   "canonicalStage": "stage-07",
   "productionTreeNote": "This lesson applies a permanent practice change against the canonical checkpoint."
