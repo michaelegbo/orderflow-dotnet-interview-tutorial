@@ -50,6 +50,9 @@ assert(count(/class="lesson-scope"/g) === lessonIds.length, 'Every lesson must e
 const practicalLessonCount = manifest.lessons.filter(lesson => ['BUILD', 'EXPERIMENT'].includes(lesson.exercise?.type)).length;
 assert(contentCount(/Only the new lines for this lesson/g) === practicalLessonCount, 'Every BUILD/EXPERIMENT lesson must use a lesson-scoped answer.');
 assert(!htmlWithoutSnapshotData.includes('Potential code answer'), 'Unsafe first-code-block answer selection remains in the tutorial.');
+assert(htmlWithoutSnapshotData.includes('<span class="tok-kw">string</span> status = <span class="tok-str">&quot;paid&quot;</span>;'), 'Switch-expression example does not declare its status input.');
+assert(htmlWithoutSnapshotData.includes('_ =&gt; <span class="tok-str">&quot;Unknown status&quot;</span>'), 'Switch-expression example is missing its unescaped discard arm.');
+assert(!htmlWithoutSnapshotData.includes('\\_ =&gt;') && !htmlWithoutSnapshotData.includes('\\_ =>'), 'Switch-expression discard arm is incorrectly escaped.');
 assert(!/@@[A-Z]+\d*@@/.test(htmlWithoutSnapshotData), 'An internal rendering placeholder leaked into the tutorial.');
 assert(inlineScript.includes("const perLessonMinutes = list.length ? plannedMinutes / list.length : 0"), 'Per-lesson estimated time calculation is missing.');
 assert(inlineScript.includes("timeLeft += chapterTimeLeft"), 'Chapter estimates are not included in total time left.');

@@ -732,7 +732,7 @@
       "codePath": "tutorial-snapshots/01-console",
       "codeUrl": "https://github.com/michaelegbo/orderflow-dotnet-interview-tutorial/tree/stage-01/tutorial-snapshots/01-console",
       "run": "dotnet run --project tutorial-snapshots/01-console",
-      "sourceContentHash": "925c309846d3ff47373aa0da3b3637d69a2a59462a1065e23236cd852da9ca33",
+      "sourceContentHash": "8291053b727c4dbfc838fa5998317b442245b1633b18174d8fbf3ede36095998",
       "teaching": {
         "tier": "supporting",
         "category": "if \\/ else|Ternary|switch|Loops|Methods$",

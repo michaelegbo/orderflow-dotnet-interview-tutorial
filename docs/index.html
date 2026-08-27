@@ -598,13 +598,17 @@ Console.WriteLine(paidLabel);</code></pre></div></div><div class="answer-change"
     <span class="tok-kw">default</span>:
         Console.WriteLine(<span class="tok-str">&quot;Unknown status&quot;</span>);
         <span class="tok-kw">break</span>;
-}</code></pre></div><p>Modern switch expression:</p><div class="code-shell"><div class="code-head"><span>csharp</span><button class="copy-code" type="button">Copy</button></div><pre><code class="language-csharp"><span class="tok-kw">string</span> message = status <span class="tok-kw">switch</span>
+}</code></pre></div><p>Modern switch expression:</p><div class="code-shell"><div class="code-head"><span>csharp</span><button class="copy-code" type="button">Copy</button></div><pre><code class="language-csharp"><span class="tok-kw">string</span> status = <span class="tok-str">&quot;paid&quot;</span>;
+
+<span class="tok-kw">string</span> message = status <span class="tok-kw">switch</span>
 {
     <span class="tok-str">&quot;paid&quot;</span> =&gt; <span class="tok-str">&quot;Prepare for fulfilment&quot;</span>,
     <span class="tok-str">&quot;pending&quot;</span> =&gt; <span class="tok-str">&quot;Wait for payment&quot;</span>,
     <span class="tok-str">&quot;cancelled&quot;</span> =&gt; <span class="tok-str">&quot;Do not fulfil&quot;</span>,
     _ =&gt; <span class="tok-str">&quot;Unknown status&quot;</span>
-};</code></pre></div><p>You mainly need to <strong>recognise</strong> modern switch expressions. In a switch arm, <code>=&gt;</code> separates a matched pattern from its result; it is not a lambda. Lambdas receive their own lesson later.</p><hr></div>
+};
+
+Console.WriteLine(message);</code></pre></div><p>You mainly need to <strong>recognise</strong> modern switch expressions. In a switch arm, <code>=&gt;</code> separates a matched pattern from its result; it is not a lambda. Lambdas receive their own lesson later.</p><hr></div>
       <section class="lesson-practice practice-build" aria-label="Practical exercise for switch" data-exercise-state="lesson-011">
     <header class="practice-head"><div><span class="practice-type">BUILD</span><p>YOUR TURN · continue the same OrderFlow solution</p><h3>Apply switch</h3></div><button class="exercise-attempt" type="button" aria-pressed="false"><span aria-hidden="true">○</span><b>I tried it</b></button></header>
     <div class="practice-state"><div><span>START FROM</span><b>lesson-010</b></div><div><span>AFTER THIS LESSON</span><b>lesson-011</b></div></div>
