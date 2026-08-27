@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "sequence": 79,
-  "lessonId": "lesson-4-72-model-binding-12",
-  "title": "72. Model Binding",
+  "sequence": 80,
+  "lessonId": "lesson-4-73-validation-13",
+  "title": "73. Validation",
   "chapter": 4,
-  "stateId": "lesson-079",
-  "exerciseType": "TRACE/DEBUG",
+  "stateId": "lesson-080",
+  "exerciseType": "BUILD",
   "canonicalStage": "stage-04",
-  "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
+  "productionTreeNote": "This lesson applies a permanent practice change against the canonical checkpoint."
 }
