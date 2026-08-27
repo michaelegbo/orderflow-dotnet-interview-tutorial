@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 167,
-  "lessonId": "lesson-8-155-what-is-caching-28",
-  "title": "155. What is caching?",
+  "sequence": 168,
+  "lessonId": "lesson-8-156-why-a-queue-29",
+  "title": "156. Why a queue?",
   "chapter": 8,
-  "stateId": "lesson-167",
+  "stateId": "lesson-168",
   "exerciseType": "REHEARSE",
   "canonicalStage": "stage-08",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
