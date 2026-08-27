@@ -8,6 +8,7 @@ Commands:
 - `pwsh ./scripts/verify-all.ps1`
 - `pwsh ./scripts/verify-lesson-history.ps1`
 - `node ./scripts/verify-site.mjs`
+- `node ./scripts/verify-pedagogy.mjs`
 
 ## Result
 
@@ -50,18 +51,26 @@ request. The lesson-history verifier additionally checks that all 176 ordered
 lesson commits are reachable, match the manifest, contain the expected
 metadata, and restore to one of the eight verified production source trees.
 
-The published site has a separate structural and semantic audit covering all
-176 lesson cards, practical exercise panels, hint and answer controls, cumulative
-chapter-checkpoint mappings, bottom completion controls, interactive knowledge checks,
-their eight code checkpoints, duplicate IDs, inline script syntax, and the
-downloadable archive. Every one of the 176 tasks has an explicitly matched
-answer; all 69 focused coding answers pass their required-concept contracts,
-all 38 permanent BUILD answers occur in their final cumulative files, and all
-69 C# answer snippets pass Roslyn syntax parsing. The 157 original C# teaching
-blocks were also parsed; 13 intentional syntax fragments are explicitly labelled
-as non-standalone. Original lesson-content hashes remain unchanged.
+The published site has a separate structural, semantic, and pedagogical audit
+covering all 176 lesson cards, practical exercise panels, hint and answer
+controls, eight chapter-end checkpoint mappings, bottom completion controls,
+interactive knowledge checks, duplicate IDs, inline script syntax, and the
+downloadable archive. Every task has an explicitly matched answer. The 68 C#
+focused answers and 142 standalone rendered teaching examples pass Roslyn
+syntax parsing; deliberately incomplete signatures are labelled as fragments.
+The sequencing audit scans every displayed C# example and focused answer
+against 45 concept-introduction boundaries and reports **0 premature-syntax
+findings**. One additional focused answer is a valid .NET CLI command rather
+than C#.
 
-Browser acceptance also covered attempt/hint/answer and
-snapshot interactions, saved state after reload, core/full route switching,
-lesson completion, and responsive layouts at 1280 px, 768 px, 390 px, and
-320 px. No horizontal overflow or browser-console errors were observed.
+The attached source Markdown remains unmodified. The generator applies narrow,
+manifest-hashed rendering corrections where the source previously introduced
+arithmetic, branching, arrays, async, routing, or other syntax before its
+dedicated lesson. A supplied array in Exercise 2 is the only intentional early
+scaffold and is labelled explicitly in the page.
+
+Browser acceptance also covered the learner-file/run-command separation,
+attempt/hint/answer and chapter snapshot interactions, saved state after reload,
+core/full route switching, lesson completion, and responsive layouts at
+1280 px, 768 px, 390 px, and 320 px. No horizontal overflow or browser-console
+errors were observed.

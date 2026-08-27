@@ -9,10 +9,12 @@ with EF Core, SQLite, JWT authorization, clean boundaries, and algorithms.
 
 ## What is actually executable?
 
-Every one of the 176 lesson cards now contains a focused practical exercise:
+Every one of the 176 lesson cards contains a focused practical exercise:
 build, experiment, trace/debug, design, or rehearse. Each exercise names the
-starting state, exact file, action, command, expected proof, hint, focused
-answer, and the state from which the next lesson continues.
+starting state, learner-owned file, action, command, expected proof, hint,
+focused answer, and the state from which the next lesson continues. Chapters
+1–3 grow `OrderFlow.Learning`; the finished repository projects are comparison
+checkpoints, not files the learner must open during each lesson.
 
 The standalone tutorial embeds a deduplicated full-file browser, so learners
 can inspect the verified cumulative checkpoint for each chapter without opening GitHub. GitHub remains
@@ -21,10 +23,12 @@ commits, one per lesson. Conceptual lessons deliberately keep the production
 tree unchanged; every production tree maps exactly to one of the eight tested
 stage tags.
 
-Every lesson now follows the same learning loop: learn, attempt the practical
-task, use a hint if blocked, reveal the focused answer, inspect the cumulative checkpoint,
+Every lesson follows the same learning loop: learn, attempt only the current
+concept in the learner copy, use a hint if blocked, reveal the focused answer,
 answer the knowledge check, rate confidence, and mark completion at the bottom.
-Exercise and course progress remain saved in the browser between study sessions.
+The cumulative source browser is deliberately after the chapter's final lesson,
+where later syntax can no longer leak into an earlier exercise. Exercise and
+course progress remain saved in the browser between study sessions.
 
 | Stage | Learning checkpoint | Direct command |
 |---|---|---|
@@ -74,8 +78,9 @@ appropriate to that stage. The final-stage verifier does more than compile. It:
 The GitHub Actions workflow validates the 176-commit lesson history and runs
 the eight-tag matrix on every push and pull request. The Stage 08 pass also
 runs `scripts/verify-site.mjs`, which verifies that all lesson cards contain
-their practical flow, snapshot controls, valid history references, stage links,
-and downloadable solution. See the latest checked-in
+their practical flow, chapter-end snapshot controls, valid history references,
+stage links, downloadable solution, and a zero-finding pedagogical dependency
+audit across 45 concept-introduction boundaries. See the latest checked-in
 [verification report](docs/verification-report.md).
 
 ## Run the API manually

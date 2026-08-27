@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
 import crypto from 'node:crypto';
+import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const scriptsDirectory = path.dirname(fileURLToPath(import.meta.url));
@@ -38,9 +39,10 @@ assert(count(/class="lesson-practice/g) === lessonIds.length, 'Every lesson must
 assert(count(/class="exercise-attempt"/g) === lessonIds.length, 'Every lesson must let the learner record an attempt.');
 assert(count(/class="exercise-hint"/g) === lessonIds.length, 'Every lesson must include a progressive hint.');
 assert(count(/class="reveal-exercise-answer"/g) === lessonIds.length, 'Every lesson must include a focused answer.');
-assert(count(/class="exercise-snapshot"/g) === lessonIds.length, 'Every lesson must expose a full project snapshot.');
+assert(count(/class="exercise-snapshot chapter-snapshot"/g) === 8, 'Every chapter must expose one cumulative checkpoint after its lessons.');
+assert(count(/class="lesson-scope"/g) === lessonIds.length, 'Every lesson must explicitly stay inside its current concept.');
 const practicalLessonCount = manifest.lessons.filter(lesson => ['BUILD', 'EXPERIMENT'].includes(lesson.exercise?.type)).length;
-assert(contentCount(/Focused answer for this exact task/g) === practicalLessonCount, 'Every BUILD/EXPERIMENT lesson must use an explicit prompt-aligned answer.');
+assert(contentCount(/Only the new lines for this lesson/g) === practicalLessonCount, 'Every BUILD/EXPERIMENT lesson must use a lesson-scoped answer.');
 assert(!htmlWithoutSnapshotData.includes('Potential code answer'), 'Unsafe first-code-block answer selection remains in the tutorial.');
 assert(!/@@[A-Z]+\d*@@/.test(htmlWithoutSnapshotData), 'An internal rendering placeholder leaked into the tutorial.');
 assert(inlineScript.includes("const perLessonMinutes = list.length ? plannedMinutes / list.length : 0"), 'Per-lesson estimated time calculation is missing.');
@@ -84,7 +86,16 @@ for (const lesson of manifest.lessons) {
 const interpolation = manifest.lessons.find(lesson => /Strings and String Interpolation/i.test(lesson.title));
 assert(Boolean(interpolation), 'String interpolation lesson is missing.');
 assert(interpolation?.exercise?.answerContract?.includes('$"'), 'String interpolation answer does not require an interpolated string.');
-assert(interpolation?.exercise?.answerContract?.includes('{unitPrice:C}') && interpolation?.exercise?.answerContract?.includes('{total:C}'), 'String interpolation answer does not require the requested currency formatting.');
+assert(interpolation?.exercise?.answerContract?.includes('{unitPrice:C}'), 'String interpolation answer does not require currency formatting.');
+assert(!interpolation?.exercise?.answerContract?.some(value => value.includes('total') || value.includes('*')), 'String interpolation answer introduces operators too early.');
+
+const renderedChapters = html.split('<section class="chapter"').slice(1);
+for (const [index, chapter] of renderedChapters.entries()) {
+  const lessonsIndex = chapter.indexOf('class="lessons"');
+  const checkpointIndex = chapter.indexOf('class="build-spine"');
+  assert(lessonsIndex >= 0 && checkpointIndex > lessonsIndex, `Chapter ${index + 1} exposes its checkpoint before its lessons.`);
+}
+assert(html.includes('Contains later lessons—do not copy it yet'), 'Lesson links do not warn about later syntax.');
 
 for (const [chapter, stage] of Object.entries(manifest.stages)) {
   const target = stage.path ? path.join(root, stage.path) : root;
@@ -104,6 +115,16 @@ catch (error) {
   failures.push(`Inline JavaScript syntax error: ${error.message}`);
 }
 
+try {
+  execFileSync(process.execPath, [path.join(root, 'scripts', 'verify-pedagogy.mjs')], {
+    cwd:root,
+    stdio:'inherit'
+  });
+}
+catch (error) {
+  failures.push(`Pedagogical dependency audit failed with exit code ${error.status ?? 'unknown'}.`);
+}
+
 if (failures.length) {
   console.error(JSON.stringify({ failures }, null, 2));
   process.exit(1);
@@ -114,7 +135,7 @@ console.log(JSON.stringify({
   codeLinks: codeLinks.length,
   knowledgeChecks: count(/class="active-check"/g),
   practicalExercises: count(/class="lesson-practice/g),
-  projectSnapshots: count(/class="exercise-snapshot"/g),
+  projectSnapshots: count(/class="exercise-snapshot chapter-snapshot"/g),
   bottomCompletionControls: count(/class="lesson-finish"/g),
   stages: new Set(manifest.lessons.map(lesson => lesson.codeStage)).size,
   duplicateIds: allIds.length - new Set(allIds).size,
