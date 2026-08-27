@@ -61,6 +61,10 @@ for (const track of quickTracks) {
 }
 assert(new Set(quickIds).size === quickIds.length, 'The short refresher contains duplicate DOM IDs.');
 assert([...quickRefresher.matchAll(/data-code-explorer="(?:dotnet|angular)"/g)].length === 2, 'The short refresher must contain one codebase explorer for .NET and one for Angular.');
+assert([...quickRefresher.matchAll(/class="map-jump"/g)].length === 2, 'Both technical tracks must expose a prominent codebase-map link.');
+assert(quickRefresher.includes('href="#dotnet-codebase-map"') && quickRefresher.includes('id="dotnet-codebase-map"'), 'The .NET codebase-map link or anchor is missing.');
+assert(quickRefresher.includes('href="#angular-codebase-map"') && quickRefresher.includes('id="angular-codebase-map"'), 'The Angular codebase-map link or anchor is missing.');
+assert(quickRefresher.includes("location.hash.startsWith('#dotnet-')"), 'A direct .NET map URL does not override previously saved track state.');
 assert([...quickRefresher.matchAll(/class="file-tab"/g)].length === 18, 'The two codebase explorers must expose exactly 18 selectable files.');
 assert([...quickRefresher.matchAll(/<article class="file-panel"[^>]+data-file-panel(?:\s|>)/g)].length === 18, 'Every selectable codebase file must have one explanation panel.');
 assert([...quickRefresher.matchAll(/class="journey-strip"/g)].length === 2, 'Both codebase explorers must show an end-to-end journey.');
