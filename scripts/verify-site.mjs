@@ -27,7 +27,11 @@ assert(new Set(manifest.lessons.map(lesson => lesson.codeStage)).size === 8, 'Al
 assert(count(/class="lesson-finish"/g) === lessonIds.length, 'Every lesson must have a bottom completion footer.');
 assert(count(/class="lesson-check"/g) === lessonIds.length, 'Every lesson must have one completion control.');
 assert(count(/id="time-left"/g) === 1, 'Estimated time-left indicator is missing or duplicated.');
-assert(inlineScript.includes("plannedMinutes * unfinished / list.length"), 'Estimated time-left calculation is missing.');
+assert(count(/class="lesson-estimate"/g) === lessonIds.length, 'Every lesson must show an estimated duration.');
+assert(count(/class="nav-estimate"/g) === 8, 'Every sidebar chapter must show its remaining-time marker.');
+assert(count(/class="chapter-progress-track"/g) === 8, 'Every chapter must show progress with remaining time.');
+assert(inlineScript.includes("const perLessonMinutes = list.length ? plannedMinutes / list.length : 0"), 'Per-lesson estimated time calculation is missing.');
+assert(inlineScript.includes("timeLeft += chapterTimeLeft"), 'Chapter estimates are not included in total time left.');
 assert(inlineScript.includes("document.getElementById('time-left').textContent = formatMinutes(timeLeft)"), 'Estimated time-left UI is not updated with progress.');
 assert(
   count(/class="check-feedback"/g) + count(/class="reveal-check-answer"/g) + count(/class="reveal-answer"/g) === lessonIds.length,
