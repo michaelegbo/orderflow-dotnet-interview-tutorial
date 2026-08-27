@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 153,
-  "lessonId": "lesson-8-141-what-is-middleware-14",
-  "title": "141. What is middleware?",
+  "sequence": 154,
+  "lessonId": "lesson-8-142-what-happens-when-a-request-reaches-asp-net-core-15",
+  "title": "142. What happens when a request reaches ASP.NET Core?",
   "chapter": 8,
-  "stateId": "lesson-153",
+  "stateId": "lesson-154",
   "exerciseType": "REHEARSE",
   "canonicalStage": "stage-08",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
