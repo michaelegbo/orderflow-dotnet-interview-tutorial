@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 11,
-  "lessonId": "lesson-1-9-switch-11",
-  "title": "9. switch",
+  "sequence": 12,
+  "lessonId": "lesson-1-10-loops-12",
+  "title": "10. Loops",
   "chapter": 1,
-  "stateId": "lesson-011",
+  "stateId": "lesson-012",
   "exerciseType": "BUILD",
   "canonicalStage": "stage-01",
   "productionTreeNote": "This lesson applies a permanent practice change against the canonical checkpoint."
