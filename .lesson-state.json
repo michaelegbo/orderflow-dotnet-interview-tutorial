@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 57,
-  "lessonId": "lesson-3-51-sdk-vs-runtime-10",
-  "title": "51. SDK vs Runtime",
+  "sequence": 58,
+  "lessonId": "lesson-3-52-clr-11",
+  "title": "52. CLR",
   "chapter": 3,
-  "stateId": "lesson-057",
+  "stateId": "lesson-058",
   "exerciseType": "TRACE/DEBUG",
   "canonicalStage": "stage-03",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
