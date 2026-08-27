@@ -36,6 +36,10 @@ assert(count(/class="lesson-estimate"/g) === lessonIds.length, 'Every lesson mus
 assert(count(/class="nav-estimate"/g) === 8, 'Every sidebar chapter must show its remaining-time marker.');
 assert(count(/class="chapter-progress-track"/g) === 8, 'Every chapter must show progress with remaining time.');
 assert(count(/class="lesson-practice/g) === lessonIds.length, 'Every lesson must have one practical exercise panel.');
+assert(count(/class="practice-given"/g) === lessonIds.length, 'Every lesson must say what the learner is given.');
+assert(count(/class="practice-starter"/g) === lessonIds.length, 'Every lesson must provide starter inputs or a response frame.');
+assert(count(/class="practice-do"/g) === lessonIds.length, 'Every lesson must break the task into ordered steps.');
+assert(count(/class="practice-steps"/g) === lessonIds.length, 'Every lesson must render its ordered steps.');
 assert(count(/class="exercise-attempt"/g) === lessonIds.length, 'Every lesson must let the learner record an attempt.');
 assert(count(/class="exercise-hint"/g) === lessonIds.length, 'Every lesson must include a progressive hint.');
 assert(count(/class="reveal-exercise-answer"/g) === lessonIds.length, 'Every lesson must include a focused answer.');
@@ -72,6 +76,11 @@ for (const lesson of manifest.lessons) {
   assert(/^[a-f0-9]{40}$/.test(lesson.exercise?.treeHash ?? ''), `Invalid lesson-history tree for ${lesson.id}`);
   assert(/^[a-f0-9]{64}$/.test(lesson.sourceContentHash ?? ''), `Invalid source-content hash for ${lesson.id}`);
   assert((lesson.exercise?.task ?? '').trim().length >= 30, `Exercise task is missing or vague: ${lesson.id}`);
+  assert((lesson.exercise?.given ?? '').trim().length >= 35, `Exercise supplied starting point is missing or vague: ${lesson.id}`);
+  assert((lesson.exercise?.starter?.label ?? '').trim().length >= 12, `Exercise starter label is missing: ${lesson.id}`);
+  assert((lesson.exercise?.starter?.content ?? '').trim().length >= 20, `Exercise starter inputs or response frame are missing: ${lesson.id}`);
+  assert(Array.isArray(lesson.exercise?.steps) && lesson.exercise.steps.length >= 3, `Exercise is not broken into ordered steps: ${lesson.id}`);
+  assert(lesson.exercise.steps.every(step => step.trim().length >= 15), `Exercise contains a vague ordered step: ${lesson.id}`);
   assert((lesson.exercise?.hint ?? '').trim().length >= 25, `Exercise hint is missing or vague: ${lesson.id}`);
   assert((lesson.exercise?.answer ?? '').trim().length >= 20, `Exercise answer is missing or vague: ${lesson.id}`);
   assert(/^[a-f0-9]{64}$/.test(lesson.exercise?.answerTextHash ?? ''), `Exercise answer text hash is missing: ${lesson.id}`);
@@ -81,6 +90,9 @@ for (const lesson of manifest.lessons) {
   assert(lesson.exercise?.answerSource === (shouldHaveCode ? 'explicit-code-contract' : 'explicit-concept-contract'), `Exercise answer is not explicitly authored for its task: ${lesson.id}`);
   assert(shouldHaveCode ? /^[a-f0-9]{64}$/.test(lesson.exercise?.answerCodeHash ?? '') : lesson.exercise?.answerCodeHash === null, `Focused-answer hash does not match exercise type: ${lesson.id}`);
   assert(Array.isArray(lesson.exercise?.answerContract), `Focused-answer contract is missing: ${lesson.id}`);
+  assert(Array.isArray(lesson.exercise?.buildingBlocks), `Hidden guidance contract is missing: ${lesson.id}`);
+  if (shouldHaveCode)
+    assert(JSON.stringify(lesson.exercise.buildingBlocks) === JSON.stringify(lesson.exercise.answerContract), `Hidden guidance contract drifted from the answer contract: ${lesson.id}`);
 }
 
 const interpolation = manifest.lessons.find(lesson => /Strings and String Interpolation/i.test(lesson.title));
@@ -88,6 +100,13 @@ assert(Boolean(interpolation), 'String interpolation lesson is missing.');
 assert(interpolation?.exercise?.answerContract?.includes('$"'), 'String interpolation answer does not require an interpolated string.');
 assert(interpolation?.exercise?.answerContract?.includes('{unitPrice:C}'), 'String interpolation answer does not require currency formatting.');
 assert(!interpolation?.exercise?.answerContract?.some(value => value.includes('total') || value.includes('*')), 'String interpolation answer introduces operators too early.');
+
+const operators = manifest.lessons.find(lesson => /6\. Operators/i.test(lesson.title));
+assert(operators?.exercise?.starter?.content.includes('int quantity = 3;'), 'Operators exercise does not supply quantity.');
+assert(operators?.exercise?.starter?.content.includes('decimal unitPrice = 25m;'), 'Operators exercise does not supply unitPrice.');
+assert(operators?.exercise?.starter?.content.includes('bool isPaid = true;'), 'Operators exercise does not supply paid state.');
+assert(!operators?.exercise?.steps?.join(' ').includes('quantity * unitPrice'), 'Operators steps reveal the hidden implementation.');
+assert(operators?.exercise?.expected.includes('Valid quantity: True; can fulfil: True'), 'Operators exercise has no concrete expected result.');
 
 const renderedChapters = html.split('<section class="chapter"').slice(1);
 for (const [index, chapter] of renderedChapters.entries()) {

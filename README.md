@@ -10,9 +10,11 @@ with EF Core, SQLite, JWT authorization, clean boundaries, and algorithms.
 ## What is actually executable?
 
 Every one of the 176 lesson cards contains a focused practical exercise:
-build, experiment, trace/debug, design, or rehearse. Each exercise names the
-starting state, learner-owned file, action, command, expected proof, hint,
-focused answer, and the state from which the next lesson continues. Chapters
+build, experiment, trace/debug, design, or rehearse. Before asking the learner
+to act, every exercise now supplies its input values or a short response frame
+and breaks the task into small ordered steps. Each exercise also names the
+starting state, learner-owned file, action, command, concrete expected proof,
+hint, focused answer, and the state from which the next lesson continues. Chapters
 1–3 grow `OrderFlow.Learning`; the finished repository projects are comparison
 checkpoints, not files the learner must open during each lesson.
 
@@ -23,8 +25,9 @@ commits, one per lesson. Conceptual lessons deliberately keep the production
 tree unchanged; every production tree maps exactly to one of the eight tested
 stage tags.
 
-Every lesson follows the same learning loop: learn, attempt only the current
-concept in the learner copy, use a hint if blocked, reveal the focused answer,
+Every lesson follows the same learning loop: learn, review the supplied inputs,
+follow the small steps using only the current concept in the learner copy,
+predict the result, use a hint if blocked, reveal the focused answer,
 answer the knowledge check, rate confidence, and mark completion at the bottom.
 The cumulative source browser is deliberately after the chapter's final lesson,
 where later syntax can no longer leak into an earlier exercise. Exercise and

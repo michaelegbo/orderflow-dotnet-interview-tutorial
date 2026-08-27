@@ -56,7 +56,8 @@ the separate site audit verifies those generated files directly.
 
 The published site has a separate structural, semantic, and pedagogical audit
 covering all 176 lesson cards, practical exercise panels, hint and answer
-controls, eight chapter-end checkpoint mappings, bottom completion controls,
+controls, supplied-input or response-frame panels, ordered task steps, eight
+chapter-end checkpoint mappings, bottom completion controls,
 interactive knowledge checks, duplicate IDs, inline script syntax, and the
 downloadable archive. Every task has an explicitly matched answer. The 68 C#
 focused answers and 142 standalone rendered teaching examples pass Roslyn
@@ -65,6 +66,14 @@ The sequencing audit scans every displayed C# example and focused answer
 against 45 concept-introduction boundaries and reports **0 premature-syntax
 findings**. One additional focused answer is a valid .NET CLI command rather
 than C#.
+
+The exercise-friction audit also requires all 176 lessons to state what the
+learner is given, provide concrete starter inputs or a response frame, and
+break the work into at least three small ordered steps. All 69 code-oriented
+lessons retain their exact answer contract behind the reveal. The Operators
+acceptance check specifically proves that quantity, unit price and paid state
+are supplied, that the ordered steps do not disclose the implementation, and
+that the expected console result is concrete.
 
 The attached source Markdown remains unmodified. The generator applies narrow,
 manifest-hashed rendering corrections where the source previously introduced
