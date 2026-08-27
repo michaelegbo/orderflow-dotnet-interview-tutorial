@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 44,
-  "lessonId": "lesson-2-39-deferred-execution-29",
-  "title": "39. Deferred Execution",
+  "sequence": 45,
+  "lessonId": "lesson-2-40-ienumerable-t-30",
+  "title": "40. IEnumerable<T>",
   "chapter": 2,
-  "stateId": "lesson-044",
+  "stateId": "lesson-045",
   "exerciseType": "EXPERIMENT",
   "canonicalStage": "stage-02",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
