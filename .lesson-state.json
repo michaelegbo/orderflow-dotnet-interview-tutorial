@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 18,
-  "lessonId": "lesson-2-14-constructors-3",
-  "title": "14. Constructors",
+  "sequence": 19,
+  "lessonId": "lesson-2-15-methods-inside-classes-4",
+  "title": "15. Methods Inside Classes",
   "chapter": 2,
-  "stateId": "lesson-018",
+  "stateId": "lesson-019",
   "exerciseType": "BUILD",
   "canonicalStage": "stage-02",
   "productionTreeNote": "This lesson applies a permanent practice change against the canonical checkpoint."
