@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 51,
-  "lessonId": "lesson-3-46-important-interview-point-4",
-  "title": "46. Important Interview Point",
+  "sequence": 52,
+  "lessonId": "lesson-3-47-avoid-result-wait-5",
+  "title": "47. Avoid .Result / .Wait()",
   "chapter": 3,
-  "stateId": "lesson-051",
+  "stateId": "lesson-052",
   "exerciseType": "EXPERIMENT",
   "canonicalStage": "stage-03",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
