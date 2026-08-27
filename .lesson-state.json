@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 28,
-  "lessonId": "lesson-2-24-arrays-13",
-  "title": "24. Arrays",
+  "sequence": 29,
+  "lessonId": "lesson-2-25-list-t-14",
+  "title": "25. List<T>",
   "chapter": 2,
-  "stateId": "lesson-028",
+  "stateId": "lesson-029",
   "exerciseType": "EXPERIMENT",
   "canonicalStage": "stage-02",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
