@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 160,
-  "lessonId": "lesson-8-148-does-async-create-a-thread-21",
-  "title": "148. Does async create a thread?",
+  "sequence": 161,
+  "lessonId": "lesson-8-149-what-is-solid-22",
+  "title": "149. What is SOLID?",
   "chapter": 8,
-  "stateId": "lesson-160",
+  "stateId": "lesson-161",
   "exerciseType": "REHEARSE",
   "canonicalStage": "stage-08",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
