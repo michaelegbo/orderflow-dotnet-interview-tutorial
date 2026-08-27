@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 137,
-  "lessonId": "lesson-7-127-binary-search-8",
-  "title": "127. Binary Search",
+  "sequence": 138,
+  "lessonId": "lesson-7-128-sliding-window-9",
+  "title": "128. Sliding Window",
   "chapter": 7,
-  "stateId": "lesson-137",
+  "stateId": "lesson-138",
   "exerciseType": "BUILD",
   "canonicalStage": "stage-07",
   "productionTreeNote": "This lesson applies a permanent practice change against the canonical checkpoint."
