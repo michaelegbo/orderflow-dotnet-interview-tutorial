@@ -46,9 +46,14 @@ for (const track of quickTracks) {
   assert([...track.html.matchAll(/class="check" data-answer=/g)].length === 5, `Every ${track.name} section must have one quick check.`);
   assert([...track.html.matchAll(/class="complete"/g)].length === 5, `Every ${track.name} section must have one completion control.`);
   assert([...track.html.matchAll(/class="explain"/g)].length === 5, `Every ${track.name} section must have exactly one concise explanatory layer.`);
-  assert(wordCount(visibleWords) >= 1400 && wordCount(visibleWords) <= 2400, `The ${track.name} track has drifted outside its concise 30-minute reading range.`);
+  const maximumWords = track.name === 'dotnet' ? 2800 : 2400;
+  assert(wordCount(visibleWords) >= 1400 && wordCount(visibleWords) <= maximumWords, `The ${track.name} track has drifted outside its concise 30-minute reading range.`);
 }
 assert(new Set(quickIds).size === quickIds.length, 'The short refresher contains duplicate DOM IDs.');
+assert([...quickRefresher.matchAll(/class="api-flow"/g)].length === 1, 'The short refresher must contain one focused Web API request journey.');
+for (const requiredWebApiIdea of ['Kestrel receives it', 'Routing matches it', 'Binding reads it', 'EF Core saves it', '201 Created', 'ProblemDetails', 'WebApplicationFactory', 'CORS']) {
+  assert(quickRefresher.includes(requiredWebApiIdea), `The short Web API refresher is missing: ${requiredWebApiIdea}.`);
+}
 assert(!/<(?:script|link)[^>]+(?:src|href)=/i.test(quickRefresher), 'The short refresher unexpectedly depends on an external asset.');
 assert(quickRefresher.includes('width=device-width,initial-scale=1,viewport-fit=cover'), 'The short refresher is missing mobile viewport support.');
 for (const match of quickRefresher.matchAll(/<script>([\s\S]*?)<\/script>/g)) {

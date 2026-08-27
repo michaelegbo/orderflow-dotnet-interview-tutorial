@@ -250,6 +250,36 @@
     .compare > div { border: 1px solid var(--line); border-radius: 11px; padding: 12px; }
     .compare b { display: block; color: var(--green); font-size: .77rem; }
     .compare p { margin: 4px 0 0; color: var(--muted); font-size: .79rem; }
+    .api-flow {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin: 14px 0 18px;
+      counter-reset: api-step;
+    }
+    .api-flow > div {
+      position: relative;
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      background: #fbfdfc;
+      padding: 12px 10px;
+    }
+    .api-flow > div::before {
+      counter-increment: api-step;
+      content: counter(api-step);
+      display: grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+      margin-bottom: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      color: #fff;
+      font: 800 .64rem "Cascadia Code", monospace;
+    }
+    .api-flow b { display: block; color: var(--green-dark); font-size: .75rem; }
+    .api-flow span { display: block; margin-top: 3px; color: var(--muted); font-size: .72rem; line-height: 1.4; }
     .code {
       margin: 16px 0;
       border-radius: 13px;
@@ -346,6 +376,8 @@
     .memory-line { margin-top: 12px; border-top: 1px solid var(--line); padding-top: 11px; color: var(--green-dark); font-weight: 800; font-size: .8rem; }
     .source-links { margin-top: 18px; color: #9fb0aa; font-size: .72rem; }
     .source-links a { color: #8de0c5; }
+    .lesson-body > .source-links { color: var(--muted); }
+    .lesson-body > .source-links a { color: var(--green-dark); }
     .story-card .source-links { color: var(--muted); }
     .story-card .source-links a { color: var(--green-dark); }
 
@@ -380,6 +412,7 @@
       .lesson-head { padding: 21px 18px 16px; }
       .lesson-body { padding: 19px 18px 22px; }
       .compare { grid-template-columns: 1fr; }
+      .api-flow { grid-template-columns: 1fr 1fr; }
       .code { margin-left: -6px; margin-right: -6px; }
       pre { padding: 14px; font-size: .74rem; }
       .finish { align-items: stretch; flex-direction: column; padding: 14px 18px 18px; }
@@ -390,6 +423,7 @@
       .time-left { padding: 7px 8px; }
       main { width: calc(100% - 18px); }
       .lesson-body, .lesson-head { padding-left: 15px; padding-right: 15px; }
+      .api-flow { grid-template-columns: 1fr; }
     }
     @media (prefers-reduced-motion: reduce) {
       * { scroll-behavior: auto !important; transition: none !important; }
@@ -419,10 +453,10 @@
 
     <nav class="route" aria-label="Thirty-minute route">
       <a href="#part-1"><b>5 min</b><span>C# basics</span></a>
-      <a href="#part-2"><b>6 min</b><span>OOP + LINQ</span></a>
+      <a href="#part-2"><b>5 min</b><span>OOP + LINQ</span></a>
       <a href="#part-3"><b>6 min</b><span>Async + tasks</span></a>
-      <a href="#part-4"><b>7 min</b><span>Web API</span></a>
-      <a href="#part-5"><b>6 min</b><span>Design + recall</span></a>
+      <a href="#part-4"><b>9 min</b><span>Web API</span></a>
+      <a href="#part-5"><b>5 min</b><span>Design + recall</span></a>
     </nav>
 
     <article class="lesson" id="part-1" data-minutes="5">
@@ -470,9 +504,9 @@
       <footer class="finish"><span>Remember: value → decision → repetition → method.</span><button type="button" class="complete">Mark section complete</button></footer>
     </article>
 
-    <article class="lesson" id="part-2" data-minutes="6">
+    <article class="lesson" id="part-2" data-minutes="5">
       <header class="lesson-head">
-        <div class="lesson-meta"><span class="number">2</span><span class="minutes">6 MINUTES</span></div>
+        <div class="lesson-meta"><span class="number">2</span><span class="minutes">5 MINUTES</span></div>
         <h2>Objects, interfaces, collections, and LINQ</h2>
         <p class="lesson-summary">How OrderFlow represents orders and asks useful questions about groups of them.</p>
       </header>
@@ -581,26 +615,42 @@
       <footer class="finish"><span>Remember: async is about waiting efficiently.</span><button type="button" class="complete">Mark section complete</button></footer>
     </article>
 
-    <article class="lesson" id="part-4" data-minutes="7">
+    <article class="lesson" id="part-4" data-minutes="9">
       <header class="lesson-head">
-        <div class="lesson-meta"><span class="number">4</span><span class="minutes">7 MINUTES</span></div>
+        <div class="lesson-meta"><span class="number">4</span><span class="minutes">9 MINUTES</span></div>
         <h2>ASP.NET Core Web API, EF Core, and DI</h2>
         <p class="lesson-summary">The path from an HTTP request to a saved OrderFlow order.</p>
       </header>
       <div class="lesson-body">
-        <div class="plain"><b>Simple picture</b><p>A request enters a line of checkpoints, reaches an endpoint, calls the business service, uses EF Core to speak to the database, and returns a response.</p></div>
+        <div class="plain"><b>Simple picture</b><p>An API is a doorway into the application's capabilities. Angular sends a message such as “create this order”; ASP.NET Core checks it, runs the use case, saves the result, and sends a clear answer back.</p></div>
 
-        <h3>Request journey</h3>
-        <ol>
-          <li><span class="term">Kestrel</span> receives the HTTP request.</li>
-          <li><span class="term">Middleware</span> handles shared work such as errors, logging, authentication, and authorization.</li>
-          <li><span class="term">Routing</span> selects an endpoint from the HTTP method and URL.</li>
-          <li><span class="term">Model binding</span> turns route, query, and JSON values into C# inputs.</li>
-          <li>The controller calls an application service. The service applies the use case.</li>
-          <li>EF Core reads or writes SQLite, and the API sends an HTTP response.</li>
-        </ol>
+        <h3>Picture one complete request</h3>
+        <p>A user presses <strong>Place order</strong>. Angular sends <code>POST /orders</code> with JSON. Follow that single request:</p>
+        <div class="api-flow" aria-label="Web API request journey">
+          <div><b>Kestrel receives it</b><span>IIS may sit in front, but Kestrel runs the ASP.NET Core app.</span></div>
+          <div><b>Middleware checks it</b><span>Shared checkpoints handle errors, logs, CORS, identity and permission.</span></div>
+          <div><b>Routing matches it</b><span><code>POST</code> + <code>/orders</code> selects the create-order endpoint.</span></div>
+          <div><b>Binding reads it</b><span>JSON becomes a C# request DTO; validation rejects a bad shape.</span></div>
+          <div><b>Endpoint receives it</b><span>A minimal handler or controller translates HTTP into a use-case call.</span></div>
+          <div><b>Service decides</b><span>Business rules calculate the total and decide whether the order is valid.</span></div>
+          <div><b>EF Core saves it</b><span>The repository uses a scoped <code>DbContext</code>; EF Core produces SQL.</span></div>
+          <div><b>Response returns</b><span><code>201 Created</code> carries the result and the new order's address.</span></div>
+        </div>
 
-        <div class="explain"><b>How do you choose the response?</b><p>Use the HTTP result that describes what happened: <code>200 OK</code> for a successful read, <code>201 Created</code> after creating an order, <code>400 Bad Request</code> for invalid input, <code>401 Unauthorized</code> when identity is missing or invalid, <code>403 Forbidden</code> when the known caller lacks permission, and <code>404 Not Found</code> when the order does not exist.</p><p>Do not expose the EF entity automatically. A DTO lets the API return only the fields its contract promises, even if the database model later changes.</p></div>
+        <div class="code">
+          <div class="code-head"><span>HTTP · what crosses the boundary</span><button class="copy" type="button">Copy</button></div>
+          <pre><code><span class="kw">POST</span> /orders
+Authorization: Bearer &lt;token&gt;
+Content-Type: application/json
+
+{ <span class="str">"customerId"</span>: <span class="num">42</span>, <span class="str">"quantity"</span>: <span class="num">3</span>, <span class="str">"unitPrice"</span>: <span class="num">25.00</span> }
+
+<span class="kw">HTTP/1.1 201 Created</span>
+Location: /orders/123
+{ <span class="str">"id"</span>: <span class="num">123</span>, <span class="str">"status"</span>: <span class="str">"pending"</span>, <span class="str">"total"</span>: <span class="num">75.00</span> }</code></pre>
+        </div>
+
+        <div class="explain"><b>Method + address + result = the API conversation</b><p><code>GET</code> reads, <code>POST</code> creates, <code>PUT</code> replaces, <code>PATCH</code> changes part, and <code>DELETE</code> removes. A successful read normally returns <code>200</code>; a create returns <code>201</code>; invalid input returns <code>400</code>; missing/invalid identity returns <code>401</code>; known identity without permission returns <code>403</code>; a missing order returns <code>404</code>.</p><p>A DTO is the promised message shape at this boundary. It prevents database details from leaking into the public contract.</p></div>
 
         <div class="code">
           <div class="code-head"><span>C# · minimal endpoint shape</span><button class="copy" type="button">Copy</button></div>
@@ -615,18 +665,22 @@
         </div>
 
         <div class="compare">
-          <div><b>DTO</b><p>The API's input or output shape. It keeps the HTTP contract separate from the domain object.</p></div>
-          <div><b>Validation</b><p>Rejects missing or invalid input before it can damage business state.</p></div>
-          <div><b>Authentication</b><p>Checks who the caller is.</p></div>
-          <div><b>Authorization</b><p>Checks what that caller may do.</p></div>
-          <div><b>EF Core</b><p>Turns C# database queries into SQL and rows back into objects.</p></div>
-          <div><b>Migration</b><p>A saved, repeatable change to the database structure.</p></div>
+          <div><b>Minimal API or controller?</b><p>Both use the same ASP.NET Core pipeline. Minimal handlers are compact; controllers group actions and offer conventions and filters for larger APIs.</p></div>
+          <div><b>Validation</b><p>Shape checks ask “is the message usable?” Business rules ask “is this order allowed?” Keep both.</p></div>
+          <div><b>Authentication / authorization</b><p>Authentication asks who you are. Authorization asks whether you may create or view this order.</p></div>
+          <div><b>CORS</b><p>A browser rule controlling which front-end origins may call the API. It is not login or API security.</p></div>
+          <div><b>Errors</b><p>Catch unexpected failures centrally, log the real detail, and return a consistent <code>ProblemDetails</code> response.</p></div>
+          <div><b>OpenAPI</b><p>A machine-readable contract describing routes, inputs and responses. A UI can make it easy to explore.</p></div>
         </div>
 
         <h3>Dependency injection</h3>
         <p>Instead of a controller building its own repository, it asks for <code>IOrderService</code>. The application setup chooses the real implementation. This makes dependencies clear and testing easier.</p>
         <p><strong>Lifetimes:</strong> <span class="term">Transient</span> creates a new instance each time; <span class="term">Scoped</span> normally creates one per web request; <span class="term">Singleton</span> shares one for the application's lifetime.</p>
         <p><strong>EF Core detail:</strong> tracking remembers loaded entities so changes can be saved. For a read-only query, <code>AsNoTracking()</code> avoids that work. <code>SaveChangesAsync()</code> sends the tracked changes to the database as one unit of work.</p>
+
+        <h3>How you prove and operate it</h3>
+        <p><strong>Unit tests</strong> test a business rule by itself. <strong>Integration tests</strong> send a real HTTP request through a test server—often with <code>WebApplicationFactory</code>—and prove that routing, DI, serialization, security and storage work together. In production, structured logs, traces, metrics and health checks tell you what failed and where.</p>
+        <p><strong>Pipeline order matters:</strong> put central exception handling early; then routing, CORS, authentication and authorization in their required positions before endpoints run. The response travels back through the pipeline in reverse.</p>
 
         <div class="story-card">
           <b>Strong interview story · modernising a legacy .NET system</b>
@@ -646,17 +700,18 @@
         <div class="interview"><b>Say this</b><p>“I keep controllers thin: receive HTTP input, call the use case, and translate the result into an HTTP response. Business rules stay in the domain/application layer, and EF Core stays behind an interface.”</p></div>
 
         <div class="check" data-answer="1">
-          <b>Quick check: Which DI lifetime is normally used for <code>DbContext</code>?</b>
-          <div class="options"><button class="option" data-choice="0">Singleton</button><button class="option" data-choice="1">Scoped</button><button class="option" data-choice="2">Static</button></div>
-          <p class="feedback"><strong>Scoped.</strong> One context normally follows one web request and its unit of work.</p>
+          <b>Quick check: The API successfully creates order 123. What is the clearest response?</b>
+          <div class="options"><button class="option" data-choice="0">200 with no location</button><button class="option" data-choice="1">201 Created with /orders/123</button><button class="option" data-choice="2">204 No Content</button></div>
+          <p class="feedback"><strong>201 Created.</strong> It says a new resource now exists, and the Location header tells the client where to find it.</p>
         </div>
+        <p class="source-links">Web API anchors: <a href="https://learn.microsoft.com/en-us/aspnet/core/web-api/?view=aspnetcore-10.0" target="_blank" rel="noreferrer">API fundamentals</a> · <a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/?view=aspnetcore-10.0" target="_blank" rel="noreferrer">middleware order</a> · <a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/error-handling-api?view=aspnetcore-10.0" target="_blank" rel="noreferrer">API errors</a> · <a href="https://learn.microsoft.com/en-us/aspnet/core/test/integration-tests?view=aspnetcore-10.0" target="_blank" rel="noreferrer">integration testing</a>.</p>
       </div>
-      <footer class="finish"><span>Remember: middleware → endpoint → service → database → response.</span><button type="button" class="complete">Mark section complete</button></footer>
+      <footer class="finish"><span>Remember: request → checkpoints → endpoint → use case → database → response.</span><button type="button" class="complete">Mark section complete</button></footer>
     </article>
 
-    <article class="lesson" id="part-5" data-minutes="6">
+    <article class="lesson" id="part-5" data-minutes="5">
       <header class="lesson-head">
-        <div class="lesson-meta"><span class="number">5</span><span class="minutes">6 MINUTES</span></div>
+        <div class="lesson-meta"><span class="number">5</span><span class="minutes">5 MINUTES</span></div>
         <h2>SOLID, testing, architecture, and algorithms</h2>
         <p class="lesson-summary">The final ideas that help you explain why a solution is safe and able to grow.</p>
       </header>
