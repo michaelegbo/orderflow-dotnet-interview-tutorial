@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 89,
-  "lessonId": "lesson-4-84-savechangesasync-21",
-  "title": "84. SaveChangesAsync",
+  "sequence": 90,
+  "lessonId": "lesson-4-85-migrations-22",
+  "title": "85. Migrations",
   "chapter": 4,
-  "stateId": "lesson-089",
+  "stateId": "lesson-090",
   "exerciseType": "TRACE/DEBUG",
   "canonicalStage": "stage-04",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
