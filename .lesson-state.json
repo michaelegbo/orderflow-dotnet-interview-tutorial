@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 8,
-  "lessonId": "lesson-1-6-operators-8",
-  "title": "6. Operators",
+  "sequence": 9,
+  "lessonId": "lesson-1-7-if-else-9",
+  "title": "7. if / else",
   "chapter": 1,
-  "stateId": "lesson-008",
+  "stateId": "lesson-009",
   "exerciseType": "BUILD",
   "canonicalStage": "stage-01",
   "productionTreeNote": "This lesson applies a permanent practice change against the canonical checkpoint."
