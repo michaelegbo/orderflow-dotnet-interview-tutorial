@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 100,
-  "lessonId": "lesson-5-91-l-liskov-substitution-7",
-  "title": "91. L — Liskov Substitution",
+  "sequence": 101,
+  "lessonId": "lesson-5-92-i-interface-segregation-8",
+  "title": "92. I — Interface Segregation",
   "chapter": 5,
-  "stateId": "lesson-100",
+  "stateId": "lesson-101",
   "exerciseType": "DESIGN",
   "canonicalStage": "stage-05",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
