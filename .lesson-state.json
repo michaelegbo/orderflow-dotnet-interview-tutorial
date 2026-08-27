@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 76,
-  "lessonId": "lesson-4-69-http-methods-9",
-  "title": "69. HTTP Methods",
+  "sequence": 77,
+  "lessonId": "lesson-4-70-http-status-codes-10",
+  "title": "70. HTTP Status Codes",
   "chapter": 4,
-  "stateId": "lesson-076",
+  "stateId": "lesson-077",
   "exerciseType": "TRACE/DEBUG",
   "canonicalStage": "stage-04",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
