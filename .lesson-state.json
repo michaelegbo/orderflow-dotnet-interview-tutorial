@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 53,
-  "lessonId": "lesson-3-48-task-whenall-6",
-  "title": "48. Task.WhenAll",
+  "sequence": 54,
+  "lessonId": "lesson-3-49-cancellationtoken-7",
+  "title": "49. CancellationToken",
   "chapter": 3,
-  "stateId": "lesson-053",
+  "stateId": "lesson-054",
   "exerciseType": "BUILD",
   "canonicalStage": "stage-03",
   "productionTreeNote": "This lesson applies a permanent practice change against the canonical checkpoint."
