@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 126,
-  "lessonId": "lesson-6-117-resilience-12",
-  "title": "117. Resilience",
+  "sequence": 127,
+  "lessonId": "lesson-6-118-ci-cd-13",
+  "title": "118. CI/CD",
   "chapter": 6,
-  "stateId": "lesson-126",
+  "stateId": "lesson-127",
   "exerciseType": "DESIGN",
   "canonicalStage": "stage-06",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
