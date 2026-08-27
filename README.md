@@ -51,7 +51,8 @@ pwsh ./scripts/verify-checkpoints.ps1
 ```
 
 Verify the 176 lesson commits, their metadata, ordering, tree hashes, and exact
-mapping to the eight compiled/tested checkpoints:
+production-source mapping to the eight compiled/tested checkpoints (generated
+site files are excluded to avoid a manifest/history hash cycle):
 
 ```powershell
 pwsh ./scripts/verify-lesson-history.ps1

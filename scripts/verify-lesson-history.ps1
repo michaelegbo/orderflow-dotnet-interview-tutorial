@@ -58,14 +58,26 @@ try {
         if ($tree -ne $lesson.exercise.treeHash) { throw "Tree hash mismatch for $($lesson.id)" }
 
         $stage = [string]$lesson.codeStage
-        $stageDiff = Invoke-Git -Arguments @('diff', '--quiet', $stage, $commit, '--', '.', ':(exclude).lesson-state.json', ':(exclude)docs/orderflow-verified.zip') -AllowFailure
-        if ($stageDiff.ExitCode -ne 0) { throw "Production tree for $($lesson.id) differs from verified $stage" }
+        # Lesson history proves the executable production source, while the
+        # generated site/manifest can legitimately receive a later commit that
+        # inserts the final history hashes. Comparing docs here creates a hash
+        # cycle: the manifest names the commits whose trees would then contain
+        # that manifest. Keep the invariant on the code that builds and runs.
+        $productionPaths = @(
+            'tutorial-snapshots',
+            'src',
+            'tests',
+            'OrderFlow.sln',
+            'dotnet-tools.json'
+        )
+        $stageDiff = Invoke-Git -Arguments (@('diff', '--quiet', $stage, $commit, '--') + $productionPaths) -AllowFailure
+        if ($stageDiff.ExitCode -ne 0) { throw "Production source for $($lesson.id) differs from verified $stage" }
         $previous = $commit
     }
 
     $historyCount = [int](Invoke-Git -Arguments @('rev-list', '--count', $previous)).Output
     if ($historyCount -ne 176) { throw "Expected 176 commits in lesson-history, found $historyCount" }
-    Write-Host "[lesson-history] PASS — 176 ordered commits map exactly to eight verified production trees"
+    Write-Host "[lesson-history] PASS — 176 ordered commits map exactly to eight verified production source checkpoints"
 }
 finally {
     Pop-Location

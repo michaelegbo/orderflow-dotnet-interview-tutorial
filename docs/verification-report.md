@@ -49,7 +49,10 @@ temporary SQLite database were removed at the end of the run.
 The repository workflow repeats this verification on every push and pull
 request. The lesson-history verifier additionally checks that all 176 ordered
 lesson commits are reachable, match the manifest, contain the expected
-metadata, and restore to one of the eight verified production source trees.
+metadata, and restore to one of the eight verified executable production-source
+checkpoints. Generated site and manifest files are excluded from that tree
+comparison because embedding the final history hashes creates a circular hash;
+the separate site audit verifies those generated files directly.
 
 The published site has a separate structural, semantic, and pedagogical audit
 covering all 176 lesson cards, practical exercise panels, hint and answer
