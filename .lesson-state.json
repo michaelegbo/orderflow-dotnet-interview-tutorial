@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 49,
-  "lessonId": "lesson-3-44-task-2",
-  "title": "44. Task",
+  "sequence": 50,
+  "lessonId": "lesson-3-45-task-t-3",
+  "title": "45. Task<T>",
   "chapter": 3,
-  "stateId": "lesson-049",
+  "stateId": "lesson-050",
   "exerciseType": "EXPERIMENT",
   "canonicalStage": "stage-03",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
