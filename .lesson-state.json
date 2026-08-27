@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "sequence": 91,
-  "lessonId": "lesson-4-86-n-1-problem-23",
-  "title": "86. N+1 Problem",
+  "sequence": 92,
+  "lessonId": "lesson-4-87-create-iorderservice-24",
+  "title": "87. Create IOrderService",
   "chapter": 4,
-  "stateId": "lesson-091",
-  "exerciseType": "TRACE/DEBUG",
+  "stateId": "lesson-092",
+  "exerciseType": "BUILD",
   "canonicalStage": "stage-04",
-  "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
+  "productionTreeNote": "This lesson applies a permanent practice change against the canonical checkpoint."
 }
