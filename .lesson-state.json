@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 154,
-  "lessonId": "lesson-8-142-what-happens-when-a-request-reaches-asp-net-core-15",
-  "title": "142. What happens when a request reaches ASP.NET Core?",
+  "sequence": 155,
+  "lessonId": "lesson-8-143-authentication-vs-authorization-16",
+  "title": "143. Authentication vs authorization?",
   "chapter": 8,
-  "stateId": "lesson-154",
+  "stateId": "lesson-155",
   "exerciseType": "REHEARSE",
   "canonicalStage": "stage-08",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
