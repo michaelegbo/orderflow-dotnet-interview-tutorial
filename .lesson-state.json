@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 149,
-  "lessonId": "lesson-8-137-overloading-vs-overriding-10",
-  "title": "137. Overloading vs overriding?",
+  "sequence": 150,
+  "lessonId": "lesson-8-138-why-di-11",
+  "title": "138. Why DI?",
   "chapter": 8,
-  "stateId": "lesson-149",
+  "stateId": "lesson-150",
   "exerciseType": "REHEARSE",
   "canonicalStage": "stage-08",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
