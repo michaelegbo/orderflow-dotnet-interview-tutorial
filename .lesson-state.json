@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 24,
-  "lessonId": "lesson-2-20-polymorphism-9",
-  "title": "20. Polymorphism",
+  "sequence": 25,
+  "lessonId": "lesson-2-21-overloading-vs-overriding-10",
+  "title": "21. Overloading vs Overriding",
   "chapter": 2,
-  "stateId": "lesson-024",
+  "stateId": "lesson-025",
   "exerciseType": "EXPERIMENT",
   "canonicalStage": "stage-02",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
