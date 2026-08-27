@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "sequence": 1,
-  "lessonId": "lesson-1-0-how-to-use-this-tonight-1",
-  "title": "0. How to Use This Tonight",
+  "sequence": 2,
+  "lessonId": "lesson-1-1-the-project-we-will-build-2",
+  "title": "1. The Project We Will Build",
   "chapter": 1,
-  "stateId": "lesson-001",
-  "exerciseType": "TRACE/DEBUG",
+  "stateId": "lesson-002",
+  "exerciseType": "DESIGN",
   "canonicalStage": "stage-01",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
 }
