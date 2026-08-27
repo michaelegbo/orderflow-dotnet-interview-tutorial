@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 27,
-  "lessonId": "lesson-2-23-abstract-classes-12",
-  "title": "23. Abstract Classes",
+  "sequence": 28,
+  "lessonId": "lesson-2-24-arrays-13",
+  "title": "24. Arrays",
   "chapter": 2,
-  "stateId": "lesson-027",
+  "stateId": "lesson-028",
   "exerciseType": "EXPERIMENT",
   "canonicalStage": "stage-02",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
