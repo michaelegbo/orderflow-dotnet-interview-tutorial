@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "sequence": 80,
-  "lessonId": "lesson-4-73-validation-13",
-  "title": "73. Validation",
+  "sequence": 81,
+  "lessonId": "lesson-4-authentication-authorization-jwt",
+  "title": "Authentication, authorization & development JWTs",
   "chapter": 4,
-  "stateId": "lesson-080",
-  "exerciseType": "BUILD",
+  "stateId": "lesson-081",
+  "exerciseType": "TRACE/DEBUG",
   "canonicalStage": "stage-04",
-  "productionTreeNote": "This lesson applies a permanent practice change against the canonical checkpoint."
+  "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
 }
