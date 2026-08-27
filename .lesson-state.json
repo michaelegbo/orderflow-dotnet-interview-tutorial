@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "sequence": 1,
+  "lessonId": "lesson-1-0-how-to-use-this-tonight-1",
+  "title": "0. How to Use This Tonight",
+  "chapter": 1,
+  "stateId": "lesson-001",
+  "exerciseType": "TRACE/DEBUG",
+  "canonicalStage": "stage-01",
+  "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
+}
