@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "sequence": 55,
-  "lessonId": "lesson-3-exercise-5-async-order-lookup-8",
-  "title": "Exercise 5 — Async Order Lookup",
+  "sequence": 56,
+  "lessonId": "lesson-3-50-c-vs-net-9",
+  "title": "50. C# vs .NET",
   "chapter": 3,
-  "stateId": "lesson-055",
-  "exerciseType": "EXPERIMENT",
+  "stateId": "lesson-056",
+  "exerciseType": "TRACE/DEBUG",
   "canonicalStage": "stage-03",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
 }
