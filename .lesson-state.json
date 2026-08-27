@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "sequence": 97,
-  "lessonId": "lesson-5-77-inversion-of-control-4",
-  "title": "77. Inversion of Control",
+  "sequence": 98,
+  "lessonId": "lesson-5-89-s-single-responsibility-principle-5",
+  "title": "89. S — Single Responsibility Principle",
   "chapter": 5,
-  "stateId": "lesson-097",
-  "exerciseType": "TRACE/DEBUG",
+  "stateId": "lesson-098",
+  "exerciseType": "DESIGN",
   "canonicalStage": "stage-05",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
 }
