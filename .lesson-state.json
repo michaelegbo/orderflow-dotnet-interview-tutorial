@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "sequence": 63,
-  "lessonId": "lesson-3-57-value-types-vs-reference-types-16",
-  "title": "57. Value Types vs Reference Types",
+  "sequence": 64,
+  "lessonId": "lesson-3-58-boxing-unboxing-17",
+  "title": "58. Boxing / Unboxing",
   "chapter": 3,
-  "stateId": "lesson-063",
-  "exerciseType": "TRACE/DEBUG",
+  "stateId": "lesson-064",
+  "exerciseType": "EXPERIMENT",
   "canonicalStage": "stage-03",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
 }
