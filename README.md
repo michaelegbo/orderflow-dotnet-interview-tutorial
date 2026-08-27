@@ -7,6 +7,9 @@ with EF Core, SQLite, JWT authorization, clean boundaries, and algorithms.
 **Read the tutorial:**
 [michaelegbo.github.io/orderflow-dotnet-interview-tutorial](https://michaelegbo.github.io/orderflow-dotnet-interview-tutorial/)
 
+**Need only the interview essentials?**
+[Open the separate 30-minute refresher](https://michaelegbo.github.io/orderflow-dotnet-interview-tutorial/orderflow-30-minute-interview-crash-course.html)
+
 ## What is actually executable?
 
 Every one of the 176 lesson cards contains a focused practical exercise:

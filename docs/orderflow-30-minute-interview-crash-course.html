@@ -1,0 +1,684 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="description" content="A simple 30-minute C# and .NET interview refresher built around OrderFlow.">
+  <title>OrderFlow — 30-Minute C#/.NET Refresher</title>
+  <style>
+    :root {
+      --bg: #f4f7f6;
+      --paper: #ffffff;
+      --ink: #15231f;
+      --muted: #5f716b;
+      --line: #dbe5e1;
+      --soft: #edf5f2;
+      --green: #087f65;
+      --green-dark: #075c4b;
+      --coral: #ed6a5a;
+      --yellow: #f2c14e;
+      --code: #101923;
+      --code-ink: #dce9e4;
+      --shadow: 0 14px 42px rgba(18, 46, 37, .08);
+      color-scheme: light;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Segoe UI Variable", "Segoe UI", system-ui, sans-serif;
+      line-height: 1.65;
+    }
+    button { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button:focus-visible, a:focus-visible, summary:focus-visible {
+      outline: 3px solid rgba(8, 127, 101, .32);
+      outline-offset: 3px;
+    }
+    code, pre { font-family: "Cascadia Code", Consolas, monospace; }
+
+    .progress-line {
+      position: fixed;
+      inset: 0 auto auto 0;
+      width: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--coral), var(--yellow), var(--green));
+      z-index: 50;
+      transition: width .2s ease;
+    }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      min-height: 62px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 8px max(18px, env(safe-area-inset-right)) 8px max(18px, env(safe-area-inset-left));
+      border-bottom: 1px solid rgba(219, 229, 225, .9);
+      background: rgba(244, 247, 246, .92);
+      backdrop-filter: blur(14px);
+    }
+    .topbar-brand { margin-right: auto; min-width: 0; }
+    .topbar-brand b, .topbar-brand small { display: block; }
+    .topbar-brand b { font-size: .87rem; }
+    .topbar-brand small { color: var(--muted); font-size: .68rem; }
+    .time-left {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--paper);
+      padding: 7px 11px;
+      color: var(--green-dark);
+      font: 800 .75rem "Cascadia Code", monospace;
+      white-space: nowrap;
+    }
+    .top-progress { min-width: 92px; text-align: right; }
+    .top-progress b { display: block; font-size: .75rem; }
+    .top-progress span { color: var(--muted); font-size: .65rem; }
+
+    main { width: min(760px, calc(100% - 32px)); margin: 0 auto; padding: 46px 0 90px; }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(28px, 7vw, 54px);
+      border: 1px solid var(--line);
+      border-top: 6px solid var(--coral);
+      border-radius: 24px;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+    .hero::after {
+      content: "30";
+      position: absolute;
+      right: -12px;
+      bottom: -58px;
+      color: var(--soft);
+      font: 900 13rem/1 "Cascadia Code", monospace;
+      pointer-events: none;
+    }
+    .eyebrow {
+      position: relative;
+      z-index: 1;
+      margin: 0 0 9px;
+      color: var(--coral);
+      font: 800 .68rem "Cascadia Code", monospace;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    h1 {
+      position: relative;
+      z-index: 1;
+      max-width: 12ch;
+      margin: 0;
+      font-size: clamp(2.35rem, 8vw, 4.6rem);
+      line-height: .98;
+      letter-spacing: -.055em;
+    }
+    .hero-copy {
+      position: relative;
+      z-index: 1;
+      max-width: 56ch;
+      margin: 22px 0 0;
+      color: var(--muted);
+      font-size: 1.02rem;
+    }
+    .hero-note {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      margin-top: 20px;
+      border-radius: 9px;
+      background: var(--soft);
+      padding: 8px 11px;
+      color: var(--green-dark);
+      font-size: .78rem;
+      font-weight: 750;
+    }
+
+    .route {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 7px;
+      margin: 18px 0 42px;
+    }
+    .route a {
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--paper);
+      padding: 10px 8px;
+      color: var(--ink);
+      text-align: center;
+      text-decoration: none;
+    }
+    .route a:hover { border-color: var(--green); }
+    .route b, .route span { display: block; }
+    .route b { color: var(--green); font: 800 .68rem "Cascadia Code", monospace; }
+    .route span { margin-top: 3px; font-size: .68rem; line-height: 1.25; }
+
+    .lesson {
+      scroll-margin-top: 78px;
+      margin: 0 0 22px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--paper);
+      box-shadow: 0 8px 24px rgba(18, 46, 37, .045);
+      overflow: hidden;
+    }
+    .lesson.done { border-color: rgba(8, 127, 101, .58); }
+    .lesson-head { padding: 24px 26px 18px; border-bottom: 1px solid var(--line); }
+    .lesson-meta { display: flex; align-items: center; gap: 9px; margin-bottom: 9px; }
+    .number {
+      display: grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--green);
+      color: #fff;
+      font: 800 .7rem "Cascadia Code", monospace;
+    }
+    .minutes { color: var(--green); font: 800 .67rem "Cascadia Code", monospace; }
+    .lesson h2 { margin: 0; font-size: clamp(1.45rem, 5vw, 2rem); letter-spacing: -.035em; line-height: 1.15; }
+    .lesson-summary { margin: 9px 0 0; color: var(--muted); font-size: .9rem; }
+    .lesson-body { padding: 22px 26px 26px; }
+    .plain {
+      border-left: 4px solid var(--yellow);
+      border-radius: 0 12px 12px 0;
+      background: #fff9e9;
+      padding: 13px 15px;
+      margin-bottom: 20px;
+    }
+    .plain b { display: block; color: #845b00; font-size: .73rem; text-transform: uppercase; letter-spacing: .06em; }
+    .plain p { margin: 5px 0 0; }
+    h3 { margin: 24px 0 8px; font-size: 1rem; }
+    p { margin: 8px 0; }
+    ul { margin: 9px 0; padding-left: 22px; }
+    li { margin: 6px 0; }
+    .term { color: var(--green-dark); font-weight: 800; }
+    .compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 14px 0;
+    }
+    .compare > div { border: 1px solid var(--line); border-radius: 11px; padding: 12px; }
+    .compare b { display: block; color: var(--green); font-size: .77rem; }
+    .compare p { margin: 4px 0 0; color: var(--muted); font-size: .79rem; }
+    .code {
+      margin: 16px 0;
+      border-radius: 13px;
+      overflow: hidden;
+      background: var(--code);
+      color: var(--code-ink);
+    }
+    .code-head {
+      min-height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 0 8px 0 14px;
+      border-bottom: 1px solid #273543;
+      color: #8da29b;
+      font: 700 .64rem "Cascadia Code", monospace;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .copy {
+      min-width: 48px;
+      min-height: 40px;
+      border: 0;
+      background: transparent;
+      color: #9fc7ba;
+      cursor: pointer;
+      font-size: .68rem;
+    }
+    pre { margin: 0; padding: 16px; overflow-x: auto; font-size: .78rem; line-height: 1.65; -webkit-overflow-scrolling: touch; }
+    .kw { color: #83b9ff; }
+    .str { color: #a9dc9f; }
+    .num { color: #f0b978; }
+    .com { color: #7f91a0; font-style: italic; }
+    .interview {
+      margin-top: 18px;
+      border-radius: 12px;
+      background: var(--soft);
+      padding: 14px 15px;
+    }
+    .interview b { color: var(--green-dark); font-size: .76rem; text-transform: uppercase; letter-spacing: .05em; }
+    .interview p { margin: 5px 0 0; font-size: .86rem; }
+
+    .check { margin-top: 20px; border-top: 1px solid var(--line); padding-top: 18px; }
+    .check > b { font-size: .84rem; }
+    .options { display: grid; gap: 7px; margin-top: 10px; }
+    .option, .reveal {
+      min-height: 46px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--paper);
+      padding: 9px 12px;
+      color: var(--ink);
+      text-align: left;
+      cursor: pointer;
+    }
+    .option:hover, .reveal:hover { border-color: var(--green); }
+    .option.correct { border-color: var(--green); background: var(--soft); color: var(--green-dark); font-weight: 750; }
+    .option.wrong { border-color: var(--coral); background: #fff0ed; }
+    .feedback { display: none; margin: 11px 0 0; color: var(--muted); font-size: .82rem; }
+    .feedback.show { display: block; }
+    .finish {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 15px 26px;
+      border-top: 1px solid var(--line);
+      background: #fbfdfc;
+    }
+    .finish span { color: var(--muted); font-size: .76rem; }
+    .finish button {
+      min-height: 46px;
+      border: 1px solid var(--green);
+      border-radius: 10px;
+      background: transparent;
+      padding: 9px 14px;
+      color: var(--green);
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .lesson.done .finish button { background: var(--green); color: #fff; }
+
+    .final-card {
+      margin-top: 32px;
+      border-radius: 20px;
+      background: var(--code);
+      padding: clamp(24px, 6vw, 38px);
+      color: var(--code-ink);
+    }
+    .final-card h2 { margin: 0; color: #fff; font-size: 1.65rem; }
+    .final-card > p { color: #9fb0aa; }
+    .script { display: grid; gap: 9px; margin-top: 18px; counter-reset: script; }
+    .script p { margin: 0; border-left: 3px solid var(--green); padding: 9px 12px; background: #17232d; border-radius: 0 9px 9px 0; }
+    .script p::before { counter-increment: script; content: counter(script) ". "; color: var(--yellow); font-weight: 900; }
+    .footer-note { margin: 28px 0 0; color: var(--muted); text-align: center; font-size: .76rem; }
+
+    @media (max-width: 600px) {
+      .topbar { gap: 8px; }
+      .topbar-brand small { display: none; }
+      .top-progress { min-width: 62px; }
+      .top-progress span { display: none; }
+      main { width: min(100% - 24px, 760px); padding-top: 24px; padding-bottom: max(72px, env(safe-area-inset-bottom)); }
+      .hero { border-radius: 18px; padding: 28px 22px; }
+      .hero::after { font-size: 9rem; bottom: -42px; }
+      .route { grid-template-columns: repeat(5, minmax(66px, 1fr)); overflow-x: auto; padding-bottom: 7px; scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch; }
+      .route a { scroll-snap-align: start; min-width: 70px; min-height: 58px; }
+      .lesson { border-radius: 16px; }
+      .lesson-head { padding: 21px 18px 16px; }
+      .lesson-body { padding: 19px 18px 22px; }
+      .compare { grid-template-columns: 1fr; }
+      .code { margin-left: -6px; margin-right: -6px; }
+      pre { padding: 14px; font-size: .74rem; }
+      .finish { align-items: stretch; flex-direction: column; padding: 14px 18px 18px; }
+      .finish button { width: 100%; }
+    }
+    @media (max-width: 340px) {
+      .topbar-brand b { max-width: 92px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .time-left { padding: 7px 8px; }
+      main { width: calc(100% - 18px); }
+      .lesson-body, .lesson-head { padding-left: 15px; padding-right: 15px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { scroll-behavior: auto !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress-line" aria-hidden="true"></div>
+  <header class="topbar">
+    <div class="topbar-brand"><b>OrderFlow · Fast Refresher</b><small>Five sections · no coding required</small></div>
+    <div class="time-left" id="time-left" aria-live="polite">30 min left</div>
+    <div class="top-progress"><b id="progress-count">0 / 5</b><span>sections complete</span></div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">Interview essentials only · 30 minutes</p>
+      <h1>C# and .NET, without the noise.</h1>
+      <p class="hero-copy">This is not the full course. Read it once from top to bottom for the main ideas, the smallest useful code examples, and short answers you can reuse in the interview.</p>
+      <span class="hero-note">You do not need to type code for this version.</span>
+    </section>
+
+    <nav class="route" aria-label="Thirty-minute route">
+      <a href="#part-1"><b>5 min</b><span>C# basics</span></a>
+      <a href="#part-2"><b>6 min</b><span>OOP + LINQ</span></a>
+      <a href="#part-3"><b>5 min</b><span>Async</span></a>
+      <a href="#part-4"><b>7 min</b><span>Web API</span></a>
+      <a href="#part-5"><b>7 min</b><span>Design + recall</span></a>
+    </nav>
+
+    <article class="lesson" id="part-1" data-minutes="5">
+      <header class="lesson-head">
+        <div class="lesson-meta"><span class="number">1</span><span class="minutes">5 MINUTES</span></div>
+        <h2>C# foundations</h2>
+        <p class="lesson-summary">Values, decisions, loops, and methods—the small pieces every program uses.</p>
+      </header>
+      <div class="lesson-body">
+        <div class="plain"><b>Simple picture</b><p>A program remembers information, makes decisions with it, repeats useful work, and gives names to reusable actions.</p></div>
+
+        <h3>The four ideas</h3>
+        <ul>
+          <li>A <span class="term">variable</span> is a labelled box: <code>string customer = "Sarah";</code></li>
+          <li>A <span class="term">condition</span> asks a yes-or-no question: <code>if (paid)</code>.</li>
+          <li>A <span class="term">loop</span> repeats work for several items.</li>
+          <li>A <span class="term">method</span> gives a name to a job and can return a result.</li>
+        </ul>
+
+        <div class="code">
+          <div class="code-head"><span>C# · one small order</span><button class="copy" type="button">Copy</button></div>
+          <pre><code><span class="kw">string</span> customer = <span class="str">"Sarah"</span>;
+<span class="kw">int</span> quantity = <span class="num">3</span>;
+<span class="kw">decimal</span> unitPrice = <span class="num">25m</span>;
+
+<span class="kw">decimal</span> total = quantity * unitPrice;
+
+<span class="kw">if</span> (total &gt;= <span class="num">50m</span>)
+    Console.WriteLine(<span class="str">$"{customer}: £{total:F2}"</span>);</code></pre>
+        </div>
+
+        <p><strong>Why the <code>$</code>?</strong> It enables string interpolation: values inside <code>{ }</code> are placed into the sentence. <code>:F2</code> shows two decimal places.</p>
+        <p><strong>Method shape:</strong> <code>decimal CalculateTotal(int quantity, decimal price)</code>. The first word is the return type; the values inside the brackets are inputs.</p>
+
+        <div class="interview"><b>Say this</b><p>“C# is strongly typed, so a variable has a known type. I use conditions for decisions, loops for repetition, and small methods to keep each job clear and reusable.”</p></div>
+
+        <div class="check" data-answer="1">
+          <b>Quick check: What type should hold £25.50?</b>
+          <div class="options"><button class="option" data-choice="0">int</button><button class="option" data-choice="1">decimal</button><button class="option" data-choice="2">bool</button></div>
+          <p class="feedback">Use <strong>decimal</strong> for money because it represents base-10 values accurately.</p>
+        </div>
+      </div>
+      <footer class="finish"><span>Remember: value → decision → repetition → method.</span><button type="button" class="complete">Mark section complete</button></footer>
+    </article>
+
+    <article class="lesson" id="part-2" data-minutes="6">
+      <header class="lesson-head">
+        <div class="lesson-meta"><span class="number">2</span><span class="minutes">6 MINUTES</span></div>
+        <h2>Objects, interfaces, collections, and LINQ</h2>
+        <p class="lesson-summary">How OrderFlow represents orders and asks useful questions about groups of them.</p>
+      </header>
+      <div class="lesson-body">
+        <div class="plain"><b>Simple picture</b><p>An object keeps related information and behaviour together. An interface states what a helper promises to do. LINQ asks questions about groups of objects.</p></div>
+
+        <h3>Object-oriented programming</h3>
+        <ul>
+          <li>A <span class="term">class</span> is the design; an <span class="term">object</span> is one thing created from that design.</li>
+          <li><span class="term">Encapsulation</span> protects an object's values by changing them through safe methods.</li>
+          <li>An <span class="term">interface</span> is a promise. The caller knows what can be done without knowing the internal details.</li>
+          <li><span class="term">Polymorphism</span> means different objects can fulfil the same promise in their own way.</li>
+        </ul>
+
+        <div class="code">
+          <div class="code-head"><span>C# · domain and query</span><button class="copy" type="button">Copy</button></div>
+          <pre><code><span class="kw">public interface</span> IOrderRepository
+{
+    Task&lt;Order?&gt; FindAsync(Guid id);
+}
+
+<span class="kw">public class</span> Order
+{
+    <span class="kw">public</span> Guid Id { <span class="kw">get</span>; } = Guid.NewGuid();
+    <span class="kw">public</span> <span class="kw">decimal</span> Total { <span class="kw">get</span>; <span class="kw">private set</span>; }
+}
+
+<span class="kw">var</span> largeOrders = orders
+    .Where(order =&gt; order.Total &gt; <span class="num">100m</span>)
+    .OrderByDescending(order =&gt; order.Total)
+    .ToList();</code></pre>
+        </div>
+
+        <div class="compare">
+          <div><b>List&lt;T&gt;</b><p>An ordered group. Good when you visit items in sequence.</p></div>
+          <div><b>Dictionary&lt;TKey,TValue&gt;</b><p>Finds a value using a unique key. Usually fast for lookups.</p></div>
+          <div><b>Where</b><p>Keeps only items that match a condition.</p></div>
+          <div><b>Select</b><p>Changes each item into a new shape.</p></div>
+        </div>
+
+        <div class="interview"><b>Say this</b><p>“I keep business rules inside domain objects, depend on small interfaces at boundaries, and use LINQ for readable filtering, projection, ordering, and grouping.”</p></div>
+
+        <div class="check" data-answer="2">
+          <b>Quick check: Which LINQ method keeps matching orders?</b>
+          <div class="options"><button class="option" data-choice="0">Select</button><button class="option" data-choice="1">OrderBy</button><button class="option" data-choice="2">Where</button></div>
+          <p class="feedback"><strong>Where</strong> filters. Select changes shape; OrderBy changes order.</p>
+        </div>
+      </div>
+      <footer class="finish"><span>Remember: class = design; object = instance; interface = promise.</span><button type="button" class="complete">Mark section complete</button></footer>
+    </article>
+
+    <article class="lesson" id="part-3" data-minutes="5">
+      <header class="lesson-head">
+        <div class="lesson-meta"><span class="number">3</span><span class="minutes">5 MINUTES</span></div>
+        <h2>Async and core .NET</h2>
+        <p class="lesson-summary">How a web server waits for databases and networks without wasting a worker.</p>
+      </header>
+      <div class="lesson-body">
+        <div class="plain"><b>Simple picture</b><p><code>await</code> means: “Pause this job here, let the worker do something else, and continue when the result arrives.”</p></div>
+
+        <h3>The important truth</h3>
+        <ul>
+          <li>An async method normally returns <code>Task</code> or <code>Task&lt;T&gt;</code>.</li>
+          <li><code>await</code> does not automatically create a new thread.</li>
+          <li>Async is most useful for waiting on I/O: databases, files, HTTP, and queues.</li>
+          <li>A <code>CancellationToken</code> carries a polite stop request through the call chain.</li>
+          <li>Use <code>Task.WhenAll</code> when independent async operations can run together.</li>
+        </ul>
+
+        <div class="code">
+          <div class="code-head"><span>C# · async service</span><button class="copy" type="button">Copy</button></div>
+          <pre><code><span class="kw">public async</span> Task&lt;Order?&gt; GetOrderAsync(
+    Guid id,
+    CancellationToken cancellationToken)
+{
+    <span class="kw">return await</span> repository.FindAsync(
+        id,
+        cancellationToken);
+}</code></pre>
+        </div>
+
+        <h3>What .NET does with your code</h3>
+        <p>The C# compiler changes source code into <span class="term">IL</span>, a middle form stored in an assembly. The <span class="term">CLR</span> runs the application. The <span class="term">JIT</span> turns needed IL methods into machine instructions for the current computer.</p>
+
+        <div class="interview"><b>Say this</b><p>“Async improves scalability for I/O-bound work because a thread does not need to sit idle while waiting. I pass cancellation tokens and avoid blocking with <code>.Result</code> or <code>.Wait()</code>.”</p></div>
+
+        <div class="check" data-answer="0">
+          <b>Quick check: Does <code>await</code> always create a new thread?</b>
+          <div class="options"><button class="option" data-choice="0">No</button><button class="option" data-choice="1">Yes</button></div>
+          <p class="feedback"><strong>No.</strong> Await normally releases the current thread while an I/O operation is incomplete.</p>
+        </div>
+      </div>
+      <footer class="finish"><span>Remember: async is about waiting efficiently.</span><button type="button" class="complete">Mark section complete</button></footer>
+    </article>
+
+    <article class="lesson" id="part-4" data-minutes="7">
+      <header class="lesson-head">
+        <div class="lesson-meta"><span class="number">4</span><span class="minutes">7 MINUTES</span></div>
+        <h2>ASP.NET Core Web API, EF Core, and DI</h2>
+        <p class="lesson-summary">The path from an HTTP request to a saved OrderFlow order.</p>
+      </header>
+      <div class="lesson-body">
+        <div class="plain"><b>Simple picture</b><p>A request enters a line of checkpoints, reaches an endpoint, calls the business service, uses EF Core to speak to the database, and returns a response.</p></div>
+
+        <h3>Request journey</h3>
+        <ol>
+          <li><span class="term">Kestrel</span> receives the HTTP request.</li>
+          <li><span class="term">Middleware</span> handles shared work such as errors, logging, authentication, and authorization.</li>
+          <li><span class="term">Routing</span> selects an endpoint from the HTTP method and URL.</li>
+          <li><span class="term">Model binding</span> turns route, query, and JSON values into C# inputs.</li>
+          <li>The controller calls an application service. The service applies the use case.</li>
+          <li>EF Core reads or writes SQLite, and the API sends an HTTP response.</li>
+        </ol>
+
+        <div class="code">
+          <div class="code-head"><span>C# · minimal endpoint shape</span><button class="copy" type="button">Copy</button></div>
+          <pre><code>app.MapPost(<span class="str">"/orders"</span>, <span class="kw">async</span> (
+    CreateOrderRequest request,
+    IOrderService service,
+    CancellationToken token) =&gt;
+{
+    <span class="kw">var</span> order = <span class="kw">await</span> service.CreateAsync(request, token);
+    <span class="kw">return</span> Results.Created(<span class="str">$"/orders/{order.Id}"</span>, order);
+});</code></pre>
+        </div>
+
+        <div class="compare">
+          <div><b>DTO</b><p>The API's input or output shape. It keeps the HTTP contract separate from the domain object.</p></div>
+          <div><b>Validation</b><p>Rejects missing or invalid input before it can damage business state.</p></div>
+          <div><b>Authentication</b><p>Checks who the caller is.</p></div>
+          <div><b>Authorization</b><p>Checks what that caller may do.</p></div>
+          <div><b>EF Core</b><p>Turns C# database queries into SQL and rows back into objects.</p></div>
+          <div><b>Migration</b><p>A saved, repeatable change to the database structure.</p></div>
+        </div>
+
+        <h3>Dependency injection</h3>
+        <p>Instead of a controller building its own repository, it asks for <code>IOrderService</code>. The application setup chooses the real implementation. This makes dependencies clear and testing easier.</p>
+        <p><strong>Lifetimes:</strong> <span class="term">Transient</span> creates a new instance each time; <span class="term">Scoped</span> normally creates one per web request; <span class="term">Singleton</span> shares one for the application's lifetime.</p>
+
+        <div class="interview"><b>Say this</b><p>“I keep controllers thin: receive HTTP input, call the use case, and translate the result into an HTTP response. Business rules stay in the domain/application layer, and EF Core stays behind an interface.”</p></div>
+
+        <div class="check" data-answer="1">
+          <b>Quick check: Which DI lifetime is normally used for <code>DbContext</code>?</b>
+          <div class="options"><button class="option" data-choice="0">Singleton</button><button class="option" data-choice="1">Scoped</button><button class="option" data-choice="2">Static</button></div>
+          <p class="feedback"><strong>Scoped.</strong> One context normally follows one web request and its unit of work.</p>
+        </div>
+      </div>
+      <footer class="finish"><span>Remember: middleware → endpoint → service → database → response.</span><button type="button" class="complete">Mark section complete</button></footer>
+    </article>
+
+    <article class="lesson" id="part-5" data-minutes="7">
+      <header class="lesson-head">
+        <div class="lesson-meta"><span class="number">5</span><span class="minutes">7 MINUTES</span></div>
+        <h2>SOLID, testing, architecture, and algorithms</h2>
+        <p class="lesson-summary">The final ideas that help you explain why a solution is safe and able to grow.</p>
+      </header>
+      <div class="lesson-body">
+        <div class="plain"><b>Simple picture</b><p>Good architecture puts business rules in a protected centre, keeps replaceable tools around the outside, and proves important behaviour with tests.</p></div>
+
+        <h3>SOLID without slogans</h3>
+        <ul>
+          <li><strong>S — Single Responsibility:</strong> one class has one clear job.</li>
+          <li><strong>O — Open/Closed:</strong> add new behaviour without repeatedly rewriting stable code.</li>
+          <li><strong>L — Liskov:</strong> a replacement must keep the promises callers rely on.</li>
+          <li><strong>I — Interface Segregation:</strong> give callers small interfaces containing only what they need.</li>
+          <li><strong>D — Dependency Inversion:</strong> important business code depends on promises, not database or web details.</li>
+        </ul>
+
+        <h3>Testing levels</h3>
+        <div class="compare">
+          <div><b>Unit test</b><p>Checks one small rule quickly, with outside dependencies replaced.</p></div>
+          <div><b>Integration test</b><p>Checks that real parts work together, such as routing, EF Core, and SQLite.</p></div>
+          <div><b>End-to-end test</b><p>Checks a complete user journey through the running system.</p></div>
+          <div><b>Test pyramid</b><p>Many fast unit tests, fewer integration tests, and a small number of valuable E2E tests.</p></div>
+        </div>
+
+        <h3>System design in one minute</h3>
+        <ul>
+          <li>Start with requirements and expected traffic before choosing technology.</li>
+          <li>Keep API servers <span class="term">stateless</span> so a load balancer can send requests to any healthy copy.</li>
+          <li>Use caching for repeated reads, queues for slow background work, and timeouts/retries for unreliable dependencies.</li>
+          <li>Make important create/payment operations <span class="term">idempotent</span> so retries do not repeat the business action.</li>
+          <li>Measure latency, throughput, error rate, and saturation before scaling.</li>
+        </ul>
+
+        <h3>Algorithms: the interview pattern</h3>
+        <div class="code">
+          <div class="code-head"><span>Think before coding</span><button class="copy" type="button">Copy</button></div>
+          <pre><code><span class="com">// 1. Repeat the problem in your words.</span>
+<span class="com">// 2. Walk through a small example.</span>
+<span class="com">// 3. State a simple solution first.</span>
+<span class="com">// 4. Improve it with the right structure.</span>
+<span class="com">// 5. Test normal, empty, and edge cases.</span>
+<span class="com">// 6. Explain time and space cost.</span></code></pre>
+        </div>
+        <p>Common tools: dictionary for fast lookup, stack for matching brackets, queue for first-in-first-out work, two pointers for ordered data, and a sliding window for neighbouring items.</p>
+
+        <div class="interview"><b>Say this</b><p>“I begin with the business requirement, keep domain rules independent, choose the simplest architecture that meets current scale, add observability, and evolve only when measurements show a real bottleneck.”</p></div>
+
+        <div class="check" data-answer="2">
+          <b>Quick check: What protects a create-order endpoint from duplicate retries?</b>
+          <div class="options"><button class="option" data-choice="0">A larger server</button><button class="option" data-choice="1">A longer timeout</button><button class="option" data-choice="2">An idempotency key</button></div>
+          <p class="feedback">An <strong>idempotency key</strong> lets the server recognise a retry and return the first result instead of creating another order.</p>
+        </div>
+      </div>
+      <footer class="finish"><span>Remember: simple boundaries, useful tests, measured scaling.</span><button type="button" class="complete">Mark section complete</button></footer>
+    </article>
+
+    <section class="final-card">
+      <h2>Your reusable interview answer</h2>
+      <p>When you are asked about almost any technical choice, use this short structure:</p>
+      <div class="script">
+        <p><strong>Define it simply:</strong> “It is a way to…”</p>
+        <p><strong>Explain why:</strong> “I use it when…”</p>
+        <p><strong>Tie it to OrderFlow:</strong> “For example, in the order API…”</p>
+        <p><strong>Name the trade-off:</strong> “The cost or risk is…”</p>
+        <p><strong>Show judgement:</strong> “I would measure or test…”</p>
+      </div>
+    </section>
+    <p class="footer-note">Your progress is saved only in this browser on this device. The full tutorial remains separate.</p>
+  </main>
+
+  <script>
+    (() => {
+      const key = 'orderflow-30-minute-progress-v1';
+      const lessons = [...document.querySelectorAll('.lesson')];
+      let done = [];
+      try { done = JSON.parse(localStorage.getItem(key) || '[]'); } catch { done = []; }
+
+      const update = () => {
+        lessons.forEach(lesson => {
+          const complete = done.includes(lesson.id);
+          lesson.classList.toggle('done', complete);
+          const button = lesson.querySelector('.complete');
+          button.textContent = complete ? 'Section completed ✓' : 'Mark section complete';
+          button.setAttribute('aria-pressed', String(complete));
+        });
+        const used = lessons.filter(lesson => done.includes(lesson.id)).reduce((sum, lesson) => sum + Number(lesson.dataset.minutes), 0);
+        const left = Math.max(0, 30 - used);
+        document.getElementById('time-left').textContent = left ? `${left} min left` : 'Complete';
+        document.getElementById('progress-count').textContent = `${done.length} / 5`;
+        document.querySelector('.progress-line').style.width = `${done.length / 5 * 100}%`;
+      };
+
+      document.addEventListener('click', event => {
+        const complete = event.target.closest('.complete');
+        if (complete) {
+          const id = complete.closest('.lesson').id;
+          done = done.includes(id) ? done.filter(value => value !== id) : [...done, id];
+          localStorage.setItem(key, JSON.stringify(done));
+          update();
+        }
+
+        const option = event.target.closest('.option');
+        if (option) {
+          const check = option.closest('.check');
+          const correct = Number(option.dataset.choice) === Number(check.dataset.answer);
+          check.querySelectorAll('.option').forEach(button => button.classList.remove('correct', 'wrong'));
+          option.classList.add(correct ? 'correct' : 'wrong');
+          check.querySelector('.feedback').classList.add('show');
+        }
+
+        const copy = event.target.closest('.copy');
+        if (copy) {
+          const text = copy.closest('.code').querySelector('code').textContent;
+          navigator.clipboard.writeText(text).then(() => {
+            copy.textContent = 'Copied';
+            setTimeout(() => copy.textContent = 'Copy', 1100);
+          });
+        }
+      });
+
+      update();
+    })();
+  </script>
+</body>
+</html>

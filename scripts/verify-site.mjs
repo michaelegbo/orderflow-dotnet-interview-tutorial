@@ -10,6 +10,8 @@ const root = path.resolve(scriptsDirectory, '..');
 const docs = path.join(root, 'docs');
 const html = fs.readFileSync(path.join(docs, 'index.html'), 'utf8');
 const manifest = JSON.parse(fs.readFileSync(path.join(docs, 'lesson-manifest.json'), 'utf8'));
+const quickRefresherPath = path.join(docs, 'orderflow-30-minute-interview-crash-course.html');
+const quickRefresher = fs.readFileSync(quickRefresherPath, 'utf8');
 const packageMode = process.argv.includes('--package');
 const failures = [];
 const assert = (condition, message) => { if (!condition) failures.push(message); };
@@ -22,6 +24,19 @@ const wordCount = value => (value ?? '').trim().split(/\s+/).filter(Boolean).len
 const inlineScript = html.match(/<script>([\s\S]*?)<\/script>/)?.[1] ?? '';
 const htmlWithoutSnapshotData = html.replace(/<script type="application\/json" id="snapshot-store">[\s\S]*?<\/script>/, '');
 const contentCount = pattern => [...htmlWithoutSnapshotData.matchAll(pattern)].length;
+const quickLessons = [...quickRefresher.matchAll(/<article class="lesson" id="([^"]+)" data-minutes="(\d+)">/g)];
+const quickIds = [...quickRefresher.matchAll(/\sid="([^"]+)"/g)].map(match => match[1]);
+
+assert(quickLessons.length === 5, `Expected five sections in the 30-minute refresher; found ${quickLessons.length}.`);
+assert(quickLessons.reduce((sum, match) => sum + Number(match[2]), 0) === 30, 'The short refresher timings do not total 30 minutes.');
+assert([...quickRefresher.matchAll(/class="check" data-answer=/g)].length === 5, 'Each short-refresher section must have one quick check.');
+assert([...quickRefresher.matchAll(/class="complete"/g)].length === 5, 'Each short-refresher section must have one completion control.');
+assert(new Set(quickIds).size === quickIds.length, 'The short refresher contains duplicate DOM IDs.');
+assert(!/<(?:script|link)[^>]+(?:src|href)=/i.test(quickRefresher), 'The short refresher unexpectedly depends on an external asset.');
+assert(quickRefresher.includes('width=device-width,initial-scale=1,viewport-fit=cover'), 'The short refresher is missing mobile viewport support.');
+for (const match of quickRefresher.matchAll(/<script>([\s\S]*?)<\/script>/g)) {
+  try { new vm.Script(match[1]); } catch (error) { failures.push(`Short refresher JavaScript does not parse: ${error.message}`); }
+}
 
 assert(lessonIds.length === 176, `Expected 176 lesson cards; found ${lessonIds.length}.`);
 assert(manifest.schemaVersion === 2, `Expected lesson manifest schema 2; found ${manifest.schemaVersion}.`);
