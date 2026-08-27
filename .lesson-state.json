@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 19,
-  "lessonId": "lesson-2-15-methods-inside-classes-4",
-  "title": "15. Methods Inside Classes",
+  "sequence": 20,
+  "lessonId": "lesson-2-16-encapsulation-5",
+  "title": "16. Encapsulation",
   "chapter": 2,
-  "stateId": "lesson-019",
+  "stateId": "lesson-020",
   "exerciseType": "BUILD",
   "canonicalStage": "stage-02",
   "productionTreeNote": "This lesson applies a permanent practice change against the canonical checkpoint."
