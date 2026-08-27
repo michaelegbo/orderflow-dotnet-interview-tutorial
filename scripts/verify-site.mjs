@@ -16,6 +16,7 @@ const lessonIds = [...html.matchAll(/<article class="lesson [^"]*" id="([^"]+)"/
 const codeLinks = [...html.matchAll(/<a class="lesson-code-link" href="([^"]+)"/g)].map(match => match[1].replaceAll('&amp;', '&'));
 const allIds = [...html.matchAll(/\sid="([^"]+)"/g)].map(match => match[1]);
 const count = pattern => [...html.matchAll(pattern)].length;
+const inlineScript = html.match(/<script>([\s\S]*?)<\/script>/)?.[1] ?? '';
 
 assert(lessonIds.length === 176, `Expected 176 lesson cards; found ${lessonIds.length}.`);
 assert(codeLinks.length === lessonIds.length, 'Every lesson must have one code-checkpoint link.');
@@ -25,6 +26,9 @@ assert(new Set(manifest.lessons.map(lesson => lesson.id)).size === lessonIds.len
 assert(new Set(manifest.lessons.map(lesson => lesson.codeStage)).size === 8, 'All eight stages are not represented.');
 assert(count(/class="lesson-finish"/g) === lessonIds.length, 'Every lesson must have a bottom completion footer.');
 assert(count(/class="lesson-check"/g) === lessonIds.length, 'Every lesson must have one completion control.');
+assert(count(/id="time-left"/g) === 1, 'Estimated time-left indicator is missing or duplicated.');
+assert(inlineScript.includes("plannedMinutes * unfinished / list.length"), 'Estimated time-left calculation is missing.');
+assert(inlineScript.includes("document.getElementById('time-left').textContent = formatMinutes(timeLeft)"), 'Estimated time-left UI is not updated with progress.');
 assert(
   count(/class="check-feedback"/g) + count(/class="reveal-check-answer"/g) + count(/class="reveal-answer"/g) === lessonIds.length,
   'Every lesson must offer a quiz or revealable answer.'
@@ -55,7 +59,6 @@ assert(html.includes('orderflow-verified.zip'), 'The HTML does not link to the d
 assert(!html.includes('${'), 'Unresolved template interpolation found.');
 assert(!html.includes('OWNER/REPO'), 'Unresolved repository placeholder found.');
 
-const inlineScript = html.match(/<script>([\s\S]*?)<\/script>/)?.[1] ?? '';
 try {
   new vm.Script(`(function(){${inlineScript}})`);
 }
