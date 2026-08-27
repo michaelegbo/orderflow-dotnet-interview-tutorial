@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "sequence": 129,
-  "lessonId": "lesson-6-120-design-orderflow-for-100-000-users-15",
-  "title": "120. Design OrderFlow for 100,000 Users",
-  "chapter": 6,
-  "stateId": "lesson-129",
-  "exerciseType": "DESIGN",
-  "canonicalStage": "stage-06",
+  "sequence": 130,
+  "lessonId": "lesson-7-part-xix-small-dsa-crash-course-1",
+  "title": "PART XIX — SMALL DSA CRASH COURSE",
+  "chapter": 7,
+  "stateId": "lesson-130",
+  "exerciseType": "TRACE/DEBUG",
+  "canonicalStage": "stage-07",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
 }
