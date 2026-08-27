@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "sequence": 29,
-  "lessonId": "lesson-2-25-list-t-14",
-  "title": "25. List<T>",
+  "sequence": 30,
+  "lessonId": "lesson-2-26-dictionary-tkey-tvalue-15",
+  "title": "26. Dictionary<TKey,TValue>",
   "chapter": 2,
-  "stateId": "lesson-029",
-  "exerciseType": "EXPERIMENT",
+  "stateId": "lesson-030",
+  "exerciseType": "BUILD",
   "canonicalStage": "stage-02",
-  "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
+  "productionTreeNote": "This lesson applies a permanent practice change against the canonical checkpoint."
 }
