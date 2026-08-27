@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 107,
-  "lessonId": "lesson-5-98-mocking-14",
-  "title": "98. Mocking",
+  "sequence": 108,
+  "lessonId": "lesson-5-99-integration-tests-15",
+  "title": "99. Integration Tests",
   "chapter": 5,
-  "stateId": "lesson-107",
+  "stateId": "lesson-108",
   "exerciseType": "TRACE/DEBUG",
   "canonicalStage": "stage-05",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
