@@ -87,7 +87,9 @@ function Invoke-Checkpoint {
                 if ($LASTEXITCODE -ne 0) {
                     throw "stage-08 verifier failed with exit code $LASTEXITCODE"
                 }
-                Invoke-CheckedCommand node @('./scripts/verify-site.mjs')
+                # Git archives intentionally exclude the downloadable ZIP so
+                # that a release archive never contains itself recursively.
+                Invoke-CheckedCommand node @('./scripts/verify-site.mjs', '--package')
             }
             default {
                 throw "Unknown checkpoint: $Tag"
