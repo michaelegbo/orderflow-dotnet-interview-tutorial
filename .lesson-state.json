@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 23,
-  "lessonId": "lesson-2-19-inheritance-8",
-  "title": "19. Inheritance",
+  "sequence": 24,
+  "lessonId": "lesson-2-20-polymorphism-9",
+  "title": "20. Polymorphism",
   "chapter": 2,
-  "stateId": "lesson-023",
+  "stateId": "lesson-024",
   "exerciseType": "EXPERIMENT",
   "canonicalStage": "stage-02",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
