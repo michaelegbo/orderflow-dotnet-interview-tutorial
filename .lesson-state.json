@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "sequence": 14,
-  "lessonId": "lesson-1-11-methods-14",
-  "title": "11. Methods",
+  "sequence": 15,
+  "lessonId": "lesson-1-exercise-3-discount-method-15",
+  "title": "Exercise 3 — Discount Method",
   "chapter": 1,
-  "stateId": "lesson-014",
-  "exerciseType": "BUILD",
+  "stateId": "lesson-015",
+  "exerciseType": "EXPERIMENT",
   "canonicalStage": "stage-01",
-  "productionTreeNote": "This lesson applies a permanent practice change against the canonical checkpoint."
+  "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
 }
