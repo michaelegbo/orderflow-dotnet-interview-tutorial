@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 119,
-  "lessonId": "lesson-6-110-load-balancer-5",
-  "title": "110. Load Balancer",
+  "sequence": 120,
+  "lessonId": "lesson-6-111-health-checks-6",
+  "title": "111. Health Checks",
   "chapter": 6,
-  "stateId": "lesson-119",
+  "stateId": "lesson-120",
   "exerciseType": "DESIGN",
   "canonicalStage": "stage-06",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
