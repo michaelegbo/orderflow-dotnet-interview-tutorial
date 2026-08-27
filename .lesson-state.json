@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "sequence": 67,
-  "lessonId": "lesson-3-61-nuget-20",
-  "title": "61. NuGet",
-  "chapter": 3,
-  "stateId": "lesson-067",
+  "sequence": 68,
+  "lessonId": "lesson-4-part-viii-turn-the-project-into-an-asp-net-core-web-api-1",
+  "title": "PART VIII — TURN THE PROJECT INTO AN ASP.NET CORE WEB API",
+  "chapter": 4,
+  "stateId": "lesson-068",
   "exerciseType": "TRACE/DEBUG",
-  "canonicalStage": "stage-03",
+  "canonicalStage": "stage-04",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
 }
