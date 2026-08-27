@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 87,
-  "lessonId": "lesson-4-82-ienumerable-t-vs-iqueryable-t-19",
-  "title": "82. IEnumerable<T> vs IQueryable<T>",
+  "sequence": 88,
+  "lessonId": "lesson-4-83-tracking-and-asnotracking-20",
+  "title": "83. Tracking and AsNoTracking",
   "chapter": 4,
-  "stateId": "lesson-087",
+  "stateId": "lesson-088",
   "exerciseType": "TRACE/DEBUG",
   "canonicalStage": "stage-04",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
