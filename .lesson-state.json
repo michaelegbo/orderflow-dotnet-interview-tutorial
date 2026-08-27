@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 152,
-  "lessonId": "lesson-8-140-why-is-dbcontext-normally-scoped-13",
-  "title": "140. Why is DbContext normally scoped?",
+  "sequence": 153,
+  "lessonId": "lesson-8-141-what-is-middleware-14",
+  "title": "141. What is middleware?",
   "chapter": 8,
-  "stateId": "lesson-152",
+  "stateId": "lesson-153",
   "exerciseType": "REHEARSE",
   "canonicalStage": "stage-08",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
