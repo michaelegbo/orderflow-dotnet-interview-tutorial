@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sequence": 168,
-  "lessonId": "lesson-8-156-why-a-queue-29",
-  "title": "156. Why a queue?",
+  "sequence": 169,
+  "lessonId": "lesson-8-157-unit-vs-integration-vs-e2e-30",
+  "title": "157. Unit vs integration vs E2E?",
   "chapter": 8,
-  "stateId": "lesson-168",
+  "stateId": "lesson-169",
   "exerciseType": "REHEARSE",
   "canonicalStage": "stage-08",
   "productionTreeNote": "This lesson intentionally leaves the canonical production checkpoint unchanged."
